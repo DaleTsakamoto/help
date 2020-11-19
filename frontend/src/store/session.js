@@ -27,6 +27,20 @@ export const login = (user) => async (dispatch) => {
   return res;
 }
 
+export const signup = (user) => async (dispatch) => {
+  const { email, username, password } = user;
+  const res = await fetch('/api/users', {
+    method: 'POST',
+    body: JSON.stringify({
+      email,
+      username,
+      password,
+    }),
+  })
+  dispatch(setUser(res.data.user))
+  return res;
+}
+
 const initialState = { user:null }
 
 const sessionReducer = (state = initialState, action) => {
@@ -43,6 +57,12 @@ const sessionReducer = (state = initialState, action) => {
     default:
       return state;
   }
+};
+
+export const restoreUser = () => async dispatch => {
+  const res = await fetch('/api/session');
+  dispatch(setUser(res.data.user));
+  return res;
 };
 
 export default sessionReducer;
