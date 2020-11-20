@@ -9,7 +9,7 @@ const Navigation = ({isLoaded}) => {
   
   let headerNavigation;
   if (userSession) {
-    headerNavigation = ( <ProfileButton />
+    headerNavigation = ( <ProfileButton user={userSession}/>
     )
   } else {
     headerNavigation = (
