@@ -1,12 +1,15 @@
-const express = require("express");
-const { check } = require("express-validator");
-const asyncHandler = require("express-async-handler");
+const express = require('express');
+const asyncHandler = require('express-async-handler');
+const { check } = require('express-validator');
 
-const { handleValidationErrors } = require("../../utils/validation");
-const { setTokenCookie, requireAuth } = require("../../utils/auth");
-const { User } = require("../../db/models");
+const { handleValidationErrors } = require('../../utils/validation');
+const { setTokenCookie, requireAuth } = require('../../utils/auth');
+const { User } = require('../../db/models');
 
 const router = express.Router();
+
+
+/****************** SIGNUP ERRORS MIDDLEWARE **************************/
 
 const validateSignup = [
   check('email')
@@ -25,16 +28,20 @@ const validateSignup = [
     .exists({ checkFalsy: true })
     .isLength({ min: 6 })
     .withMessage('Password must be 6 characters or more.'),
+  check('helpType')
+    .exists({ checkFalsy: true })
+    .withMessage('Choose either helper or helpee'),
   handleValidationErrors,
 ];
 
-// Sign up
+/****************** SIGNUP **************************/
+
 router.post(
   '',
   validateSignup,
   asyncHandler(async (req, res) => {
-    const { email, password, username } = req.body;
-    const user = await User.signup({ email, username, password });
+    const { username, email, password, helpType, avatar, bio } = req.body;
+    const user = await User.signup({ username, email, password, helpType, avatar, bio });
 
     await setTokenCookie(res, user);
 
@@ -43,5 +50,6 @@ router.post(
     });
   }),
 );
+
 
 module.exports = router;
