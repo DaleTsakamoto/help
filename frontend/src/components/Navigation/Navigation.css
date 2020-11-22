@@ -4,4 +4,11 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  align-items: center;
+}
+
+.home-logo{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }

@@ -28,13 +28,11 @@ const Navigation = ({isLoaded}) => {
   }
 
   return (
-    <div>
       <div className="header">
         <HomeLogo />
         <SearchBar />
         <div> {isLoaded && headerNavigation} </div>
       </div>
-    </div>
   );
 }
 

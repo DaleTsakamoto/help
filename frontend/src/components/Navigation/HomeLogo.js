@@ -1,15 +1,11 @@
-import React, { useState, useEffect } from "react";
-import {NavLink} from 'react-router-dom'
-import { useDispatch } from 'react-redux';
-import * as sessionActions from '../../store/session';
+import React from "react";
 
 function HomeLogo () {
 
   return (
-    <div>
-      <img />
+    <div className="home-logo">
+      <div>Help</div>
       <i className="fas fa-hands-helping"></i>
-      <div> Help</div>
     </div>
   )
 }
