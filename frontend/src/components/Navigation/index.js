@@ -31,7 +31,8 @@ const Navigation = ({isLoaded}) => {
       <div className="header">
         <HomeLogo />
         <SearchBar />
-        <div> {isLoaded && headerNavigation} </div>
+        <div className="header-testimony">Write a Testimony</div>
+        <div className="profile-drop"> {isLoaded && headerNavigation} </div>
       </div>
   );
 }

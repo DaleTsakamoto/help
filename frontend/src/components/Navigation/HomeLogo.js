@@ -4,8 +4,8 @@ function HomeLogo () {
 
   return (
     <div className="home-logo">
-      <div>Help</div>
-      <i className="fas fa-hands-helping"></i>
+      <div className="home-logo__help">help</div>
+      <i className="fas fa-hands-helping home-logo__hands"></i>
     </div>
   )
 }
