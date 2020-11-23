@@ -1,28 +1,54 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from 'react-redux';
-import {Redirect, NavLink} from 'react-router-dom'
+import { Redirect } from 'react-router-dom'
+
 import * as sessionActions from '../../store/session';
+import { fetch } from '../../store/csrf'
 
 function ProfileButton({ user }) {
   const dispatch = useDispatch();
   const [showMenu, setShowMenu] = useState(false);
   const [redirect, setRedirect] = useState(false);
 
-  const usersPage = () => {
+
+  // const findUser = async () => {
+  //   const res = await fetch(`/users/${user.id}`)
+  //   return res;
+  // }
+
+  // const usersPage = () => {
+  //   if (redirect) {
+  //     const res = findUser();
+  //     console.log(res)
+  //     return (
+  //       <Redirect to={{
+  //         pathname: `/users/${user.id}`,
+  //         user: res.data.user
+  //       }}/>
+  //     )
+  //   }
+  // }
+
+  useEffect(() => {
     if (redirect) {
-      return (
-        <Redirect to='/user' />
-      )
+      const findUser = async () => {
+        const res = await fetch(`/users/${user.id}`)
+        console.log(res);
+        return (
+          <Redirect to={{
+            pathname: `/users/${user.id}`,
+            user: res.data.user
+          }} />
+        )
+      }
+      setRedirect(false);
+      findUser();
     }
-  }
+  }, [redirect])
 
   const useRedirect = () => {
     setRedirect(true)
   }
-
-  useEffect(() => {
-    setRedirect(false);
-  }, [redirect])
   
   const openMenu = () => {
     if (showMenu) return;
@@ -55,7 +81,6 @@ function ProfileButton({ user }) {
       {showMenu && (
         <div className="profile-dropdown">
           <div>
-            {usersPage()}
             <i className="fas fa-user"></i>
             <button onClick={useRedirect}> About Me </button>
           </div>

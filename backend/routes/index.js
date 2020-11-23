@@ -6,7 +6,7 @@ const userPageRouter = require("./UserPage")
 
 router.use("/api", apiRouter);
 router.use("/search", searchRouter);
-router.use("/user", userPageRouter)
+router.use("/users", userPageRouter)
 
 // router.get("/hello/world", function (req, res) {
 //   res.cookie("XSRF-TOKEN", req.csrfToken());

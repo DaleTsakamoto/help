@@ -208,6 +208,42 @@ module.exports = {
         createdAt: new Date(),
         updatedAt: new Date()
       },
+      {
+        email: faker.internet.email(),
+        username: faker.internet.userName(),
+        helpType: false,
+        hashedPassword: bcrypt.hashSync(faker.internet.password()),
+        firstName: faker.name.firstName(),
+        lastName: faker.name.lastName(),
+        avatar: faker.image.avatar(),
+        bio: faker.lorem.paragraph(),
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        email: faker.internet.email(),
+        username: faker.internet.userName(),
+        helpType: false,
+        hashedPassword: bcrypt.hashSync(faker.internet.password()),
+        firstName: faker.name.firstName(),
+        lastName: faker.name.lastName(),
+        avatar: faker.image.avatar(),
+        bio: faker.lorem.paragraph(),
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        email: faker.internet.email(),
+        username: faker.internet.userName(),
+        helpType: true,
+        hashedPassword: bcrypt.hashSync(faker.internet.password()),
+        firstName: faker.name.firstName(),
+        lastName: faker.name.lastName(),
+        avatar: faker.image.avatar(),
+        bio: faker.lorem.paragraph(),
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
     ], {});
   },
 

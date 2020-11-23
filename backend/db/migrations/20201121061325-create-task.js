@@ -8,6 +8,10 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
+      completed: {
+        type: Sequelize.BOOLEAN,
+        allowNull: false
+      },
       category: {
         type: Sequelize.STRING(50),
         allowNull: false
@@ -20,13 +24,12 @@ module.exports = {
       },
       helperId: {
         type: Sequelize.INTEGER,
-        allowNull: false,
         references: {model: 'Users'}
       },
       helpeeId: {
         type: Sequelize.INTEGER,
-        allowNull: false,
-        references: {model: 'Users'}
+        references: { model: 'Users' },
+        allowNull: false
       },
       createdAt: {
         allowNull: false,
