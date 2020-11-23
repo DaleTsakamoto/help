@@ -10,13 +10,13 @@ input:focus{
 
 .search-bar__keyword, .search-bar__location{
   height: 40px;
-  box-shadow: 0px 0px 5px #888888;
+  box-shadow: 0px 0px 5px lightgrey;
   border: none;
   padding: 0 15px;
 }
 
 .search-bar__keyword::placeholder{
-  color: lightgrey;
+  color: whitesmoke;
 }
 
 .search-bar__keyword{
@@ -31,7 +31,7 @@ input:focus{
   width: 10px;
   font-size: 30px;
   position: absolute;
-  padding-top: 2px;
+  padding-top: 5px;
   margin-left: 169px;
   content: "|";
   color: whitesmoke;
@@ -39,13 +39,9 @@ input:focus{
   z-index: 1;
 }
 
-.search-bar__location{
-  /* clip-path: inset(-5px 0px); */
-}
-
 .search-button{
   background-color: teal;
-  box-shadow: 0px 0px 5px #888888;
+  box-shadow: 0px 0px 5px lightgrey;
   border: none;
   height: 40px;
   width: 45px;

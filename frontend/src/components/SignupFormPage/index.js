@@ -7,10 +7,13 @@ import './SignupForm.css';
 const SignupFormPage = () => {
   const dispatch = useDispatch()
   const sessionUser = useSelector(state => state.session.user)
+  const [firstName, setFirstName] = useState('')
+  const [lastName, setLastName] = useState('')
   const [email, setEmail] = useState('')
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
+  const [helpType, setHelpType] = useState(true)
   const [errors, setErrors] = useState([])
 
   if (sessionUser) {
@@ -21,7 +24,9 @@ const SignupFormPage = () => {
     e.preventDefault();
     if (password === confirmPassword) {
       setErrors([]);
-      return dispatch(sessionActions.signup({ email, username, password }))
+      return (
+        dispatch(sessionActions.signup({ email, username, password, firstName, lastName, helpType }))
+      )
         .catch(res => {
           if (res.data && res.data.errors) setErrors(res.data.errors);
         });
@@ -34,6 +39,22 @@ const SignupFormPage = () => {
       <ul>
         {errors.map((error, idx) => <li key={idx}>{error}</li>)}
       </ul>
+      <label>First Name
+        <input
+          value={firstName}
+          type='text'
+          onChange={ e => setFirstName(e.target.value) }
+          required
+        />
+        </label>
+        <label>Last Name
+        <input
+          value={lastName}
+          type='text'
+          onChange={ e => setLastName(e.target.value) }
+          required
+        />
+      </label>
       <label>Email
         <input
           value={email}
@@ -66,6 +87,11 @@ const SignupFormPage = () => {
           required
           />
       </label>
+      <label htmlFor="helpType">Help Type:</label>
+      <select id="helpType">
+        <option value={true} onChange={e => setHelpType(true)} required>Helper</option>
+        <option value={false} onChange={e => setHelpType(false)} required>Helpee</option>
+      </select>
       <button type="submit">Sign-up</button>
     </form>
   )

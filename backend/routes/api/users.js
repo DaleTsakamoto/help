@@ -31,17 +31,24 @@ const validateSignup = [
   check('helpType')
     .exists({ checkFalsy: true })
     .withMessage('Choose either helper or helpee'),
+  check('firstName')
+    .exists({ checkFalsy: true })
+    .withMessage('You must include a first name'),
+  check('lastName')
+    .exists({ checkFalsy: true })
+    .withMessage('You must include a last name'),
   handleValidationErrors,
 ];
 
 /****************** SIGNUP **************************/
 
 router.post(
-  '',
+  '/',
   validateSignup,
   asyncHandler(async (req, res) => {
-    const { username, email, password, helpType, avatar, bio } = req.body;
-    const user = await User.signup({ username, email, password, helpType, avatar, bio });
+    const { username, email, password, helpType, firstName, lastName, avatar, bio } = req.body;
+    console.log("IM WORKING TOO!!!", firstName)
+    const user = await User.signup({ username, firstName, lastName, email, password, helpType, avatar, bio });
 
     await setTokenCookie(res, user);
 

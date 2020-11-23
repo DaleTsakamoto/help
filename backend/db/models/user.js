@@ -5,8 +5,8 @@ const bcrypt = require('bcryptjs');
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
     toSafeObject() {
-      const { id, username, email } = this; // context will be the User instance
-      return { id, username, email };
+      const { id, username, email, firstName, lastName, helpType } = this; // context will be the User instance
+      return { id, username, email, firstName, lastName, helpType };
     }
     validatePassword(password) {
       return bcrypt.compareSync(password, this.hashedPassword.toString());
@@ -28,12 +28,14 @@ module.exports = (sequelize, DataTypes) => {
         return await User.scope('currentUser').findByPk(user.id);
       }
     }
-    static async signup({ username, email, password, helpType, avatar, bio }) {
+    static async signup({ username, email, password, helpType, avatar, bio, firstName, lastName }) {
       const hashedPassword = bcrypt.hashSync(password);
       const user = await User.create({
         username,
         email,
         hashedPassword,
+        firstName,
+        lastName,
         helpType,
         avatar,
         bio
@@ -41,7 +43,12 @@ module.exports = (sequelize, DataTypes) => {
       return await User.scope('currentUser').findByPk(user.id);
     };
     static associate(models) {
-      // define association here
+      User.belongsToMany(models.User, {through: "Tasks", as: "helperTask", foreignKey: "helpeeId", otherKey: "helperId"});
+      User.belongsToMany(models.User, {through: "Tasks", as: "helpeeTask", foreignKey: "helperId", otherKey: "helpeeId" });
+      User.belongsToMany(models.User, {through: "Testimonies", as: "helperTestimony", foreignKey: "helpeeId", otherKey: "helperId"});
+      User.belongsToMany(models.User, {through: "Testimonies", as: "helpeeTestimony", foreignKey: "helperId", otherKey: "helpeeId" });
+      User.belongsToMany(models.User, {through: "helpingHands", as: "helperHand", foreignKey: "helpeeId", otherKey: "helperId"});
+      User.belongsToMany(models.User, {through: "helpingHands", as: "helpeeHand", foreignKey: "helperId", otherKey: "helpeeId"});
     }
   };
   User.init(
@@ -76,6 +83,14 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.BOOLEAN,
         allowNull: false,
       },
+      firstName: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      lastName: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
       avatar: {
         type: DataTypes.STRING
       },
@@ -86,7 +101,7 @@ module.exports = (sequelize, DataTypes) => {
       modelName: "User",
       defaultScope: {
         attributes: {
-          exclude: ["hashedPassword", "email", "createdAt", "updatedAt", "bio", "avatar"],
+          exclude: ["hashedPassword", "email", "createdAt", "updatedAt", "bio", "avatar", "firstName", "lastName"],
         },
       },
       scopes: {
