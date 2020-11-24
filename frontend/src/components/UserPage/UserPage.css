@@ -1,7 +1,13 @@
+.navlinks{
+  text-decoration: none;
+  color: black
+}
+
 .user-holder{
   margin-top: 20px;
   display: grid;
   box-sizing: border-box;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
 .user-holder__header{
@@ -15,6 +21,7 @@
 
 .user-holder__header__1{
   grid-column: 1 / 2;
+  margin-left: 30px;
 }
 
 .avatar{
@@ -37,7 +44,6 @@
 
 .user-holder__header__2{
   grid-column: 2 / 3;
-  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -93,6 +99,74 @@
   grid-column: 3 / 4;
 }
 
-.user-holder__header__1{
+.user-holder__body{
+  display: grid;
+  grid-template-columns: 250px 500px 250px;
+  width: 100vw;
+  grid-column: 1 / 4;
+}
+
+.user-holder__body__1{
+  margin-top: 70px;
   margin-left: 30px;
+  grid-column: 1 / 2;
+}
+
+.user-holder__body__1__header{
+  font-weight: 500;
+  font-size: 16px;
+  margin-bottom: 15px;
+}
+
+.user-holder__body__1__parent{
+  position: relative;
+  background-color: transparent;
+  height: 50px;
+  width: 200px;
+  z-index: 10;
+}
+
+.user-holder__body__1__Profile__Overview,
+.user-holder__body__1__Tasks,
+.user-holder__body__1__Testimony{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  font-size: 14px;
+  box-sizing: border-box;
+  padding: 13px 0 13px 10px;
+  border-top: .5px solid lightgrey;
+  z-index: -3;
+}
+
+.user-holder__body__1__Profile__Overview:hover,
+.user-holder__body__1__Tasks:hover,
+.user-holder__body__1__Testimony:hover{
+  background-color: whitesmoke;
+  cursor: pointer;
+}
+
+.user-holder__body__1__Profile__Overview__icon,
+.user-holder__body__1__Tasks__icon,
+.user-holder__body__1__Testimony__icon{
+  padding-right: 10px;
+  font-size: 20px;
+  z-index: 0;
+}
+
+.user-holder__body__1__text{
+  z-index: 0;
+}
+
+.user-holder__body__1__selected{
+  background-color: whitesmoke;
+  border-left: 2px solid red;
+}
+
+.user-holder__body__2{
+  margin-left: 30px;
+  margin-top: 15px;
+  grid-column: 2 / 3;
 }

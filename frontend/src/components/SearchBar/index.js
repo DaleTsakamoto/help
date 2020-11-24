@@ -7,8 +7,8 @@ function SearchBar() {
   const [keywordSearch, setKeywordSearch] = useState('')
   const [locationSearch, setLocationSearch] = useState('')
 
-  const activateSearch = () => {
-    const res = fetch('/search', {
+  const activateSearch = async () => {
+    const res = await fetch('/api/search', {
       method: 'POST',
       body: JSON.stringify({
         keywordSearch

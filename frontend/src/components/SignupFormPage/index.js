@@ -14,6 +14,7 @@ const SignupFormPage = () => {
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
   const [helpType, setHelpType] = useState(true)
+  const [zipCode, setZipCode] = useState()
   const [errors, setErrors] = useState([])
 
   if (sessionUser) {
@@ -84,6 +85,14 @@ const SignupFormPage = () => {
           value={confirmPassword}
           type='password'
           onChange={ e => setConfirmPassword(e.target.value) }
+          required
+          />
+      </label>
+      <label>Zip Code
+        <input
+          value={zipCode}
+          type='number'
+          onChange={ e => setZipCode(e.target.value) }
           required
           />
       </label>

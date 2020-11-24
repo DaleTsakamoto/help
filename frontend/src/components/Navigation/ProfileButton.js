@@ -29,26 +29,19 @@ function ProfileButton({ user }) {
   //   }
   // }
 
-  useEffect(() => {
+  const goUser = () => {
     if (redirect) {
-      const findUser = async () => {
-        const res = await fetch(`/users/${user.id}`)
-        console.log(res);
-        return (
-          <Redirect to={{
-            pathname: `/users/${user.id}`,
-            user: res.data.user
-          }} />
-        )
-      }
-      setRedirect(false);
-      findUser();
+      return <Redirect to={`/users/${user.id}`} />
     }
-  }, [redirect])
+  }
 
   const useRedirect = () => {
     setRedirect(true)
   }
+
+  useEffect(() => {
+    setRedirect(false);
+  }, [redirect])
   
   const openMenu = () => {
     if (showMenu) return;
@@ -83,6 +76,7 @@ function ProfileButton({ user }) {
           <div>
             <i className="fas fa-user"></i>
             <button onClick={useRedirect}> About Me </button>
+            {goUser()}
           </div>
           <div>
             <i className="fas fa-sign-out-alt"></i>

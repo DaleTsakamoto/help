@@ -5,8 +5,11 @@ const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
 const { setTokenCookie, requireAuth } = require('../../utils/auth');
 const { User } = require('../../db/models');
+const tasksRouter = require('./tasks')
 
 const router = express.Router();
+
+router.use('/:id/tasks', tasksRouter);
 
 
 /****************** SIGNUP ERRORS MIDDLEWARE **************************/
@@ -37,6 +40,9 @@ const validateSignup = [
   check('lastName')
     .exists({ checkFalsy: true })
     .withMessage('You must include a last name'),
+  check('zipCode')
+    .exists({ checkFalsy: true })
+    .withMessage('You must include a zip code'),
   handleValidationErrors,
 ];
 
@@ -46,9 +52,9 @@ router.post(
   '/',
   validateSignup,
   asyncHandler(async (req, res) => {
-    const { username, email, password, helpType, firstName, lastName, avatar, bio } = req.body;
+    const { username, email, password, helpType, firstName, lastName, avatar, bio, zipCode } = req.body;
     console.log("IM WORKING TOO!!!", firstName)
-    const user = await User.signup({ username, firstName, lastName, email, password, helpType, avatar, bio });
+    const user = await User.signup({ username, firstName, lastName, email, password, helpType, avatar, bio, zipCode });
 
     await setTokenCookie(res, user);
 
@@ -57,6 +63,21 @@ router.post(
     });
   }),
 );
+
+/****************** USERS PAGE **************************/
+
+router.get('/:id(\\d+)', asyncHandler(async (req, res) => {
+  const userId = parseInt(req.params.id, 10)
+  console.log("I'M WORKING!!!!!", userId)
+  const user = await User.findByPk(userId)
+  console.log("THIS IS THE USER:", user)
+  if (user) {
+    return res.json({
+      user
+    })
+  }
+    return res.json('No User Found!');
+  }))
 
 
 module.exports = router;

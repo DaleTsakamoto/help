@@ -14,6 +14,7 @@ module.exports = {
         lastName: faker.name.lastName(),
         avatar: faker.image.avatar(),
         bio: faker.lorem.paragraph(),
+        zipCode: 94561,
         createdAt: new Date(),
         updatedAt: new Date()
       },
@@ -26,6 +27,7 @@ module.exports = {
         lastName: faker.name.lastName(),
         avatar: faker.image.avatar(),
         bio: faker.lorem.paragraph(),
+        zipCode: 94561,
         createdAt: new Date(),
         updatedAt: new Date()
       },
@@ -38,6 +40,7 @@ module.exports = {
         lastName: faker.name.lastName(),
         avatar: faker.image.avatar(),
         bio: faker.lorem.paragraph(),
+        zipCode: 94561,
         createdAt: new Date(),
         updatedAt: new Date()
       },
@@ -50,6 +53,7 @@ module.exports = {
         lastName: faker.name.lastName(),
         avatar: faker.image.avatar(),
         bio: faker.lorem.paragraph(),
+        zipCode: 94562,
         createdAt: new Date(),
         updatedAt: new Date()
       },
@@ -62,6 +66,7 @@ module.exports = {
         lastName: faker.name.lastName(),
         avatar: faker.image.avatar(),
         bio: faker.lorem.paragraph(),
+        zipCode: 94562,
         createdAt: new Date(),
         updatedAt: new Date()
       },
@@ -74,6 +79,7 @@ module.exports = {
         lastName: faker.name.lastName(),
         avatar: faker.image.avatar(),
         bio: faker.lorem.paragraph(),
+        zipCode: 94562,
         createdAt: new Date(),
         updatedAt: new Date()
       },
@@ -86,6 +92,7 @@ module.exports = {
         lastName: faker.name.lastName(),
         avatar: faker.image.avatar(),
         bio: faker.lorem.paragraph(),
+        zipCode: 94561,
         createdAt: new Date(),
         updatedAt: new Date()
       },
@@ -98,6 +105,7 @@ module.exports = {
         lastName: faker.name.lastName(),
         avatar: faker.image.avatar(),
         bio: faker.lorem.paragraph(),
+        zipCode: 94562,
         createdAt: new Date(),
         updatedAt: new Date()
       },
@@ -110,6 +118,7 @@ module.exports = {
         lastName: faker.name.lastName(),
         avatar: faker.image.avatar(),
         bio: faker.lorem.paragraph(),
+        zipCode: 94563,
         createdAt: new Date(),
         updatedAt: new Date()
       },{
@@ -121,6 +130,7 @@ module.exports = {
         lastName: faker.name.lastName(),
         avatar: faker.image.avatar(),
         bio: faker.lorem.paragraph(),
+        zipCode: 94563,
         createdAt: new Date(),
         updatedAt: new Date()
       },
@@ -133,6 +143,7 @@ module.exports = {
         lastName: faker.name.lastName(),
         avatar: faker.image.avatar(),
         bio: faker.lorem.paragraph(),
+        zipCode: 94563,
         createdAt: new Date(),
         updatedAt: new Date()
       },
@@ -145,6 +156,7 @@ module.exports = {
         lastName: faker.name.lastName(),
         avatar: faker.image.avatar(),
         bio: faker.lorem.paragraph(),
+        zipCode: 94563,
         createdAt: new Date(),
         updatedAt: new Date()
       },
@@ -157,6 +169,7 @@ module.exports = {
         lastName: faker.name.lastName(),
         avatar: faker.image.avatar(),
         bio: faker.lorem.paragraph(),
+        zipCode: 94562,
         createdAt: new Date(),
         updatedAt: new Date()
       },
@@ -169,6 +182,7 @@ module.exports = {
         lastName: faker.name.lastName(),
         avatar: faker.image.avatar(),
         bio: faker.lorem.paragraph(),
+        zipCode: 94562,
         createdAt: new Date(),
         updatedAt: new Date()
       },
@@ -181,6 +195,7 @@ module.exports = {
         lastName: faker.name.lastName(),
         avatar: faker.image.avatar(),
         bio: faker.lorem.paragraph(),
+        zipCode: 94562,
         createdAt: new Date(),
         updatedAt: new Date()
       },
@@ -193,6 +208,7 @@ module.exports = {
         lastName: faker.name.lastName(),
         avatar: faker.image.avatar(),
         bio: faker.lorem.paragraph(),
+        zipCode: 94562,
         createdAt: new Date(),
         updatedAt: new Date()
       },
@@ -205,6 +221,7 @@ module.exports = {
         lastName: faker.name.lastName(),
         avatar: faker.image.avatar(),
         bio: faker.lorem.paragraph(),
+        zipCode: 94562,
         createdAt: new Date(),
         updatedAt: new Date()
       },
@@ -217,6 +234,7 @@ module.exports = {
         lastName: faker.name.lastName(),
         avatar: faker.image.avatar(),
         bio: faker.lorem.paragraph(),
+        zipCode: 94562,
         createdAt: new Date(),
         updatedAt: new Date()
       },
@@ -229,6 +247,7 @@ module.exports = {
         lastName: faker.name.lastName(),
         avatar: faker.image.avatar(),
         bio: faker.lorem.paragraph(),
+        zipCode: 94563,
         createdAt: new Date(),
         updatedAt: new Date()
       },
@@ -241,6 +260,7 @@ module.exports = {
         lastName: faker.name.lastName(),
         avatar: faker.image.avatar(),
         bio: faker.lorem.paragraph(),
+        zipCode: 94563,
         createdAt: new Date(),
         updatedAt: new Date()
       },
