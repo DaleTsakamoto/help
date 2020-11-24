@@ -1,13 +1,15 @@
 import React, {useEffect, useState} from 'react'
 import { useSelector } from 'react-redux'
+import * as taskActions from '../../store/tasks'
+
+import Tasks from '../Tasks'
 import { fetch } from '../../store/csrf'
-import {NavLink} from 'react-router-dom'
 import './UserPage.css'
 
 const UserPage = () => {
   const sessionUser = useSelector(state => state.session.user)
   const [currentUserPage, setCurrentUserPage] = useState()
-  const [tasks, setTasks] = useState([])
+  // const [tasks, setTasks] = useState([])
 
   const addClass = (e) => {
     if (!e.target.id) {
@@ -17,34 +19,34 @@ const UserPage = () => {
       e.target.classList.add("user-holder__body__1__selected")
       setCurrentUserPage(e.target.id)
     }
-    console.log(currentUserPage)
+    // console.log(currentUserPage)
   }
+
+  let column2;
 
   const addRemoveClass = (e) => {
     const value = document.querySelector('.user-holder__body__1__selected')
     if (value) {
       value.classList.remove("user-holder__body__1__selected")
     }
-    addClass(e);
+    column2 = addClass(e);
+    console.log(column2)
   }
   
-  useEffect(() => {
-    const search = async () => {
-      // ${currentUserPage}
-      const res = await fetch(`/api/users/${sessionUser.id}/tasks`, {
-        method: 'POST',
-        body: JSON.stringify({
-          id: sessionUser.id,
-          helpType: sessionUser.helpType
-        }),
-      })
-      return setTasks(res);
-    }
-    search();
-  }, [currentUserPage]);
-
-  let column2;
-  console.log(tasks)
+  // useEffect(() => {
+  //   const search = async () => {
+  //     // ${currentUserPage}
+  //     const res = await fetch(`/api/users/${sessionUser.id}/tasks`, {
+  //       method: 'POST',
+  //       body: JSON.stringify({
+  //         id: sessionUser.id,
+  //         helpType: sessionUser.helpType
+  //       }),
+  //     })
+  //     return setTasks(res);
+  //   }
+  //   search();
+  // }, [currentUserPage]);
 
   // const column2Overview = () => {
     
@@ -107,25 +109,25 @@ const UserPage = () => {
         <div className='user-holder__body__1'>
           <div className='user-holder__body__1__header'>{sessionUser.firstName}'s Profile</div>
           <div className='user-holder__body__1__parent'>
-            <div id='overview' onClick={addRemoveClass} className='user-holder__body__1__Profile__Overview' >
+            <div id='Overview' onClick={addRemoveClass} className='user-holder__body__1__Profile__Overview' >
               <i className="fas fa-user user-holder__body__1__Profile__Overview__icon" />
               <div className='user-holder__body__1__text'> Profile Overview </div>
             </div>
           </div>
           <div className='user-holder__body__1__parent'>
-            <div id='tasks' onClick={addRemoveClass} className='user-holder__body__1__Tasks'>
+            <div id='Tasks' onClick={addRemoveClass} className='user-holder__body__1__Tasks'>
               <i className="fas fa-tasks user-holder__body__1__Tasks__icon" />
               <div className='user-holder__body__1__text'> Tasks </div>
             </div>
           </div>
           <div className='user-holder__body__1__parent'>
-            <div id='testimonies' onClick={addRemoveClass} className='user-holder__body__1__Testimony'>
+            <div id='Testimonies' onClick={addRemoveClass} className='user-holder__body__1__Testimony'>
               <i className="fas fa-comment-alt user-holder__body__1__Testimony__icon"></i>
               <div className='user-holder__body__1__text'> Testimony </div>
             </div>
           </div>
         </div>
-        <div className='user-holder__body__2'>{column2}</div>
+        <div className='user-holder__body__2'><Tasks /></div>
         <div className='user-holder__body__3'>column 3</div>
       </div>
     </div>

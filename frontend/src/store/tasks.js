@@ -2,12 +2,13 @@ import { fetch } from './csrf'
 
 // const SET_USER = 'session/setUser'
 // const REMOVE_USER = 'session/removeUser'
-const REMOVE_TASKs = 'tasks/removeTasks'
-const SET_TASKS = 'tasks/setTasks'
+const ADD_TASK = 'tasks/addTask'
+const REMOVE_TASK = 'tasks/removeTasks'
+const FIND_TASKS = 'tasks/findTasks'
 
-const setTasks = (tasks) => {
+const findTasks = (tasks) => {
   return {
-    type: SET_TASKS,
+    type: FIND_TASKS,
     tasks
   }
 }
@@ -35,57 +36,58 @@ export const search = (user) => async (dispatch) => {
       helpType
     }),
   })
-  dispatch(setTasks(res.data.tasks));
+  dispatch(findTasks(res.data.tasks));
   return res
 }
 
-export const login = (user) => async (dispatch) => {
-  const { credential, password } = user;
-  const res = await fetch('/api/session', {
-    method: 'POST',
-    body: JSON.stringify({
-      credential,
-      password,
-    }),
-  })
-  dispatch(setUser(res.data.user))
-  return res;
-}
+// export const login = (user) => async (dispatch) => {
+//   const { credential, password } = user;
+//   const res = await fetch('/api/session', {
+//     method: 'POST',
+//     body: JSON.stringify({
+//       credential,
+//       password,
+//     }),
+//   })
+//   dispatch(setUser(res.data.user))
+//   return res;
+// }
 
-export const signup = (user) => async (dispatch) => {
-  const { email, username, password, firstName, lastName, helpType } = user;
-  console.log("I'm WORKING!!", firstName)
-  const res = await fetch('/api/users', {
-    method: 'POST',
-    body: JSON.stringify({
-      email,
-      username,
-      password,
-      firstName,
-      lastName,
-      helpType
-    }),
-  })
-  dispatch(setUser(res.data.user))
-  return res;
-}
+// export const signup = (user) => async (dispatch) => {
+//   const { email, username, password, firstName, lastName, helpType } = user;
+//   console.log("I'm WORKING!!", firstName)
+//   const res = await fetch('/api/users', {
+//     method: 'POST',
+//     body: JSON.stringify({
+//       email,
+//       username,
+//       password,
+//       firstName,
+//       lastName,
+//       helpType
+//     }),
+//   })
+//   dispatch(setUser(res.data.user))
+//   return res;
+// }
 
-export const logout = () => async (dispatch) => {
-  const res = await fetch('/api/session', {
-    method: 'DELETE',
-  });
-  dispatch(removeUser());
-  return res;
-};
+// export const logout = () => async (dispatch) => {
+//   const res = await fetch('/api/session', {
+//     method: 'DELETE',
+//   });
+//   dispatch(removeUser());
+//   return res;
+// };
 
 const initialState = { tasks: null }
 
 const tasksReducer = (state = initialState, action) => {
   let newState;
   switch (action.type) {
-    case SET_TASKS:
+    case FIND_TASKS:
       newState = Object.assign({}, state)
       newState.tasks = action.tasks;
+      return newState;
     default:
       return state;
   }
