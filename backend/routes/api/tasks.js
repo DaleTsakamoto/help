@@ -25,7 +25,6 @@ router.post(
         [help]: id
       }
     })
-    console.log(tasks)
 
     return res.json({
       tasks,

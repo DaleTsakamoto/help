@@ -31,7 +31,6 @@ export const login = (user) => async (dispatch) => {
 
 export const signup = (user) => async (dispatch) => {
   const { email, username, password, firstName, lastName, helpType } = user;
-  console.log("I'm WORKING!!", firstName)
   const res = await fetch('/api/users', {
     method: 'POST',
     body: JSON.stringify({

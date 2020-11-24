@@ -8,7 +8,6 @@ function LoginFormModal() {
   return (
     <>
       <button onClick={() => {
-        console.log('WORKING!!!!', showModal)
         setShowModal(true)
       }
       }>Log In</button>

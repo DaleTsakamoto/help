@@ -1,23 +1,24 @@
 import React, {useEffect, useState} from 'react'
 import { useSelector } from 'react-redux'
-import * as taskActions from '../../store/tasks'
+import {NavLink, Switch, Route} from 'react-router-dom'
 
 import Tasks from '../Tasks'
+import Overview from './userPageOverview'
 import { fetch } from '../../store/csrf'
 import './UserPage.css'
 
 const UserPage = () => {
   const sessionUser = useSelector(state => state.session.user)
-  const [currentUserPage, setCurrentUserPage] = useState()
+  // const [currentUserPage, setCurrentUserPage] = useState()
   // const [tasks, setTasks] = useState([])
 
   const addClass = (e) => {
     if (!e.target.id) {
       e.target.parentElement.classList.add("user-holder__body__1__selected")
-      setCurrentUserPage(e.target.parentElement.id)
+      // setCurrentUserPage(e.target.parentElement.id)
     } else {
       e.target.classList.add("user-holder__body__1__selected")
-      setCurrentUserPage(e.target.id)
+      // setCurrentUserPage(e.target.id)
     }
     // console.log(currentUserPage)
   }
@@ -56,14 +57,6 @@ const UserPage = () => {
   // }
 
 
-  // useEffect(() => {
-  //     const findUser = async () => {
-  //       const res = await fetch(`/users/${sessionUser.id}`)
-  //       setCurrentUserPage(res.data.user)
-  //       return res.data.user
-  //     }
-  //   findUser()
-  // }, [])
 
   // function success(pos) {
   //   var crd = pos.coords;
@@ -80,7 +73,11 @@ const UserPage = () => {
 
   // navigator.geolocation.getCurrentPosition(success, error)
 
-  // console.log(currentUserPage);
+
+  // let currentComponent;
+  // if (currentUserPage === "Tasks") {
+  //   currentComponent = <Tasks />
+  // }
   return (
     <div className="user-holder">
       <div className="user-holder__header">
@@ -108,18 +105,22 @@ const UserPage = () => {
       <div className="user-holder__body">
         <div className='user-holder__body__1'>
           <div className='user-holder__body__1__header'>{sessionUser.firstName}'s Profile</div>
+          <NavLink className="navlinks" to={`/users/${sessionUser.id}`}>
           <div className='user-holder__body__1__parent'>
             <div id='Overview' onClick={addRemoveClass} className='user-holder__body__1__Profile__Overview' >
               <i className="fas fa-user user-holder__body__1__Profile__Overview__icon" />
               <div className='user-holder__body__1__text'> Profile Overview </div>
             </div>
           </div>
-          <div className='user-holder__body__1__parent'>
-            <div id='Tasks' onClick={addRemoveClass} className='user-holder__body__1__Tasks'>
-              <i className="fas fa-tasks user-holder__body__1__Tasks__icon" />
-              <div className='user-holder__body__1__text'> Tasks </div>
+          </NavLink>
+          <NavLink className="navlinks" to={`/users/${sessionUser.id}/tasks`}>
+            <div className='user-holder__body__1__parent'>
+              <div id='Tasks' onClick={addRemoveClass} className='user-holder__body__1__Tasks'>
+                <i className="fas fa-tasks user-holder__body__1__Tasks__icon" />
+                <div className='user-holder__body__1__text'> Tasks </div>
+              </div>
             </div>
-          </div>
+          </NavLink>
           <div className='user-holder__body__1__parent'>
             <div id='Testimonies' onClick={addRemoveClass} className='user-holder__body__1__Testimony'>
               <i className="fas fa-comment-alt user-holder__body__1__Testimony__icon"></i>
@@ -127,7 +128,16 @@ const UserPage = () => {
             </div>
           </div>
         </div>
-        <div className='user-holder__body__2'><Tasks /></div>
+        <div className='user-holder__body__2'>
+          <Switch>
+            <Route path={`/users/${sessionUser.id}/tasks`}>
+              <Tasks />
+            </Route>
+            <Route path={`/users/${sessionUser.id}`}>
+              <Overview />
+            </Route>
+          </Switch>
+        </div>
         <div className='user-holder__body__3'>column 3</div>
       </div>
     </div>
@@ -135,3 +145,5 @@ const UserPage = () => {
 }
 
 export default UserPage;
+
+//nest routes with a switch, use location or use history
