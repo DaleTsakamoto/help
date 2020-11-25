@@ -11,19 +11,19 @@ router.post(
   '/',
   asyncHandler(async (req, res, next) => {
    
+
+    //GEOCODER
     const options = {
       provider: 'google',
-    
-      // Optional depending on the providers
-      apiKey: process.env.GOOGLE_API, // for Mapquest, OpenCage, Google Premier
-      formatter: null // 'gpx', 'string', ...
+      apiKey: process.env.GOOGLE_API,
+      formatter: null
     };
     
     const geocoder = NodeGeocoder(options);
-    
-    // Using callback
+  
     const result = await geocoder.geocode('513 Quicksilver Court, Oakley, CA, 94561');
     console.log(result[0].latitude)
+
 
     const { keywordSearch } = req.body;
     let users;

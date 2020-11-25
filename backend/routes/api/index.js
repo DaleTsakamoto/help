@@ -13,9 +13,11 @@ const { requireAuth } = require('../../utils/auth.js');
 router.use('/session', sessionRouter);
 router.use('/users', usersRouter);
 router.use('/search', searchRouter);
-// router.use('/people', peopleRouter);
+router.use('/people', peopleRouter);
 
 /****************** TEST ROUTES **************************/
+
+
 
 // router.post('/test', function(req, res) {
 //   res.json({ requestBody: req.body });

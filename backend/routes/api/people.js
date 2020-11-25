@@ -1,25 +1,52 @@
 const express = require('express');
 const asyncHandler = require('express-async-handler');
+const { check } = require('express-validator');
+const NodeGeocoder = require('node-geocoder');
 
-const { setTokenCookie, requireAuth } = require('../../utils/auth');
 const { User } = require('../../db/models');
+const distance = require ('../utils/mathEquations')
 
 const router = express.Router();
 
 
 
+/****************** GEOCODER ************************/
+
+async function geocodeAddress (address) {
+  const options = {
+    provider: 'google',
+    apiKey: process.env.GOOGLE_API,
+    formatter: null
+  };
+  
+  const geocoder = NodeGeocoder(options);
+  
+  const result = await geocoder.geocode(address);
+  console.log(result[0].latitude)
+
+}
+
 /****************** GET PEOPLE ************************/
 
-// router.post(
-//   '/',
-//   asyncHandler(async (req, res) => {
-//     const { username, email, password, helpType, firstName, lastName, avatar, bio, zipCode } = req.body;
-//     const user = await User.signup({ username, firstName, lastName, email, password, helpType, avatar, bio, zipCode });
+router.post(
+  '/',
+  asyncHandler(async (req, res) => {
+    const { lat, lng } = req.body;
+    console.log("IM WORKING!!!!!!!!!!!!!!!!!!!!!", lat, lng);
+  
+    users = await User.findAll({
+      where: {
+        username: {
+          [Sequelize.Op.iLike]: '%'+keywordSearch+'%'
+        },
+      }
+    })
 
-//     await setTokenCookie(res, user);
 
-//     return res.json({
-//       user,
-//     });
-//   }),
-// );
+    // return res.json({
+    //   user,
+    // });
+  }),
+);
+
+module.exports = router;

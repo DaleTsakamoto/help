@@ -24,13 +24,14 @@ const findUsers = (users) => {
 //   };
 // };
 
-export const search = (user) => async (dispatch) => {
+export const searchPeople = (coords) => async (dispatch) => {
   // ${currentUserPage}
-  const { id } = user;
+  const { lat, lng } = coords;
   const res = await fetch(`/api/people`, {
     method: 'POST',
     body: JSON.stringify({
-      id
+      lat,
+      lng
     }),
   })
   dispatch(findUsers(res.data.users));

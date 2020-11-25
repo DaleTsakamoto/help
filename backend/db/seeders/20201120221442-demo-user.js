@@ -18,6 +18,8 @@ module.exports = {
         city: 'Antioch',
         state: 'CA',
         zipCode: 94531,
+        lat: 37.95853966797496,
+        lng: -121.80304313152969,
         createdAt: new Date(),
         updatedAt: new Date()
       },
@@ -34,6 +36,8 @@ module.exports = {
         city: 'Pittsburg',
         state: 'CA',
         zipCode: 94565,
+        lat: 38.021680034268115,
+        lng: -121.87386073152757,
         createdAt: new Date(),
         updatedAt: new Date()
       },
@@ -50,6 +54,8 @@ module.exports = {
         city: 'Antioch',
         state: 'CA',
         zipCode: 94509,
+        lat: 38.00140914542003, 
+        lng: -121.76434488920012,
         createdAt: new Date(),
         updatedAt: new Date()
       },
@@ -65,6 +71,8 @@ module.exports = {
         address: '153 Curtis Dr',
         city: 'BrentWood',
         state: 'CA',
+        lat: 37.9419890634006, 
+        lng: -121.69888086036613,
         zipCode: 94513,
         createdAt: new Date(),
         updatedAt: new Date()
@@ -82,6 +90,8 @@ module.exports = {
         city: 'Knightsen',
         state: 'CA',
         zipCode: 94548,
+        lat: 37.96925178748121, 
+        lng: -121.66590643152932,
         createdAt: new Date(),
         updatedAt: new Date()
       },
@@ -97,6 +107,8 @@ module.exports = {
         address: '1445 Oxford St',
         city: 'Berkeley',
         state: 'CA',
+        lat: 37.88104002410611, 
+        lng: - 122.26692440269618,
         zipCode: 94709,
         createdAt: new Date(),
         updatedAt: new Date()
@@ -114,6 +126,8 @@ module.exports = {
         city: 'Berkeley',
         state: 'CA',
         zipCode: 94709,
+        lat: 37.87981242343178, 
+        lng: -122.26567531804005,
         createdAt: new Date(),
         updatedAt: new Date()
       },
@@ -130,6 +144,8 @@ module.exports = {
         city: 'Berkeley',
         state: 'CA',
         zipCode: 94703,
+        lat: 37.852187180644954, 
+        lng: -122.27319441618923,
         createdAt: new Date(),
         updatedAt: new Date()
       },
@@ -146,6 +162,8 @@ module.exports = {
         city: 'Berkeley',
         state: 'CA',
         zipCode: 94705,
+        lat: 37.85637845417516, 
+        lng: -122.24920046222056,
         createdAt: new Date(),
         updatedAt: new Date()
       },{
@@ -160,6 +178,8 @@ module.exports = {
         address: '431 49th St',
         city: 'Oakland',
         state: 'CA',
+        lat: 37.83554880032592, 
+        lng: - 122.2600278450257,
         zipCode: 94609,
         createdAt: new Date(),
         updatedAt: new Date()
@@ -177,6 +197,8 @@ module.exports = {
         city: 'Oakland',
         state: 'CA',
         zipCode: 94618,
+        lat: 37.84371555280373, 
+        lng: - 122.24755280269733,
         createdAt: new Date(),
         updatedAt: new Date()
       },
@@ -193,6 +215,8 @@ module.exports = {
         city: 'Walnut Creek',
         state: 'CA',
         zipCode: 94597,
+        lat: 37.91064273342357, 
+        lng: -122.07430177385926,
         createdAt: new Date(),
         updatedAt: new Date()
       },
@@ -209,6 +233,8 @@ module.exports = {
         city: 'Walnut Creek',
         state: 'CA',
         zipCode: 94597,
+        lat: 37.92044818823334, 
+        lng: - 122.07769885851513,
         createdAt: new Date(),
         updatedAt: new Date()
       },
@@ -224,6 +250,8 @@ module.exports = {
         address: '2008 San Miguel Dr',
         city: 'Walnut Creek',
         state: 'CA',
+        lat: 37.89157815134282, 
+        lng: - 122.04776520269581,
         zipCode: 94596,
         createdAt: new Date(),
         updatedAt: new Date()
@@ -241,6 +269,8 @@ module.exports = {
         city: 'Walnut Creek',
         state: 'CA',
         zipCode: 94595,
+        lat: 37.884931091955174, 
+        lng: -122.06107253153203,
         createdAt: new Date(),
         updatedAt: new Date()
       },
@@ -257,6 +287,8 @@ module.exports = {
         city: 'Walnut Creek',
         state: 'CA',
         zipCode: 94597,
+        lat: 37.92314942551073, 
+        lng: -122.0546468026948,
         createdAt: new Date(),
         updatedAt: new Date()
       },
@@ -273,6 +305,8 @@ module.exports = {
         city: 'Concord',
         state: 'CA',
         zipCode: 94520,
+        lat: 37.95817152066825, 
+        lng: -122.04337108734993,
         createdAt: new Date(),
         updatedAt: new Date()
       },
@@ -289,6 +323,8 @@ module.exports = {
         city: 'Pleasant Hill',
         state: 'CA',
         zipCode: 94523,
+        lat: 37.96647593746985, 
+        lng: -122.06547741803729,
         createdAt: new Date(),
         updatedAt: new Date()
       },
@@ -304,6 +340,8 @@ module.exports = {
         address: '2840 Mt Diablo St',
         city: 'Concord',
         state: 'CA',
+        lat: 37.970528783655986, 
+        lng: -122.02749446036525,
         zipCode: 94518,
         createdAt: new Date(),
         updatedAt: new Date()
@@ -320,6 +358,8 @@ module.exports = {
         address: '4101 Hamlet Dr',
         city: 'Concord',
         state: 'CA',
+        lat: 37.96069581310835, 
+        lng: -122.00154841618574,
         zipCode: 94521,
         createdAt: new Date(),
         updatedAt: new Date()

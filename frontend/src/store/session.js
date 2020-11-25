@@ -1,4 +1,19 @@
 import { fetch } from './csrf'
+import NodeGeocoder from 'node-geocoder'
+
+async function geocodeAddress (address) {
+  const options = {
+    provider: 'google',
+    apiKey: process.env.GOOGLE_API,
+    formatter: null
+  };
+  
+  const geocoder = NodeGeocoder(options);
+  
+  const result = await geocoder.geocode(address);
+  return { lat: result[0].latitude, lng: result[0].longitude}
+
+}
 
 const SET_USER = 'session/setUser'
 const REMOVE_USER = 'session/removeUser'
@@ -30,7 +45,9 @@ export const login = (user) => async (dispatch) => {
 }
 
 export const signup = (user) => async (dispatch) => {
-  const { email, username, password, firstName, lastName, helpType } = user;
+  const { email, username, password, firstName, lastName, helpType, address, city, state, zipCode } = user;
+  const formatAddress = `${address}, ${city}, ${state}, ${zipCode}`
+  const { lat, lng } = geocodeAddress(formatAddress)
   const res = await fetch('/api/users', {
     method: 'POST',
     body: JSON.stringify({
@@ -39,7 +56,13 @@ export const signup = (user) => async (dispatch) => {
       password,
       firstName,
       lastName,
-      helpType
+      helpType,
+      address,
+      city,
+      state,
+      zipCode,
+      lat,
+      lng
     }),
   })
   dispatch(setUser(res.data.user))
