@@ -53,7 +53,6 @@ router.post(
   validateSignup,
   asyncHandler(async (req, res) => {
     const { username, email, password, helpType, firstName, lastName, avatar, bio, zipCode } = req.body;
-    console.log("IM WORKING TOO!!!", firstName)
     const user = await User.signup({ username, firstName, lastName, email, password, helpType, avatar, bio, zipCode });
 
     await setTokenCookie(res, user);
@@ -68,9 +67,7 @@ router.post(
 
 router.get('/:id(\\d+)', asyncHandler(async (req, res) => {
   const userId = parseInt(req.params.id, 10)
-  console.log("I'M WORKING!!!!!", userId)
   const user = await User.findByPk(userId)
-  console.log("THIS IS THE USER:", user)
   if (user) {
     return res.json({
       user

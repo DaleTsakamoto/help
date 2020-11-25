@@ -1,5 +1,5 @@
 .home-page-main-image{
-  background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url('./help_sample.jpeg');
+  background: linear-gradient( rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7) ), url('./help_sample.jpeg');
   width: 100%;
   height: 600px;
   background-size: cover;
@@ -7,4 +7,127 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+.alt-home-logo{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-left: 30px;
+  cursor: pointer;
+  margin-bottom: 35px;
+}
+
+.alt-home-logo__help{
+  font-family: 'M PLUS Rounded 1c', sans-serif;
+  color: white;
+  font-size: 50px;
+  padding-right: 5px;
+}
+
+.alt-home-logo__hands{
+  font-size: 35px;
+  color: teal
+}
+
+input:focus{
+  outline: none;
+}
+
+.alt-search-bar{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.alt-search-bar__keyword, .alt-search-bar__location{
+  height: 45px;
+  width: 350px;
+  box-shadow: 0px 0px 5px lightgrey;
+  border: none;
+  padding: 0 15px;
+}
+
+.alt-search-bar__keyword::placeholder{
+  color: whitesmoke;
+}
+
+.alt-search-bar__keyword{
+  border-radius: 3px 0 0 3px;
+
+}
+
+.alt-search-bar::before{
+  box-sizing: border-box;
+  height: 45px;
+  width: 10px;
+  font-size: 30px;
+  position: absolute;
+  padding-top: 7px;
+  margin-left: 375px;
+  content: "|";
+  color: lightgrey;
+  background-color: white;
+  z-index: 1;
+}
+
+.alt-search-button{
+  background-color: teal;
+  box-shadow: 0px 0px 5px lightgrey;
+  border: none;
+  height: 45px;
+  width: 65px;
+  cursor: pointer;
+  border-radius: 0 3px 3px 0;
+}
+
+.alt-magnify{
+  display: flex;
+  font-size: 20px;
+  color: white;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.homepage-users-container__local{
+  box-sizing: border-box;
+  height: 1000px;
+  width: 1014px;
+}
+
+.users-container__header__local{
+  box-sizing: border-box;
+  padding: 35px 0;
+  margin: 0 27px;
+  border-bottom: .5px solid lightgrey;
+  text-align: center;
+  color: teal;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 24px;
+  font-weight: 1000;
+}
+
+.users-container__body__local{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  margin: 0 15px;
+}
+
+.users-container__body__local > div{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  height: 400px;
+  width: 328px;
+}
+
+.users-container__body__local > div > div{
+  height: 350px;
+  width: 300px;
+  border: .5px solid lightgrey;
+  border-radius: 5px;
 }

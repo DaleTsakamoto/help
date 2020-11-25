@@ -29,7 +29,7 @@ const Tasks = () => {
   let incomplete;
   if (isLoaded) {
     if (user.helpType) {
-      complete = Object.values(currentTasks).map((task, idx) => {
+      complete = Object.values(currentTasks).map((task) => {
         if (!task.completed) {
           return(
             <div className='task-container__list__completed'>
@@ -55,6 +55,7 @@ const Tasks = () => {
   return isLoaded && (
     <div className='tasks-container'>
       <div className='tabs'>
+        <h1 className='tabs-header__name'>Tasks</h1>
         <ul className='tab-header'>
           <li className='tab-header__incomplete show'>
             <NavLink onClick={tabHide} className='navlinks' to={`/users/${user.id}/tasks/incomplete`}>

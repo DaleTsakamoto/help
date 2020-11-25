@@ -26,9 +26,9 @@ const NavigationAlternate = ({isLoaded}) => {
   }
 
   return (
-      <div className="header">
-        <div className="header-testimony">Write a Testimony</div>
-        <div className="profile-drop"> {isLoaded && headerNavigation} </div>
+      <div className="alt-header">
+        <div className="alt-header-testimony">Write a Testimony</div>
+        <div className="alt-profile-drop"> {isLoaded && headerNavigation} </div>
       </div>
   );
 }

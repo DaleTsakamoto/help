@@ -11,24 +11,33 @@
   background-color: #FFFEF2;
 }
 
+.tabs-header__name{
+  color: teal;
+  text-align: center;
+  font-size: 24px;
+  margin-top: 40px
+}
+
 .tabs {
   width: 450px;
-  height: 100%
+  height: 20%
+
 }
 
 .tab-header {
   color: teal;
   display: flex;
   justify-content: flex-end;
-  margin-top: 50px;
+  margin-top: 60px;
   border-bottom: .5px dashed #e6f2f2;
 }
 
 .tab-header__incomplete,
 .tab-header__complete{
   position: absolute;
-  margin-top: -26px;
+  margin-top: 0px;
   width: 12%;
+  margin-top: -26px;
   text-align: center;
   cursor: pointer;
   background-color: #FFFEF2;
@@ -39,7 +48,7 @@
 }
 
 .tab-header__incomplete{
-  margin-right: 126px;
+  margin-right: 144px;
 }
 
 a {
