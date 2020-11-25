@@ -8,10 +8,6 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      zipCode: {
-        type: Sequelize.INTEGER(),
-        allowNull: false
-      },
       firstName: {
         type: Sequelize.STRING(50),
         allowNull: false
@@ -43,6 +39,22 @@ module.exports = {
       },
       bio: {
         type: Sequelize.TEXT
+      },
+      address: {
+        type: Sequelize.TEXT,
+        allowNull: false
+      },
+      city: {
+        type: Sequelize.STRING(50),
+        allowNull: false
+      },
+      state: {
+        type: Sequelize.STRING(2),
+        allowNull: false
+      },
+      zipCode: {
+        type: Sequelize.INTEGER,
+        allowNull: false
       },
       createdAt: {
         allowNull: false,

@@ -14,6 +14,9 @@ const SignupFormPage = () => {
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
   const [helpType, setHelpType] = useState(true)
+  const [address, setAddress] = useState('')
+  const [city, setCity] = useState('')
+  const [state, setState] = useState('')
   const [zipCode, setZipCode] = useState()
   const [errors, setErrors] = useState([])
 
@@ -26,7 +29,7 @@ const SignupFormPage = () => {
     if (password === confirmPassword) {
       setErrors([]);
       return (
-        dispatch(sessionActions.signup({ email, username, password, firstName, lastName, helpType }))
+        dispatch(sessionActions.signup({ email, username, password, firstName, lastName, helpType, address, city, state, zipCode }))
       )
         .catch(res => {
           if (res.data && res.data.errors) setErrors(res.data.errors);
@@ -85,6 +88,30 @@ const SignupFormPage = () => {
           value={confirmPassword}
           type='password'
           onChange={ e => setConfirmPassword(e.target.value) }
+          required
+          />
+      </label>
+      <label>Address
+        <input
+          value={address}
+          type='text'
+          onChange={ e => setAddress(e.target.value) }
+          required
+          />
+      </label>
+      <label>City
+        <input
+          value={city}
+          type='text'
+          onChange={ e => setCity(e.target.value) }
+          required
+          />
+      </label>
+      <label>State
+        <input
+          value={state}
+          type='text'
+          onChange={ e => setState(e.target.value) }
           required
           />
       </label>

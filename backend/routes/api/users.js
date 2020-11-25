@@ -40,6 +40,16 @@ const validateSignup = [
   check('lastName')
     .exists({ checkFalsy: true })
     .withMessage('You must include a last name'),
+  check('address')
+    .exists({ checkFalsy: true })
+    .withMessage('You must include an address'),
+  check('city')
+    .exists({ checkFalsy: true })
+    .withMessage('You must include a city'),
+  check('state')
+    .exists({ checkFalsy: true })
+    .isLength({ max: 2 })
+    .withMessage('You must include a state of two characters'),
   check('zipCode')
     .exists({ checkFalsy: true })
     .withMessage('You must include a zip code'),
@@ -52,8 +62,8 @@ router.post(
   '/',
   validateSignup,
   asyncHandler(async (req, res) => {
-    const { username, email, password, helpType, firstName, lastName, avatar, bio, zipCode } = req.body;
-    const user = await User.signup({ username, firstName, lastName, email, password, helpType, avatar, bio, zipCode });
+    const { username, email, password, helpType, firstName, lastName, address, city, state, zipCode } = req.body;
+    const user = await User.signup({ username, firstName, lastName, email, password, helpType, address, city, state, zipCode });
 
     await setTokenCookie(res, user);
 
