@@ -5,25 +5,12 @@ const NodeGeocoder = require('node-geocoder');
 
 const { User, Sequelize } = require('../../db/models');
 
+const Op = Sequelize.Op
 /****************** SEARCH DATABASE **************************/
 
 router.post(
   '/',
   asyncHandler(async (req, res, next) => {
-   
-
-    //GEOCODER
-    const options = {
-      provider: 'google',
-      apiKey: process.env.GOOGLE_API,
-      formatter: null
-    };
-    
-    const geocoder = NodeGeocoder(options);
-  
-    const result = await geocoder.geocode('513 Quicksilver Court, Oakley, CA, 94561');
-    console.log(result[0].latitude)
-
 
     const { keywordSearch } = req.body;
     let users;
@@ -34,7 +21,7 @@ router.post(
     users = await User.findAll({
       where: {
         username: {
-          [Sequelize.Op.iLike]: '%'+keywordSearch+'%'
+          [Op.iLike]: '%'+keywordSearch+'%'
         },
       }
     })

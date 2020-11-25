@@ -10,7 +10,9 @@ import * as usersAction from '../../store/users'
 function HomePage() {
   const dispatch = useDispatch()
   const sessionUser = useSelector(state => state.session.user)
-  const [currentLocation, setCurrentLocation ] = useState()
+  const localPeople = useSelector(state => state.users.users)
+  const [currentLocation, setCurrentLocation] = useState()
+  const [isLoaded, setIsLoaded] = useState(false);
 
   function getLocation() {
     if (navigator.geolocation) {
@@ -52,11 +54,39 @@ function HomePage() {
   
   useEffect(() => {
     if (currentLocation) {
-      console.log("YAYYYYY!!!!!!", currentLocation)
-      return dispatch(usersAction.searchPeople(currentLocation))
+      dispatch(usersAction.searchPeople(currentLocation)).then(() => setIsLoaded(true))
     }
   },[currentLocation])
   
+
+  let Helpers;
+  let Helpees;
+  if (isLoaded) {
+    let countHelpee = 0;
+    let countHelper = 0;
+    Helpees = Object.values(localPeople).map((person, idx) => {
+      if (countHelpee > 6) return;
+      if (!person.user.helpType) {
+        countHelpee = countHelpee + 1;
+        return (
+          <div key={idx} className={`users-container__body__local__helpees__${countHelpee}`}>
+            <div className={`body-local__helpee__${countHelpee}`}>{person.user.firstName}</div>
+          </div>
+        )
+      }
+    })
+    Helpers = Object.values(localPeople).map((person, idx) => {
+      if (countHelper > 6) return;
+      if (person.user.helpType) {
+        countHelper = countHelper + 1;
+        return (
+          <div key={idx} className={`users-container__body__local__helpers__${countHelper}`}>
+            <div className={`body-local__helpee__${countHelper}`}>{person.user.firstName}</div>
+          </div>
+        )
+      }
+      })
+  }
 
   return (
     <>
@@ -66,26 +96,10 @@ function HomePage() {
       </div>
       <div className='homepage-users-container__local'>
         <div className='users-container__header__local'>Help in Your Area</div>
-        <div className='users-container__body__local'>
-          <div className='users-container__body__local__users'>
-            <div className='body-local__user__1'>
-            </div>
-          </div>
-          <div className='users-container__body__local__users'>
-            <div className='body-local__user__2'></div>
-          </div>
-          <div className='users-container__body__local__users'>
-            <div className='body-local__user__3'></div>
-          </div>
-          <div className='users-container__body__local__users'>
-            <div className='body-local__user__4'></div>
-          </div>
-          <div className='users-container__body__local__users'>
-            <div className='body-local__user__5'></div>
-          </div>
-          <div className='users-container__body__local__users'>
-            <div className='body-local__user__6'></div>
-          </div>
+        <div className='users-container__body__local'> {Helpees}
+        </div>
+        <div className='users-container__header__local'>Helpers in Your Area</div>
+        <div className='users-container__body__local__2'> {Helpers}
         </div>
       </div>
     </>

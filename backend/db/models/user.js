@@ -106,11 +106,11 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false
       },
       lat: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.FLOAT(20),
         allowNull: false
       },
       lng: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.FLOAT(20),
         allowNull: false
       },
       firstName: {
@@ -131,7 +131,7 @@ module.exports = (sequelize, DataTypes) => {
       modelName: "User",
       defaultScope: {
         attributes: {
-          exclude: ["hashedPassword", "email", "createdAt", "updatedAt", "lat", "lng"],
+          exclude: ["hashedPassword", "email", "createdAt", "updatedAt"],
         },
       },
       scopes: {

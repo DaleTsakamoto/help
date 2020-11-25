@@ -9,6 +9,7 @@
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
   background-color: #FFFEF2;
+  font-family: 'Handlee', cursive;
 }
 
 .tabs-header__name{
@@ -73,12 +74,17 @@ a {
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
-  padding-top: 10px;
+  padding-top: 15px;
+  padding-right: 5px;
   padding-left: 10px;
 }
 
 .completed-icon{
   padding-right: 8px;
+}
+
+.tasks__checkbox{
+  padding-left: 5px;
 }
 
 .show{

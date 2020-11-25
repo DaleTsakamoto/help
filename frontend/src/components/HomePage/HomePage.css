@@ -92,13 +92,13 @@ input:focus{
 
 .homepage-users-container__local{
   box-sizing: border-box;
-  height: 1000px;
+  height: 800px;
   width: 1014px;
 }
 
 .users-container__header__local{
   box-sizing: border-box;
-  padding: 35px 0;
+  padding: 40px 0;
   margin: 0 27px;
   border-bottom: .5px solid lightgrey;
   text-align: center;
@@ -108,14 +108,16 @@ input:focus{
   font-weight: 1000;
 }
 
-.users-container__body__local{
+.users-container__body__local,
+.users-container__body__local__2{
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
   margin: 0 15px;
 }
 
-.users-container__body__local > div{
+.users-container__body__local > div,
+.users-container__body__local__2 > div{
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -125,7 +127,8 @@ input:focus{
   width: 328px;
 }
 
-.users-container__body__local > div > div{
+.users-container__body__local > div > div,
+.users-container__body__local__2 >div > div{
   height: 350px;
   width: 300px;
   border: .5px solid lightgrey;

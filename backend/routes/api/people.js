@@ -3,49 +3,51 @@ const asyncHandler = require('express-async-handler');
 const { check } = require('express-validator');
 const NodeGeocoder = require('node-geocoder');
 
-const { User } = require('../../db/models');
-const distance = require ('../utils/mathEquations')
+const { User, Sequelize } = require('../../db/models');
+const { distance, quickSort } = require ('../utils/mathEquations')
 
 const router = express.Router();
 
-
-
-/****************** GEOCODER ************************/
-
-async function geocodeAddress (address) {
-  const options = {
-    provider: 'google',
-    apiKey: process.env.GOOGLE_API,
-    formatter: null
-  };
-  
-  const geocoder = NodeGeocoder(options);
-  
-  const result = await geocoder.geocode(address);
-  console.log(result[0].latitude)
-
-}
+const Op = Sequelize.Op;
 
 /****************** GET PEOPLE ************************/
 
 router.post(
   '/',
   asyncHandler(async (req, res) => {
-    const { lat, lng } = req.body;
-    console.log("IM WORKING!!!!!!!!!!!!!!!!!!!!!", lat, lng);
+    let { lat, lng } = req.body;
+    lat = parseFloat(lat)
+    lng = parseFloat(lng)
   
-    users = await User.findAll({
+    let users = await User.findAll({
       where: {
-        username: {
-          [Sequelize.Op.iLike]: '%'+keywordSearch+'%'
+        lat: {
+          [Op.between]: [(lat - .5), (lat + .5)]
+        },
+        lng: {
+          [Op.between]: [(lng - .5), (lng + .5)]
         },
       }
     })
+    let usersArr = [];
 
+    users.forEach((user) => {
+      let peopleDistance = distance(user, lat, lng, user.dataValues.lat, user.dataValues.lng)
+      if (peopleDistance > 20) return;
+      else (usersArr.push({user: peopleDistance}))
+    });
 
-    // return res.json({
-    //   user,
-    // });
+    console.log(usersArr)
+
+    if (usersArr.length === 0) users = ["No one in your area"]
+    let finalArr = quickSort(usersArr)
+    users = finalArr;
+    
+    console.log(finalArr)
+
+    return res.json({
+      users,
+    });
   }),
 );
 

@@ -28,9 +28,8 @@ const Tasks = () => {
   let complete;
   let incomplete;
   if (isLoaded) {
-    if (user.helpType) {
-      complete = Object.values(currentTasks).map((task) => {
-        if (!task.completed) {
+    complete = Object.values(currentTasks).map((task) => {
+        if (task.completed) {
           return(
             <div className='task-container__list__completed'>
               <i class="far fa-check-square completed-icon"></i>
@@ -40,16 +39,15 @@ const Tasks = () => {
         }
       })
       incomplete = Object.values(currentTasks).map((task, idx) => {
-        if (task.completed) {
+        if (!task.completed) {
           return(
             <div className='task-container__list__incomplete'>
               <input type="checkbox" id={`task${idx}`} name={`task${idx}`} value={`task${idx}`} />
-              <label key={idx} htmlFor={`task${idx}`}>{task.category} - {task.details}</label><br />
+              <label className="tasks__checkbox" key={idx} htmlFor={`task${idx}`}>{task.category} - {task.details}</label><br />
             </div>
           )
         }
       })
-    }
   }
 
   return isLoaded && (

@@ -124,9 +124,9 @@ const SignupFormPage = () => {
           />
       </label>
       <label htmlFor="helpType">Help Type:</label>
-      <select id="helpType">
-        <option value={true} onChange={e => setHelpType(true)} required>Helper</option>
-        <option value={false} onChange={e => setHelpType(false)} required>Helpee</option>
+      <select id ='helpType' onChange={e => setHelpType(e.target.value)} name="helpType">
+        <option value={true} required>Helper</option>
+        <option value={false} required>Helpee</option>
       </select>
       <button type="submit">Sign-up</button>
     </form>

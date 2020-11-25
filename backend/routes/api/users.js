@@ -1,6 +1,7 @@
 const express = require('express');
 const asyncHandler = require('express-async-handler');
 const { check } = require('express-validator');
+const NodeGeocoder = require('node-geocoder')
 
 const { handleValidationErrors } = require('../../utils/validation');
 const { setTokenCookie, requireAuth } = require('../../utils/auth');
@@ -56,6 +57,22 @@ const validateSignup = [
   handleValidationErrors,
 ];
 
+/****************** GEOCODER ************************/
+
+async function geocodeAddress (address) {
+  const options = {
+    provider: 'google',
+    apiKey: process.env.GOOGLE_API,
+    formatter: null
+  };
+  
+  const geocoder = NodeGeocoder(options);
+  
+  const result = await geocoder.geocode(address);
+  const point = { lat: result[0].latitude, lng: result[0].longitude }
+  return point;
+}
+
 /****************** SIGNUP **************************/
 
 router.post(
@@ -63,7 +80,11 @@ router.post(
   validateSignup,
   asyncHandler(async (req, res) => {
     const { username, email, password, helpType, firstName, lastName, address, city, state, zipCode } = req.body;
-    const user = await User.signup({ username, firstName, lastName, email, password, helpType, address, city, state, zipCode });
+    const formatAddress = `${address}, ${city}, ${state}, ${zipCode}`
+    let { lat, lng } = await geocodeAddress(formatAddress)
+    lat = parseFloat(lat, 10)
+    lng = parseFloat(lng, 10)
+    const user = await User.signup({ username, firstName, lastName, email, password, helpType, address, city, state, zipCode, lat, lng });
 
     await setTokenCookie(res, user);
 
