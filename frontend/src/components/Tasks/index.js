@@ -11,6 +11,8 @@ const Tasks = () => {
   const user = useSelector(state => state.session.user)
   const currentTasks = useSelector(state => state.tasks.tasks)
   const [isLoaded, setIsLoaded] = useState(false);
+  const [taskDetails, setTaskDetails] = useState('')
+  const [choreType, setChoreType] = useState('House Chores')
   const { id, helpType } = user;
 
   useEffect(() => {
@@ -24,6 +26,13 @@ const Tasks = () => {
     ele.classList.remove('show')
     e.target.parentElement.classList.add('show')
   }
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+      return (
+        dispatch(TaskActions.taskAdd({choreType, taskDetails, id}))
+      )
+  };
 
   let complete;
   let incomplete;
@@ -39,11 +48,18 @@ const Tasks = () => {
         }
       })
       incomplete = Object.values(currentTasks).map((task, idx) => {
-        if (!task.completed) {
+        if (!task.completed && helpType) {
           return(
             <div className='task-container__list__incomplete'>
               <input type="checkbox" id={`task${idx}`} name={`task${idx}`} value={`task${idx}`} />
               <label className="tasks__checkbox" key={idx} htmlFor={`task${idx}`}>{task.category} - {task.details}</label><br />
+            </div>
+          )
+        } else {
+          return(
+            <div className='task-container__list__incomplete'>
+              <i className="fas fa-hands-helping tasks__helping-hands-icon"></i>
+              <div className="tasks__checkbox" key={idx} htmlFor={`task${idx}`}>{task.category} - {task.details}</div><br />
             </div>
           )
         }
@@ -72,10 +88,29 @@ const Tasks = () => {
           {complete}
           </div>
           </Route>
-          <Route path={`/users/${user.id}/tasks/incomplete`}>
-          <div className='tab-content'>
-          {incomplete}
-          </div>
+        <Route path={`/users/${user.id}/tasks/incomplete`}>
+            <div className='tab-content'>
+              {!helpType ?
+                <div className='tasks__addTask'>
+                  <form onSubmit={handleSubmit}>
+                  <label className='tasks__type__choice' htmlFor="type">Type:</label>
+                  <select id ='type' name="type" onChange={e => setChoreType(e.target.value)}>
+                    <option value='House Chores' required>House Chores</option>
+                    <option value='Yard Work' required>Yard Work</option>
+                    <option value='Grocery Shopping' required>Grocery Shopping</option>
+                    <option value='Other' required>Other</option>
+                  </select>
+                  <input className='tasks__addTask__input'
+                    value={taskDetails}
+                    type='text'
+                    onChange={ e => setTaskDetails(e.target.value) }
+                    required
+                    placeholder='I need help with...' />
+                    <input className='tasks__hidden-submit' type="submit" />
+                  </form>
+                </div> : null}
+              {incomplete}
+            </div>
         </Route>
       </Switch>
       </div>

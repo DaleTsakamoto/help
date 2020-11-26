@@ -13,18 +13,28 @@ const findTasks = (tasks) => {
   }
 }
 
-// const setUser = (user) => {
-//   return {
-//     type: SET_USER,
-//     user,
-//   }
-// }
+const addTask = (task) => {
+  return {
+    type: ADD_TASK,
+    task,
+  }
+}
 
-// const removeUser = () => {
-//   return {
-//     type: REMOVE_USER,
-//   };
-// };
+export const taskAdd = (task) => async (dispatch) => {
+  // ${currentUserPage}
+  const { choreType, taskDetails, id } = task;
+  const res = await fetch(`/api/users/${id}/tasks/add`, {
+    method: 'POST',
+    body: JSON.stringify({
+      choreType,
+      taskDetails,
+      id
+    }),
+  })
+  console.log("THIS IS RES!!!", res.data)
+  dispatch(addTask(res.task));
+  return res
+}
 
 export const search = (user) => async (dispatch) => {
   // ${currentUserPage}
@@ -36,8 +46,8 @@ export const search = (user) => async (dispatch) => {
       helpType
     }),
   })
-  dispatch(findTasks(res.data.tasks));
-  return res
+  // dispatch(findTasks(res.data.tasks));
+  return
 }
 
 const initialState = { tasks: null }
@@ -48,6 +58,10 @@ const tasksReducer = (state = initialState, action) => {
     case FIND_TASKS:
       newState = Object.assign({}, state)
       newState.tasks = action.tasks;
+      return newState;
+    case ADD_TASK:
+      newState = Object.assign({}, state)
+      newState.tasks = action.task;
       return newState;
     default:
       return state;
