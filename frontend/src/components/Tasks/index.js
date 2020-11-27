@@ -12,14 +12,14 @@ const Tasks = () => {
   const currentTasks = useSelector(state => state.tasks.tasks)
   const [isLoaded, setIsLoaded] = useState(false);
   const [taskDetails, setTaskDetails] = useState('')
+  const [currentHelpType, setCurrentHelpType] = useState()
+  const [taskId, setTaskId] = useState()
   const [choreType, setChoreType] = useState('House Chores')
   const { id, helpType } = user;
 
-  useEffect(() => {
-    dispatch(TaskActions.search({
-      id, helpType
-    })).then(() => setIsLoaded(true))
-  }, [dispatch]);
+  //USE TO GET CORRECT USERPAGE/INFORMATION
+  let urlId = parseInt(window.location.pathname.split('/')[2])
+
 
   const tabHide = (e) => {
     const ele = document.querySelector('.show');
@@ -29,35 +29,52 @@ const Tasks = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-      return (
-        dispatch(TaskActions.taskAdd({choreType, taskDetails, id}))
-      )
+    dispatch(TaskActions.taskAdd({ choreType, taskDetails, id })).then(setTaskDetails(''))
+    return
   };
+
+  const alterTask = (e) => {
+    setTaskId(e.target.id)
+    dispatch(TaskActions.taskUpdate({ taskId, urlId })).then(setTaskId())
+    return;
+  };
+
+  useEffect(() => {
+    dispatch(TaskActions.search({
+      urlId
+    })).then((res) => setCurrentHelpType(res.data.helpType)).then(() => setIsLoaded(true))
+  }, [dispatch, taskDetails, taskId, helpType, id]);
 
   let complete;
   let incomplete;
   if (isLoaded) {
-    complete = Object.values(currentTasks).map((task) => {
+    complete = Object.values(currentTasks).map((task, idx) => {
         if (task.completed) {
           return(
-            <div className='task-container__list__completed'>
-              <i class="far fa-check-square completed-icon"></i>
+            <div className='task-container__list__completed' key={idx}>
+              <i className="far fa-check-square completed-icon"></i>
               <p>{task.category} - {task.details}</p><br />
             </div>
           )
         }
       })
       incomplete = Object.values(currentTasks).map((task, idx) => {
-        if (!task.completed && helpType) {
+        if (id === urlId && !currentHelpType && !task.completed) {
+          return (
+            <div className='task-container__list__incomplete' key={idx}>
+              <div className="tasks__checkbox" key={idx}>{task.category} - {task.details}</div><br />
+            </div>
+          )
+        } else if (!task.completed && currentHelpType) {
           return(
-            <div className='task-container__list__incomplete'>
-              <input type="checkbox" id={`task${idx}`} name={`task${idx}`} value={`task${idx}`} />
-              <label className="tasks__checkbox" key={idx} htmlFor={`task${idx}`}>{task.category} - {task.details}</label><br />
+            <div className='task-container__list__incomplete' key={idx}>
+              <input type="checkbox" id={task.id} name={task.id} onClick={alterTask} />
+              <label className="tasks__checkbox" key={task.id} htmlFor={task.id}>{task.category} - {task.details}</label><br />
             </div>
           )
         } else {
           return(
-            <div className='task-container__list__incomplete'>
+            <div className='task-container__list__incomplete' key={idx}>
               <i className="fas fa-hands-helping tasks__helping-hands-icon"></i>
               <div className="tasks__checkbox" key={idx} htmlFor={`task${idx}`}>{task.category} - {task.details}</div><br />
             </div>
@@ -72,25 +89,25 @@ const Tasks = () => {
         <h1 className='tabs-header__name'>Tasks</h1>
         <ul className='tab-header'>
           <li className='tab-header__incomplete show'>
-            <NavLink onClick={tabHide} className='navlinks' to={`/users/${user.id}/tasks/incomplete`}>
+            <NavLink onClick={tabHide} className='navlinks' to={`/users/${urlId}/tasks/incomplete`}>
               Incomplete
             </NavLink>
           </li>
           <li className='tab-header__complete'>
-            <NavLink onClick={tabHide} className='navlinks' to={`/users/${user.id}/tasks/completed`}>
+            <NavLink onClick={tabHide} className='navlinks' to={`/users/${urlId}/tasks/completed`}>
               Completed
             </NavLink>
           </li>
       </ul>
       <Switch>
-        <Route path={`/users/${user.id}/tasks/completed`}>
+        <Route path={`/users/${urlId}/tasks/completed`}>
           <div className='tab-content'>
           {complete}
           </div>
           </Route>
-        <Route path={`/users/${user.id}/tasks/incomplete`}>
+        <Route path={`/users/${urlId}/tasks/incomplete`}>
             <div className='tab-content'>
-              {!helpType ?
+              {id === urlId && !helpType ?
                 <div className='tasks__addTask'>
                   <form onSubmit={handleSubmit}>
                   <label className='tasks__type__choice' htmlFor="type">Type:</label>

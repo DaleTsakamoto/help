@@ -1,10 +1,15 @@
-import React, {useEffect, useState} from 'react'
+import React, { useEffect, useState } from 'react'
+import { useSelector } from 'react-redux'
 
 
 const Overview = () => {
+  const person = useSelector(state => state.users.person)
 
   return (
-      <div>THIS IS THE OVERVIEW!!!</div>
+    <>
+      <h1 className='bio-title'>Biography:</h1>
+      <div className='bio-body'>{person.bio}</div>
+    </>
   )
 }
 

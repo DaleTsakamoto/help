@@ -3,7 +3,7 @@ import { fetch } from './csrf'
 // const SET_USER = 'session/setUser'
 // const REMOVE_USER = 'session/removeUser'
 const ADD_TASK = 'tasks/addTask'
-const REMOVE_TASK = 'tasks/removeTasks'
+const UPDATE_TASK = 'tasks/updateTasks'
 const FIND_TASKS = 'tasks/findTasks'
 
 const findTasks = (tasks) => {
@@ -20,6 +20,28 @@ const addTask = (task) => {
   }
 }
 
+const updateTask = (task) => {
+  return {
+    type: UPDATE_TASK,
+    task,
+  }
+}
+
+export const taskUpdate = (task) => async (dispatch) => {
+  const { taskId, sessionId } = task
+  console.log("SESSIONID", sessionId)
+  console.log("TASKID", taskId)
+  const res = await fetch(`/api/users/${sessionId}/tasks`, {
+    method: 'PATCH',
+    body: JSON.stringify({
+      taskId
+    }),
+  })
+  console.log("THIS IS RES!!!",res)
+  dispatch(addTask(res.data.task));
+  return
+}
+
 export const taskAdd = (task) => async (dispatch) => {
   // ${currentUserPage}
   const { choreType, taskDetails, id } = task;
@@ -31,23 +53,22 @@ export const taskAdd = (task) => async (dispatch) => {
       id
     }),
   })
-  console.log("THIS IS RES!!!", res.data)
-  dispatch(addTask(res.task));
-  return res
+  // console.log("THIS IS RES!!!",res)
+  // dispatch(addTask(res.task));
+  return
 }
 
 export const search = (user) => async (dispatch) => {
   // ${currentUserPage}
-  const { id, helpType } = user;
-  const res = await fetch(`/api/users/${id}/tasks`, {
+  const { urlId } = user;
+  const res = await fetch(`/api/users/${urlId}/tasks`, {
     method: 'POST',
     body: JSON.stringify({
-      id,
-      helpType
+      urlId,
     }),
   })
-  // dispatch(findTasks(res.data.tasks));
-  return
+  dispatch(findTasks(res.data.tasks));
+  return res
 }
 
 const initialState = { tasks: null }
@@ -61,7 +82,11 @@ const tasksReducer = (state = initialState, action) => {
       return newState;
     case ADD_TASK:
       newState = Object.assign({}, state)
-      newState.tasks = action.task;
+      newState.task = action.task;
+      return newState;
+    case UPDATE_TASK:
+      newState = Object.assign({}, state)
+      newState.task = action.task;
       return newState;
     default:
       return state;

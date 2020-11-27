@@ -170,3 +170,14 @@
   margin-top: 15px;
   grid-column: 2 / 3;
 }
+
+.bio-title{
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 28px;
+  padding: 10px 0;
+}
+
+.bio-body{
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  padding: 10px 0;
+}

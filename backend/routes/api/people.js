@@ -51,4 +51,25 @@ router.post(
   }),
 );
 
+
+/****************** GET PERSON ************************/
+
+router.get(
+  '/:id',
+  asyncHandler(async (req, res) => {
+    const userId = parseInt(req.params.id)
+    const person = await User.findByPk(userId);
+    if (person) {
+      return res.json({
+        person,
+      })
+    } else {
+      const error = new Error('Person not Found');
+      return res.json({
+        error,
+      })
+    }
+
+  }))
+
 module.exports = router;

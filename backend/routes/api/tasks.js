@@ -4,17 +4,19 @@ const { check, validationResult } = require('express-validator');
 
 const { handleValidationErrors } = require('../../utils/validation');
 const { setTokenCookie, requireAuth } = require('../../utils/auth');
-const { Task } = require('../../db/models');
+const { Task, User } = require('../../db/models');
 
 const router = express.Router();
 
-/****************** TASKS PAGE **************************/
+/****************** FIND TASKS **************************/
 
 router.post(
   '/',
   asyncHandler(async (req, res, next) => {
-    const { helpType, id } = req.body;
-    let help;
+    const { urlId } = req.body;
+    let user = await User.findByPk(urlId)
+    let helpType = user.dataValues.helpType;
+
     if (helpType) {
       help = 'helperId'
     } else {
@@ -22,13 +24,13 @@ router.post(
     }
     let tasks = await Task.findAll({
       where: {
-        [help]: id
+        [help]: urlId
       }
     })
 
     return res.json({
       tasks,
-      help
+      helpType
     });
   }),
 );
@@ -48,7 +50,7 @@ router.post('/add', requireAuth, asyncHandler(async (req, res) => {
 
     const validateErrors = validationResult(req);
 
-    console.log("WE DID IT", task);  
+    console.log("TASK BEFORE VALIDATION", task);  
     if (validateErrors.isEmpty()) {
       await task.save();
       res.status(204).end()
@@ -62,5 +64,21 @@ router.post('/add', requireAuth, asyncHandler(async (req, res) => {
       });
     }
 }));
+
+/****************** UPDATE TASK **************************/
+  
+  router.patch('/', requireAuth, asyncHandler(async (req, res) => {
+    let { taskId } = req.body
+    const id = parseInt(taskId)
+    let task = await Task.update({ completed: true }, {
+      where: {
+        id: id
+      }
+    });
+    return res.json({
+      task
+    });
+  }));
+
 
 module.exports = router;

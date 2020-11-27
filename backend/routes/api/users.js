@@ -96,7 +96,7 @@ router.post(
 
 /****************** USERS PAGE **************************/
 
-router.get('/:id(\\d+)', asyncHandler(async (req, res) => {
+router.get('/:id(\\d+)', requireAuth, asyncHandler(async (req, res) => {
   const userId = parseInt(req.params.id, 10)
   const user = await User.findByPk(userId)
   if (user) {

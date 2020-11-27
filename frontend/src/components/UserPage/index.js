@@ -1,16 +1,25 @@
 import React, {useEffect, useState} from 'react'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import {NavLink, Switch, Route} from 'react-router-dom'
 
 import Tasks from '../Tasks'
 import Overview from './userPageOverview'
-import { fetch } from '../../store/csrf'
 import './UserPage.css'
+import * as usersAction from '../../store/users'
 
 const UserPage = () => {
   const sessionUser = useSelector(state => state.session.user)
-  // const [currentUserPage, setCurrentUserPage] = useState()
-  // const [tasks, setTasks] = useState([])
+  const person = useSelector(state => state.users.person)
+  const dispatch = useDispatch()
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  //USE TO GET CORRECT USERPAGE/INFORMATION
+  const urlId = window.location.pathname.split('/')[2]
+  console.log(urlId)
+
+  useEffect(() => {
+      dispatch(usersAction.searchPerson(urlId)).then(() => setIsLoaded(true))
+  },[dispatch])
 
   const addClass = (e) => {
     if (!e.target.id) {
@@ -31,54 +40,9 @@ const UserPage = () => {
       value.classList.remove("user-holder__body__1__selected")
     }
     column2 = addClass(e);
-    console.log(column2)
   }
-  
-  // useEffect(() => {
-  //   const search = async () => {
-  //     // ${currentUserPage}
-  //     const res = await fetch(`/api/users/${sessionUser.id}/tasks`, {
-  //       method: 'POST',
-  //       body: JSON.stringify({
-  //         id: sessionUser.id,
-  //         helpType: sessionUser.helpType
-  //       }),
-  //     })
-  //     return setTasks(res);
-  //   }
-  //   search();
-  // }, [currentUserPage]);
 
-  // const column2Overview = () => {
-    
-  //   return (
-      
-  //   )
-  // }
-
-
-
-  // function success(pos) {
-  //   var crd = pos.coords;
-  
-  //   console.log('Your current position is:');
-  //   console.log(`Latitude : ${crd.latitude}`);
-  //   console.log(`Longitude: ${crd.longitude}`);
-  //   console.log(`More or less ${crd.accuracy} meters.`);
-  // }
-  
-  // function error(err) {
-  //   console.warn(`ERROR(${err.code}): ${err.message}`);
-  // }
-
-  // navigator.geolocation.getCurrentPosition(success, error)
-
-
-  // let currentComponent;
-  // if (currentUserPage === "Tasks") {
-  //   currentComponent = <Tasks />
-  // }
-  return (
+  return isLoaded && (
     <div className="user-holder">
       <div className="user-holder__header">
         <div className='user-holder__header__1'>
@@ -87,8 +51,8 @@ const UserPage = () => {
           </div>
         </div>
         <div className='user-holder__header__2'>
-          <h1>{sessionUser.firstName} {sessionUser.lastName.slice(0, 1).toUpperCase()}.</h1>
-          <h2>Location</h2>
+          <h1>{person.firstName} {person.lastName.slice(0, 1).toUpperCase()}.</h1>
+          <h2>{person.city}, {person.state}</h2>
           <div className="stats">
             <div className="stats__helping-hands">
               <i className="fas fa-hands-helping stats__helping-hands-icon"></i>
@@ -104,8 +68,8 @@ const UserPage = () => {
       </div>
       <div className="user-holder__body">
         <div className='user-holder__body__1'>
-          <div className='user-holder__body__1__header'>{sessionUser.firstName}'s Profile</div>
-          <NavLink className="navlinks" to={`/users/${sessionUser.id}`}>
+          <div className='user-holder__body__1__header'>{person.firstName}'s Profile</div>
+          <NavLink className="navlinks" to={`/users/${person.id}`}>
           <div className='user-holder__body__1__parent'>
             <div id='Overview' onClick={addRemoveClass} className='user-holder__body__1__Profile__Overview' >
               <i className="fas fa-user user-holder__body__1__Profile__Overview__icon" />
@@ -113,7 +77,7 @@ const UserPage = () => {
             </div>
           </div>
           </NavLink>
-          <NavLink className="navlinks" to={`/users/${sessionUser.id}/tasks`}>
+          <NavLink className="navlinks" to={`/users/${person.id}/tasks`}>
             <div className='user-holder__body__1__parent'>
               <div id='Tasks' onClick={addRemoveClass} className='user-holder__body__1__Tasks'>
                 <i className="fas fa-tasks user-holder__body__1__Tasks__icon" />
@@ -130,10 +94,10 @@ const UserPage = () => {
         </div>
         <div className='user-holder__body__2'>
           <Switch>
-            <Route path={`/users/${sessionUser.id}/tasks`}>
+            <Route path={`/users/${person.id}/tasks`}>
               <Tasks />
             </Route>
-            <Route path={`/users/${sessionUser.id}`}>
+            <Route path={`/users/${person.id}`}>
               <Overview />
             </Route>
           </Switch>

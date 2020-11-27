@@ -38,6 +38,7 @@
 
 .header-testimony:hover{
   background-color: whitesmoke;
+  cursor: pointer;
 }
 
 .profile-drop{

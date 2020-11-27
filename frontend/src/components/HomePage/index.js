@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { fetch } from '../../store/csrf'
 
 import './HomePage.css';
 import HomeLogoAlternate from './HomeLogoAlternate'
@@ -9,9 +8,9 @@ import * as usersAction from '../../store/users'
 
 function HomePage() {
   const dispatch = useDispatch()
-  const sessionUser = useSelector(state => state.session.user)
   const localPeople = useSelector(state => state.users.users)
   const [currentLocation, setCurrentLocation] = useState()
+  const [people, setPeople] = useState([])
   const [isLoaded, setIsLoaded] = useState(false);
 
   function getLocation() {
@@ -23,8 +22,8 @@ function HomePage() {
             lng: position.coords.longitude,
           };
           setCurrentLocation(pos)
-        }, () => {
-          showError()
+        }, (err) => {
+          showError(err)
         })
     } else {
       alert("Try another browser for geolocation services")
@@ -45,6 +44,8 @@ function HomePage() {
       case error.UNKNOWN_ERROR:
         alert("An unknown error occurred.")
         break;
+      default:
+        break;
     }
   }
 
@@ -54,9 +55,12 @@ function HomePage() {
   
   useEffect(() => {
     if (currentLocation) {
-      dispatch(usersAction.searchPeople(currentLocation)).then(() => setIsLoaded(true))
+      console.log("dispatch before")
+      dispatch(usersAction.searchPeople(currentLocation))
+        .then((res) => setPeople(res))
+        .then(() => setIsLoaded(true))
     }
-  },[currentLocation])
+  },[dispatch, currentLocation])
   
 
   let Helpers;
@@ -70,6 +74,12 @@ function HomePage() {
         countHelpee = countHelpee + 1;
         return (
           <div key={idx} className={`users-container__body__local__helpees__${countHelpee}`}>
+            {/* <img src={`https://maps.googleapis.com/maps/api/staticmap?zoom=13&size=400x180&maptype=roadmap
+&markers=color:blue%7Clabel:S%7C${person.user.lat},${person.user.lng}&key=${process.env.GOOGLE_API}`} /> */}
+            <img src={`https://maps.googleapis.com/maps/api/staticmap?center=Brooklyn+Bridge,New+York,NY&zoom=13&size=600x300&maptype=roadmap
+&markers=color:blue%7Clabel:S%7C40.702147,-74.015794&markers=color:green%7Clabel:G%7C40.711614,-74.012318
+&markers=color:red%7Clabel:C%7C40.718217,-73.998284
+&key=${process.env.GOOGLE_API}`} />
             <div className={`body-local__helpee__${countHelpee}`}>{person.user.firstName}</div>
           </div>
         )
