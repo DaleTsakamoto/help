@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import {NavLink, Switch, Route} from 'react-router-dom'
 
 import Tasks from '../Tasks'
+import Testimony from './Testimony'
 import Overview from './userPageOverview'
 import './UserPage.css'
 import * as usersAction from '../../store/users'
@@ -24,12 +25,9 @@ const UserPage = () => {
   const addClass = (e) => {
     if (!e.target.id) {
       e.target.parentElement.classList.add("user-holder__body__1__selected")
-      // setCurrentUserPage(e.target.parentElement.id)
     } else {
       e.target.classList.add("user-holder__body__1__selected")
-      // setCurrentUserPage(e.target.id)
     }
-    // console.log(currentUserPage)
   }
 
   let column2;
@@ -46,9 +44,15 @@ const UserPage = () => {
     <div className="user-holder">
       <div className="user-holder__header">
         <div className='user-holder__header__1'>
+          {person.avatar ? 
+            <div className="avatar">
+              <img className='avatar-image' src={person.avatar}/>
+            </div>
+           :
           <div className="avatar">
-          <i className="far fa-user avatar__image" />
+          <i className="far fa-user avatar__temp" />
           </div>
+        }
         </div>
         <div className='user-holder__header__2'>
           <h1>{person.firstName} {person.lastName.slice(0, 1).toUpperCase()}.</h1>
@@ -64,7 +68,14 @@ const UserPage = () => {
             </div>
           </div>
         </div>
-        <div className='user-holder__header__3'>column 3</div>
+        <div className='user-holder__header__3'>
+          <div className='user-holder__header__3__updates'>
+            <div>
+            <i className="fas fa-camera user-holder__header__camera"/>Add Profile Photos</div>
+            <div>
+              <i class="far fa-address-card user-holder__header__update" />Update Your Profile</div>
+          </div>
+        </div>
       </div>
       <div className="user-holder__body">
         <div className='user-holder__body__1'>
@@ -85,17 +96,22 @@ const UserPage = () => {
               </div>
             </div>
           </NavLink>
-          <div className='user-holder__body__1__parent'>
-            <div id='Testimonies' onClick={addRemoveClass} className='user-holder__body__1__Testimony'>
-              <i className="fas fa-comment-alt user-holder__body__1__Testimony__icon"></i>
-              <div className='user-holder__body__1__text'> Testimony </div>
+          <NavLink className="navlinks" to={`/users/${person.id}/testimony`}>
+            <div className='user-holder__body__1__parent'>
+              <div id='Testimonies' onClick={addRemoveClass} className='user-holder__body__1__Testimony'>
+                <i className="fas fa-comment-alt user-holder__body__1__Testimony__icon"></i>
+                <div className='user-holder__body__1__text'> Testimony </div>
+              </div>
             </div>
-          </div>
+          </NavLink>
         </div>
         <div className='user-holder__body__2'>
           <Switch>
             <Route path={`/users/${person.id}/tasks`}>
               <Tasks />
+            </Route>
+            <Route path={`/users/${person.id}/testimony`}>
+              <Testimony />
             </Route>
             <Route path={`/users/${person.id}`}>
               <Overview />

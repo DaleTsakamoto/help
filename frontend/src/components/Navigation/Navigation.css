@@ -62,13 +62,21 @@
   border-radius: 3px;
 }
 
-.profile-dropdown > div > button{
-  height: 40px;
+.profile-dropdown__link{
+  height: 25px;
   width: 85%;
   background-color: transparent;
   border: none;
   text-align: left;
+  font-size: 15px;
   cursor: pointer;
+  text-decoration: none;
+  color: black;
+}
+
+.profile-dropdown__about-me{
+  display: flex;
+  flex-direction: row;
 }
 
 .profile-dropdown > div:hover{

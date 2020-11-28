@@ -1,7 +1,7 @@
 .tasks-container{
-  width: 440px;
+  width: 420px;
   height: 100vh;
-  margin: 0 20px;
+  margin-left: 10px;
   display: flex;
   border-top: .5px solid #FFFEF2;
   border-left: .5px solid #FFFEF2;

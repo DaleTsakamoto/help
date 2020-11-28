@@ -37,8 +37,6 @@ router.post(
       else (usersArr.push({user: peopleDistance}))
     });
 
-    console.log(usersArr)
-
     if (usersArr.length === 0) users = ["No one in your area"]
     let finalArr = quickSort(usersArr)
     users = finalArr;
@@ -47,6 +45,7 @@ router.post(
 
     return res.json({
       users,
+      apiKey: process.env.GOOGLE_API,
     });
   }),
 );

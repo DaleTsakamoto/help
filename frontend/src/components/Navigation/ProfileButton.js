@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from 'react-redux';
-import { Redirect } from 'react-router-dom'
+import { Redirect, NavLink, Route } from 'react-router-dom'
 
 import * as sessionActions from '../../store/session';
 import { fetch } from '../../store/csrf'
@@ -29,19 +29,20 @@ function ProfileButton({ user }) {
   //   }
   // }
 
-  const goUser = () => {
-    if (redirect) {
-      return <Redirect to={`/users/${user.id}`} />
-    }
-  }
+  // const goUser = () => {
+  //   if (redirect) {
+  //     <Redirect to={`/users/${user.id}`} />
+  //     return setRedirect(false);
+  //   }
+  // }
 
-  const useRedirect = () => {
-    setRedirect(true)
-  }
+  // const useRedirect = () => {
+  //   setRedirect(true)
+  // }
 
-  useEffect(() => {
-    setRedirect(false);
-  }, [redirect])
+  // useEffect(() => {
+  //   setRedirect(false);
+  // }, [redirect])
   
   const openMenu = () => {
     if (showMenu) return;
@@ -76,10 +77,9 @@ function ProfileButton({ user }) {
       </button>
       {showMenu && (
         <div className="profile-dropdown">
-          <div>
+          <div className='profile-dropdown__about-me'>
             <i className="fas fa-user"></i>
-            <button onClick={useRedirect}> About Me </button>
-            {goUser()}
+            <a className='profile-dropdown__link' href={`/users/${user.id}`}>About Me </a>
           </div>
           <div>
             <i className="fas fa-sign-out-alt"></i>

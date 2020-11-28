@@ -1,3 +1,7 @@
+.navlinks{
+  text-decoration: none;
+}
+
 .home-page-main-image{
   background: linear-gradient( rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7) ), url('./help_sample.jpeg');
   width: 100%;
@@ -133,4 +137,32 @@ input:focus{
   width: 300px;
   border: .5px solid lightgrey;
   border-radius: 5px;
+}
+
+.body-local-header{
+  box-sizing: border-box;
+  width: 300px;
+  height: 50px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 15px;
+}
+
+.body-local-header__image{
+  padding: 0 10px;
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+}
+
+.body-local-user__bio{
+  padding: 10px;
+  height: 88px;
+  width: 270px;
+  overflow: hidden;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 13px;
+  line-height: 1.3;
 }

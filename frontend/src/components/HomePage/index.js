@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import {NavLink} from 'react-router-dom'
 
 import './HomePage.css';
 import HomeLogoAlternate from './HomeLogoAlternate'
@@ -55,7 +56,6 @@ function HomePage() {
   
   useEffect(() => {
     if (currentLocation) {
-      console.log("dispatch before")
       dispatch(usersAction.searchPeople(currentLocation))
         .then((res) => setPeople(res))
         .then(() => setIsLoaded(true))
@@ -74,13 +74,17 @@ function HomePage() {
         countHelpee = countHelpee + 1;
         return (
           <div key={idx} className={`users-container__body__local__helpees__${countHelpee}`}>
-            {/* <img src={`https://maps.googleapis.com/maps/api/staticmap?zoom=13&size=400x180&maptype=roadmap
-&markers=color:blue%7Clabel:S%7C${person.user.lat},${person.user.lng}&key=${process.env.GOOGLE_API}`} /> */}
-            <img src={`https://maps.googleapis.com/maps/api/staticmap?center=Brooklyn+Bridge,New+York,NY&zoom=13&size=600x300&maptype=roadmap
-&markers=color:blue%7Clabel:S%7C40.702147,-74.015794&markers=color:green%7Clabel:G%7C40.711614,-74.012318
-&markers=color:red%7Clabel:C%7C40.718217,-73.998284
-&key=${process.env.GOOGLE_API}`} />
-            <div className={`body-local__helpee__${countHelpee}`}>{person.user.firstName}</div>
+            <div className={`body-local__helpee__${countHelpee}`}>
+                <NavLink className='navlinks' to={`/users/${person.user.id}`}>
+              <div className='body-local-header'>
+                  <img className='body-local-header__image' src={person.user.avatar}/>
+                  <h1>{person.user.firstName} {person.user.lastName.slice(0, 1).toUpperCase()}.</h1>
+              </div>
+                </NavLink>
+              <img src={`https://maps.googleapis.com/maps/api/staticmap?zoom=13&size=300x180&maptype=roadmap
+              &markers=color:blue%7Clabel:S%7C${person.user.lat},${person.user.lng}&key=${people.data.apiKey}`} />
+              <div className='body-local-user__bio'>{person.user.bio}</div>
+            </div>
           </div>
         )
       }
@@ -91,7 +95,17 @@ function HomePage() {
         countHelper = countHelper + 1;
         return (
           <div key={idx} className={`users-container__body__local__helpers__${countHelper}`}>
-            <div className={`body-local__helpee__${countHelper}`}>{person.user.firstName}</div>
+            <div className={`body-local__helpee__${countHelpee}`}>
+            <NavLink className='navlinks' to={`/users/${person.user.id}`}>
+              <div className='body-local-header'>
+                <img className='body-local-header__image' src={person.user.avatar}/>
+                <h1>{person.user.firstName} {person.user.lastName.slice(0, 1).toUpperCase()}.</h1>
+                </div>
+              </NavLink>
+              <img src={`https://maps.googleapis.com/maps/api/staticmap?zoom=13&size=300x180&maptype=roadmap
+              &markers=color:blue%7Clabel:S%7C${person.user.lat},${person.user.lng}&key=${people.data.apiKey}`} />
+              <div className='body-local-user__bio'>{person.user.bio}</div>
+            </div>
           </div>
         )
       }
