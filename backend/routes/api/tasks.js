@@ -68,16 +68,26 @@ router.post('/add', requireAuth, asyncHandler(async (req, res) => {
 /****************** UPDATE TASK **************************/
   
   router.patch('/', requireAuth, asyncHandler(async (req, res) => {
-    let { taskId } = req.body
+    let { taskId, name, userId } = req.body
     const id = parseInt(taskId)
-    let task = await Task.update({ completed: true }, {
-      where: {
-        id: id
-      }
-    });
-    return res.json({
-      task
-    });
+    const user = parseInt(userId)
+    let task;
+    if (!name) {
+      task = await Task.update({ helperId: user }, {
+        where: {
+          id: id
+        }
+      });
+    } else {
+      task = await Task.update({ completed: true }, {
+        where: {
+          id: id
+        }
+      });
+    }
+      return res.json({
+        task
+      });
   }));
 
 

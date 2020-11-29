@@ -9,6 +9,7 @@ import * as sessionActions from "./store/session";
 import NavigationAlternate from './components/NavigationAlternate'
 import Navigation from './components/Navigation'
 import HomePage from './components/HomePage'
+import Results from './components/SearchBar/Results'
 
 
 function App() {
@@ -32,6 +33,10 @@ function App() {
         <Route path="/users/:id">
           <Navigation isLoaded={isLoaded}/>
           <UserPage />
+        </Route>
+        <Route path="/results">
+          <Navigation isLoaded={isLoaded}/>
+          <Results />
         </Route>
         <Route path="/">
           <NavigationAlternate isLoaded={isLoaded}/>

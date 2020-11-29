@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Redirect, NavLink, Route } from 'react-router-dom'
 
 import * as sessionActions from '../../store/session';
@@ -9,6 +9,7 @@ function ProfileButton({ user }) {
   const dispatch = useDispatch();
   const [showMenu, setShowMenu] = useState(false);
   const [redirect, setRedirect] = useState(false);
+  const sessionUser = useSelector(state => state.session.user)
 
 
   // const findUser = async () => {
@@ -70,11 +71,29 @@ function ProfileButton({ user }) {
   };
 
 
+  
+  {sessionUser.avatar ? 
+    <div className="dropdodwn-avatar" onClick={openMenu}>
+      <img className='dropdown-image' src={sessionUser.avatar}/>
+    </div>
+   :
+  <div className="dropdown-avatar" onClick={openMenu}>
+  <i className="far fa-user dropdown-image-temp" />
+  </div>
+}
+
+
   return (
     <>
-      <button onClick={openMenu}>
-        <i className="fas fa-hands-helping"></i>
-      </button>
+       {user.avatar ? 
+        <div className="dropdodwn-avatar" onClick={openMenu}>
+          <img className='dropdown-image' src={user.avatar}/>
+        </div>
+        :
+        <div className="dropdown-avatar" onClick={openMenu}>
+          <i className="far fa-user dropdown-image-temp" />
+        </div>
+        }
       {showMenu && (
         <div className="profile-dropdown">
           <div className='profile-dropdown__about-me'>

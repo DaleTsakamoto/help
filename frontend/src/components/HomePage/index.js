@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import {NavLink} from 'react-router-dom'
+import {NavLink, Link} from 'react-router-dom'
 
 import './HomePage.css';
 import HomeLogoAlternate from './HomeLogoAlternate'
@@ -69,16 +69,16 @@ function HomePage() {
     let countHelpee = 0;
     let countHelper = 0;
     Helpees = Object.values(localPeople).map((person, idx) => {
-      if (countHelpee > 6) return;
+      if (countHelpee > 5) return;
       if (!person.user.helpType) {
         countHelpee = countHelpee + 1;
         return (
           <div key={idx} className={`users-container__body__local__helpees__${countHelpee}`}>
             <div className={`body-local__helpee__${countHelpee}`}>
-                <NavLink className='navlinks' to={`/users/${person.user.id}`}>
+              <NavLink className='navlinks' to={`/users/${person.user.id}`}>
               <div className='body-local-header'>
                   <img className='body-local-header__image' src={person.user.avatar}/>
-                  <h1>{person.user.firstName} {person.user.lastName.slice(0, 1).toUpperCase()}.</h1>
+                  <h1 className='body-local-username'>{person.user.firstName} {person.user.lastName.slice(0, 1).toUpperCase()}.</h1>
               </div>
                 </NavLink>
               <img src={`https://maps.googleapis.com/maps/api/staticmap?zoom=13&size=300x180&maptype=roadmap
@@ -90,7 +90,7 @@ function HomePage() {
       }
     })
     Helpers = Object.values(localPeople).map((person, idx) => {
-      if (countHelper > 6) return;
+      if (countHelper > 5) return;
       if (person.user.helpType) {
         countHelper = countHelper + 1;
         return (
@@ -99,7 +99,7 @@ function HomePage() {
             <NavLink className='navlinks' to={`/users/${person.user.id}`}>
               <div className='body-local-header'>
                 <img className='body-local-header__image' src={person.user.avatar}/>
-                <h1>{person.user.firstName} {person.user.lastName.slice(0, 1).toUpperCase()}.</h1>
+                <h1 className='body-local-username'>{person.user.firstName} {person.user.lastName.slice(0, 1).toUpperCase()}.</h1>
                 </div>
               </NavLink>
               <img src={`https://maps.googleapis.com/maps/api/staticmap?zoom=13&size=300x180&maptype=roadmap

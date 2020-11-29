@@ -34,8 +34,15 @@ const Tasks = () => {
   };
 
   const alterTask = (e) => {
-    setTaskId(e.target.id)
-    dispatch(TaskActions.taskUpdate({ taskId, urlId })).then(setTaskId())
+    let taskId = e.target.id
+    let userId = user.id;
+    let name;
+    if (e.target.name) {
+      name = e.target.name
+    } else {
+      name = null
+    }
+    dispatch(TaskActions.taskUpdate({ taskId, urlId, name, userId })).then(setTaskId(taskId))
     return;
   };
 
@@ -68,15 +75,17 @@ const Tasks = () => {
         } else if (!task.completed && currentHelpType) {
           return(
             <div className='task-container__list__incomplete' key={idx}>
-              <input type="checkbox" id={task.id} name={task.id} onClick={alterTask} />
+              <input type="checkbox" id={task.id} name='checkbox' onClick={alterTask} />
               <label className="tasks__checkbox" key={task.id} htmlFor={task.id}>{task.category} - {task.details}</label><br />
             </div>
           )
         } else {
           return(
             <div className='task-container__list__incomplete' key={idx}>
-              <i className="fas fa-hands-helping tasks__helping-hands-icon"></i>
-              <div className="tasks__checkbox" key={idx} htmlFor={`task${idx}`}>{task.category} - {task.details}</div><br />
+              {/* CHANGE THIS HERE TO ASSIGN USER ID TO TASK ID AS HELPER */}
+              {!task.helperId ? 
+              <i id={task.id} onClick={alterTask} className="fas fa-hands-helping tasks__helping-hands-icon">CLICK</i> : null  }
+              <div className="tasks__checkbox">{task.category} - {task.details}</div><br />
             </div>
           )
         }
@@ -111,7 +120,7 @@ const Tasks = () => {
                 <div className='tasks__addTask'>
                   <form onSubmit={handleSubmit}>
                   <label className='tasks__type__choice' htmlFor="type">Type:</label>
-                  <select id ='type' name="type" onChange={e => setChoreType(e.target.value)}>
+                  <select className='tasks-type__selector' id ='type' name="type" onChange={e => setChoreType(e.target.value)}>
                     <option value='House Chores' required>House Chores</option>
                     <option value='Yard Work' required>Yard Work</option>
                     <option value='Grocery Shopping' required>Grocery Shopping</option>

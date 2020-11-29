@@ -1,5 +1,6 @@
 import React, { useState} from 'react'
 import { fetch } from '../../store/csrf'
+import {Redirect} from 'react-router'
 
 import './SearchBar.css'
 
@@ -15,7 +16,8 @@ function SearchBar() {
       }),
     })
     console.log(res)
-    return () => setKeywordSearch('');
+    setKeywordSearch('');
+    return <Redirect to='/results'></Redirect>
   }
 
   return (

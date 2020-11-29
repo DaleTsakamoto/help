@@ -1,0 +1,18 @@
+#location-body-map{
+  height: 350px;
+  width: 300px;
+}
+
+.location-container{
+  display:flex;
+  flex-direction: column;
+  text-align: center;
+  padding: 15px;
+}
+
+.location-title{
+  width: 300px;
+  margin-bottom: 15px;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 20px;
+}

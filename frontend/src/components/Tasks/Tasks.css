@@ -120,7 +120,7 @@ a {
   padding-right: 5px;
 }
 
-select{
+.tasks-type__selector{
   border: .5px solid #e6f2f2;
   background-color: #FFFEF2;
   height: 30px;

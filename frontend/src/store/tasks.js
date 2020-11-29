@@ -28,17 +28,18 @@ const updateTask = (task) => {
 }
 
 export const taskUpdate = (task) => async (dispatch) => {
-  const { taskId, sessionId } = task
-  console.log("SESSIONID", sessionId)
-  console.log("TASKID", taskId)
-  const res = await fetch(`/api/users/${sessionId}/tasks`, {
+  const { taskId, urlId, name, userId } = task
+  const res = await fetch(`/api/users/${urlId}/tasks`, {
     method: 'PATCH',
     body: JSON.stringify({
-      taskId
+      taskId,
+      urlId,
+      userId,
+      name
     }),
   })
   console.log("THIS IS RES!!!",res)
-  dispatch(addTask(res.data.task));
+  dispatch(updateTask(res.data.task));
   return
 }
 

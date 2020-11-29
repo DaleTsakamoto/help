@@ -83,3 +83,65 @@
   padding-right: 20px;
   background-color: whitesmoke;
 }
+
+.login-signup-container{
+  display: flex;
+  flex-direction: row;
+}
+
+.login-button{
+  height: 35px;
+  width: 70px;
+  box-sizing: border-box;
+  padding: 8px 0;
+  border: .5px solid lightgrey;
+  text-decoration: none;
+  color: black;
+  text-align: center;
+  border-radius: 5px;
+  font-family: 'Open Sans', sans-serif;
+  margin-right: 10px;
+}
+
+.login-button:hover{
+  background-color: whitesmoke;
+}
+
+.signup-button{
+  height: 35px;
+  width: 80px;
+  box-sizing: border-box;
+  padding: 8px 0;
+  border: .5px solid lightgrey;
+  text-decoration: none;
+  color: black;
+  text-align: center;
+  border-radius: 5px;
+  font-family: 'Open Sans', sans-serif;
+  color: white;
+  background-color: teal;
+}
+
+.navlink-navigation{
+  text-decoration: none;
+  color: black;
+}
+
+.dropdodwn-avatar{
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.dropdown-image{
+  height: 100%;
+  width: 100%;
+  border-radius: 50%;
+}
+
+.dropdown-image-temp{
+  height: 100%;
+  width: 100%;
+  border-radius: 50%;
+}

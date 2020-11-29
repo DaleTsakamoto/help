@@ -21,7 +21,6 @@ export const searchPerson = (urlId) => async (dispatch) => {
   const res = await fetch(`/api/people/${urlId}`, {
     method: 'GET',
   })
-  console.log(res)
   dispatch(findPerson(res.data.person));
   return res
 }

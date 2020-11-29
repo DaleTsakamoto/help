@@ -1,7 +1,8 @@
 import React, {useEffect, useState} from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import {NavLink, Switch, Route} from 'react-router-dom'
+import {NavLink, Switch, Route, useLocation} from 'react-router-dom'
 
+import Location from './Location'
 import Tasks from '../Tasks'
 import Testimony from './Testimony'
 import Overview from './userPageOverview'
@@ -11,15 +12,16 @@ import * as usersAction from '../../store/users'
 const UserPage = () => {
   const sessionUser = useSelector(state => state.session.user)
   const person = useSelector(state => state.users.person)
+  const [apiKey, setApiKey] = useState('')
   const dispatch = useDispatch()
   const [isLoaded, setIsLoaded] = useState(false);
 
-  //USE TO GET CORRECT USERPAGE/INFORMATION
   const urlId = window.location.pathname.split('/')[2]
-  console.log(urlId)
 
   useEffect(() => {
-      dispatch(usersAction.searchPerson(urlId)).then(() => setIsLoaded(true))
+    dispatch(usersAction.searchPerson(urlId))
+      .then((res) => setApiKey(res.data.apiKey))
+      .then(() => setIsLoaded(true))
   },[dispatch])
 
   const addClass = (e) => {
@@ -40,7 +42,7 @@ const UserPage = () => {
     column2 = addClass(e);
   }
 
-  return isLoaded && (
+  return isLoaded && sessionUser &&(
     <div className="user-holder">
       <div className="user-holder__header">
         <div className='user-holder__header__1'>
@@ -118,7 +120,7 @@ const UserPage = () => {
             </Route>
           </Switch>
         </div>
-        <div className='user-holder__body__3'>column 3</div>
+        <div className='user-holder__body__3'><Location apiKey={apiKey}></Location></div>
       </div>
     </div>
   )

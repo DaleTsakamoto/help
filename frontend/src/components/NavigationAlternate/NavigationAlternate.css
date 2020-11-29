@@ -61,3 +61,43 @@
   padding-right: 20px;
   background-color: whitesmoke;
 }
+
+.login-signup-container-alt{
+  display: flex;
+  flex-direction: row;
+}
+
+.login-button-alt{
+  height: 35px;
+  width: 70px;
+  box-sizing: border-box;
+  padding: 8px 0;
+  border: .5px solid lightgrey;
+  text-decoration: none;
+  color: teal;
+  text-align: center;
+  border-radius: 5px;
+  font-family: 'Open Sans', sans-serif;
+  margin-right: 10px;
+  background-color: transparent;
+}
+
+.login-button-alt:hover{
+  background-color: whitesmoke;
+}
+
+.signup-button-alt{
+  height: 35px;
+  width: 80px;
+  box-sizing: border-box;
+  padding: 8px 0;
+  border: .5px solid lightgrey;
+  text-decoration: none;
+  color: black;
+  text-align: center;
+  border-radius: 5px;
+  font-family: 'Open Sans', sans-serif;
+  color: white;
+  background-color: teal;
+  border: none;
+}

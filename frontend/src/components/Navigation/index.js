@@ -16,14 +16,14 @@ const Navigation = ({isLoaded}) => {
     )
   } else {
     headerNavigation = (
-      <>
-        <NavLink to="/login">
-          Login
+      <div className='login-signup-container'>
+        <NavLink className='login-button' to="/login">
+          Log In
         </NavLink>
-        <NavLink to="/signup">
+        <NavLink className='signup-button' to="/signup">
           Sign up
         </NavLink>
-      </>
+      </div>
     )
   }
 

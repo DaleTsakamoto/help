@@ -58,9 +58,11 @@ router.get(
   asyncHandler(async (req, res) => {
     const userId = parseInt(req.params.id)
     const person = await User.findByPk(userId);
+    const apiKey = process.env.GOOGLE_API;
     if (person) {
       return res.json({
         person,
+        apiKey,
       })
     } else {
       const error = new Error('Person not Found');
