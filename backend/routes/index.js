@@ -1,11 +1,8 @@
 const express = require("express");
 const router = express.Router();
 const apiRouter = require("./api");
-const searchRouter = require("./search")
-const userPageRouter = require("./UserPage")
 
 router.use("/api", apiRouter);
-router.use("/search", searchRouter);
 
 // router.get("/hello/world", function (req, res) {
 //   res.cookie("XSRF-TOKEN", req.csrfToken());

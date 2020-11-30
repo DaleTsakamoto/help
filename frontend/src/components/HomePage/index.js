@@ -102,7 +102,7 @@ function HomePage() {
                 <h1 className='body-local-username'>{person.user.firstName} {person.user.lastName.slice(0, 1).toUpperCase()}.</h1>
                 </div>
               </NavLink>
-              <img src={`://maps.googleapis.com/maps/api/staticmap?zoom=13&size=300x180&maptype=roadmap
+              <img src={`https://maps.googleapis.com/maps/api/staticmap?zoom=13&size=300x180&maptype=roadmap
               &markers=color:blue%7Clabel:S%7C${person.user.lat},${person.user.lng}&key=${people.data.apiKey}`} />
               <div className='body-local-user__bio'>{person.user.bio}</div>
             </div>
