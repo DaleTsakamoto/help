@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import {NavLink, Switch, Route, useLocation} from 'react-router-dom'
+import {NavLink, Switch, Route} from 'react-router-dom'
 
 import Location from './Location'
 import Tasks from '../Tasks'
@@ -75,7 +75,7 @@ const UserPage = () => {
             <div>
             <i className="fas fa-camera user-holder__header__camera"/>Add Profile Photos</div>
             <div>
-              <i class="far fa-address-card user-holder__header__update" />Update Your Profile</div>
+              <i className="far fa-address-card user-holder__header__update" />Update Your Profile</div>
           </div>
         </div>
       </div>

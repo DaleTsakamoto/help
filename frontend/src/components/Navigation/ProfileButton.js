@@ -1,14 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux';
-import { Redirect, NavLink, Route } from 'react-router-dom'
+import { Redirect} from 'react-router-dom'
 
 import * as sessionActions from '../../store/session';
-import { fetch } from '../../store/csrf'
 
 function ProfileButton({ user }) {
   const dispatch = useDispatch();
   const [showMenu, setShowMenu] = useState(false);
-  const [redirect, setRedirect] = useState(false);
   const sessionUser = useSelector(state => state.session.user)
   
   const openMenu = () => {
@@ -35,25 +33,21 @@ function ProfileButton({ user }) {
       <Redirect to='/' />
     )
   };
-
-
   
-  {sessionUser.avatar ? 
+  sessionUser.avatar ?
     <div className="dropdodwn-avatar" onClick={openMenu}>
-      <img className='dropdown-image' src={sessionUser.avatar}/>
-    </div>
-   :
+      <img className='dropdown-image' alt ='profile' src={sessionUser.avatar}/>
+    </div> :
   <div className="dropdown-avatar" onClick={openMenu}>
   <i className="far fa-user dropdown-image-temp" />
   </div>
-}
 
 
   return (
     <>
        {user.avatar ? 
         <div className="dropdodwn-avatar" onClick={openMenu}>
-          <img className='dropdown-image' src={user.avatar}/>
+          <img className='dropdown-image' alt='avatar' src={user.avatar}/>
         </div>
         :
         <div className="dropdown-avatar" onClick={openMenu}>
