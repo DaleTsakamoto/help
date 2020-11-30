@@ -46,10 +46,6 @@ The searchbar was an interesting challenge as I tried to implement the best sort
 * On the backend use the search options to query the database using a complex sequelize query.  This was complicated at times as the sequelize syntax is a bit convoluted at points.
 
     ```js
-router.post(
-  '/',
-  asyncHandler(async (req, res, next) => {
-
     const { keywordSearch, locationSearch } = req.body;
 
     let locals;
@@ -106,9 +102,7 @@ router.post(
       locals,
       apiKey: process.env.GOOGLE_API,
     });
-
-  }),
-);
+    
     ```
 
 
