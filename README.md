@@ -171,29 +171,36 @@ let complete;
       })
   }
 ```
-PostgreSQL utilization for database storage of all comments, available for any Fetch method request.
 
-Example: Back-end routing established for accessing and deleting a comment from the database.
+The tasks list also utilized a react/redux store along with several queries on the backend for this information including patch requests to udpate information in the database when a task is completed or when a task is set to a helper.
 
 ```js
-router.delete('/:id(\\d+)', asyncHandler(async (req, res) => {
-    const id = parseInt(req.params.id, 10);
-    const comment = await Comment.findByPk(id);
 
-    if (comment) {
-        await comment.destroy();
-        res.status(204).end();
+router.patch('/', requireAuth, asyncHandler(async (req, res) => {
+    let { taskId, name, userId } = req.body
+    const id = parseInt(taskId)
+    const user = parseInt(userId)
+    let task;
+    if (!name) {
+      task = await Task.update({ helperId: user }, {
+        where: {
+          id: id
+        }
+      });
     } else {
-        const errors = validateErrors.array().map(error => error.msg);
-        res.render('comments', {
-            errors,
-        });
+      task = await Task.update({ completed: true }, {
+        where: {
+          id: id
+        }
+      });
     }
-}));
-```
-There were some unique challenges with the comments, causing three of us to spend considerable time in various capacities on them. A number of insidious bugs were present in that last few days before deployment. Two big ones were the update of a comment `fetch` for a `PUT` (shown above) request was not *just* doing that, but also initiating *something* after one of the pushes suddenly causing a `GET` to immediately follow with an attached query string of what the newly revised comment was. It turned out that a key placement of `event.preventDefault()` was needed to fix that.
+      return res.json({
+        task
+      });
+  }));
 
-There was also some bug that was a combo: after *updating* the comment and/or *canceling* a delete, going through with a delete was causing "extra" deletions from the "Responses" count based on the number of times buttons were hit. This turned out to finally be solved (1) by unnesting some of the `addEventListener()` calls and (2) making those calls named functions and explicitly calling `removeEventListener()` on them when they were no longer needed.
+```
+
 
 ## FAQ
 
