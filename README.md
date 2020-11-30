@@ -1,6 +1,6 @@
 # help
 
-![Logo of the project](./public/images/help.jpg)
+![Logo of the project](./public/images/help.png)
 
 > Welcome to help
 
