@@ -22,9 +22,13 @@ As a logged-in user, you will have access to:
 
 ### Home Page
 
-The homepage will render a simple searchbar similar to yelp with a few links for accessibility navigating the site:
+The Home Page will render a simple searchbar similar to yelp with a few links for accessibility navigating the site:
 
-![Screen Shot of Homepage](./frontend/public/images/screen_shot_1.png)
+![Screen Shot of Home Page](./frontend/public/images/screen_shot_1.png)
+
+The Home Page also offers access to local users in the area which renders helpers within a 20 mile radius by using a geolocation service on the frontend to compare to the database which uses a node package to translate addresses to lattitude and longitude.  Everything then goes through a sorting algorhythm to render the nearest helper first, up to six helpers.
+
+![Screen Shot of Home Page Helpers](./frontend/public/images/screen_shot_2.png)
 
 ### Searchbar
 
