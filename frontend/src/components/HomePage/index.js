@@ -81,7 +81,7 @@ function HomePage() {
                   <h1 className='body-local-username'>{person.user.firstName} {person.user.lastName.slice(0, 1).toUpperCase()}.</h1>
               </div>
                 </NavLink>
-              <img src={`https://maps.googleapis.com/maps/api/staticmap?zoom=13&size=300x180&maptype=roadmap
+              <img src={`http://maps.googleapis.com/maps/api/staticmap?zoom=13&size=300x180&maptype=roadmap
               &markers=color:blue%7Clabel:S%7C${person.user.lat},${person.user.lng}&key=${people.data.apiKey}`} />
               <div className='body-local-user__bio'>{person.user.bio}</div>
             </div>
@@ -102,7 +102,7 @@ function HomePage() {
                 <h1 className='body-local-username'>{person.user.firstName} {person.user.lastName.slice(0, 1).toUpperCase()}.</h1>
                 </div>
               </NavLink>
-              <img src={`https://maps.googleapis.com/maps/api/staticmap?zoom=13&size=300x180&maptype=roadmap
+              <img src={`://maps.googleapis.com/maps/api/staticmap?zoom=13&size=300x180&maptype=roadmap
               &markers=color:blue%7Clabel:S%7C${person.user.lat},${person.user.lng}&key=${people.data.apiKey}`} />
               <div className='body-local-user__bio'>{person.user.bio}</div>
             </div>
@@ -126,7 +126,7 @@ function HomePage() {
         <div className='users-container__body__local__2'> {Helpers}
         </div>
         <footer>
-            <a className='navlink-to-github' href='https://github.com/DaleTsakamoto'>
+            <a className='navlink-to-github' href='http://github.com/DaleTsakamoto'>
               <img className='github-image'src='/images/github-logo.png' />
               <div>Learn more about me</div>
             </a>
