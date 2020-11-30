@@ -127,7 +127,7 @@ function HomePage() {
         </div>
         <footer>
             <a className='navlink-to-github' href='https://github.com/DaleTsakamoto'>
-              <img className='github-image'src='/images/github-logo.png' />
+              {/* <img className='github-image'src='/images/github-logo.png' /> */}
               <div>Learn more about me</div>
             </a>
         </footer>
