@@ -139,7 +139,7 @@ const SignupFormPage = () => {
         <input
           placeholder='Zip Code'
           value={zipCode}
-          type='number'
+          type='text'
           onChange={ e => setZipCode(e.target.value) }
           required
           />

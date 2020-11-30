@@ -11,7 +11,6 @@ export default function getLocation() {
 
 function logPosition(position) {
   location = { Latitude: position.coords.latitude, Longitude: position.coords.longitude }
-  console.log(location)
 }
 
 function showError(error) {

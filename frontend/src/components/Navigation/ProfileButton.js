@@ -10,40 +10,6 @@ function ProfileButton({ user }) {
   const [showMenu, setShowMenu] = useState(false);
   const [redirect, setRedirect] = useState(false);
   const sessionUser = useSelector(state => state.session.user)
-
-
-  // const findUser = async () => {
-  //   const res = await fetch(`/users/${user.id}`)
-  //   return res;
-  // }
-
-  // const usersPage = () => {
-  //   if (redirect) {
-  //     const res = findUser();
-  //     console.log(res)
-  //     return (
-  //       <Redirect to={{
-  //         pathname: `/users/${user.id}`,
-  //         user: res.data.user
-  //       }}/>
-  //     )
-  //   }
-  // }
-
-  // const goUser = () => {
-  //   if (redirect) {
-  //     <Redirect to={`/users/${user.id}`} />
-  //     return setRedirect(false);
-  //   }
-  // }
-
-  // const useRedirect = () => {
-  //   setRedirect(true)
-  // }
-
-  // useEffect(() => {
-  //   setRedirect(false);
-  // }, [redirect])
   
   const openMenu = () => {
     if (showMenu) return;

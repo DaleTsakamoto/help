@@ -3,11 +3,13 @@ import thunk from 'redux-thunk'
 import sessionReducer from './session';
 import tasksReducer from './tasks'
 import usersReducer from './users'
+import localsReducer from './search'
 
 const rootReducer = combineReducers({
   session: sessionReducer,
   tasks: tasksReducer,
-  users: usersReducer
+  users: usersReducer,
+  locals: localsReducer
 })
 
 let enhancer;

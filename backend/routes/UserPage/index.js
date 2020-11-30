@@ -11,9 +11,7 @@ const tasksRouter = require('./tasks.js');
 
 router.get('/:id(\\d+)', asyncHandler(async (req, res) => {
   const userId = parseInt(req.params.id, 10)
-  console.log("I'M WORKING!!!!!", userId)
   const user = await User.findByPk(userId)
-  console.log("THIS IS THE USER:", user)
   if (user) {
     return res.json({
       user

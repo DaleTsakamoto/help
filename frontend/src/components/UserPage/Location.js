@@ -14,7 +14,6 @@ const Location = (props) => {
   });
   let map;
   const google = window.google = window.google ? window.google : {}
-  console.log(person)
   loader.load().then(() => {
     const myLatLng = { lat: person.lat, lng: person.lng };
     map = new google.maps.Map(document.getElementById("location-body-map"), {

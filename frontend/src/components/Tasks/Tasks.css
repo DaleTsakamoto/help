@@ -137,3 +137,7 @@ a {
 .tasks__hidden-submit{
   display: none;
 }
+
+.task-list__checkbox{
+  width: 30px;
+}

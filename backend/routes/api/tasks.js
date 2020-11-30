@@ -39,7 +39,6 @@ router.post(
 
 router.post('/add', requireAuth, asyncHandler(async (req, res) => {
   const { choreType, taskDetails, id } = req.body;
-  console.log("HERE WE GO", choreType, taskDetails, id)
   const userId = parseInt(id, 10)
     const task = Task.build({
       helpeeId: userId,
@@ -49,8 +48,6 @@ router.post('/add', requireAuth, asyncHandler(async (req, res) => {
     });
 
     const validateErrors = validationResult(req);
-
-    console.log("TASK BEFORE VALIDATION", task);  
     if (validateErrors.isEmpty()) {
       await task.save();
       res.status(204).end()

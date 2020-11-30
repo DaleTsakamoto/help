@@ -40,8 +40,6 @@ router.post(
     if (usersArr.length === 0) users = ["No one in your area"]
     let finalArr = quickSort(usersArr)
     users = finalArr;
-    
-    console.log(finalArr)
 
     return res.json({
       users,

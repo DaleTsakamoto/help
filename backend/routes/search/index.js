@@ -13,7 +13,6 @@ router.post(
     let users;
     if (keywordSearch.includes(' ')) {
       const keywordArr = keywordSearch.split(' ')
-      console.log(keywordArr)
     }
     users = await User.findAll({
       where: {

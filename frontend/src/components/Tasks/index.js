@@ -50,7 +50,12 @@ const Tasks = () => {
     dispatch(TaskActions.search({
       urlId
     })).then((res) => setCurrentHelpType(res.data.helpType)).then(() => setIsLoaded(true))
-  }, [dispatch, taskDetails, taskId, helpType, id]);
+      .then(() => {
+        if (document.querySelector('.task-list__checkbox')) {
+          document.querySelector('.task-list__checkbox').checked = false;
+      }
+    })
+  });
 
   let complete;
   let incomplete;
@@ -75,16 +80,15 @@ const Tasks = () => {
         } else if (!task.completed && currentHelpType) {
           return(
             <div className='task-container__list__incomplete' key={idx}>
-              <input type="checkbox" id={task.id} name='checkbox' onClick={alterTask} />
+              <input className='task-list__checkbox' type="checkbox" id={task.id} name='checkbox' onClick={alterTask} />
               <label className="tasks__checkbox" key={task.id} htmlFor={task.id}>{task.category} - {task.details}</label><br />
             </div>
           )
-        } else {
+        } else if (!task.completed){
           return(
             <div className='task-container__list__incomplete' key={idx}>
-              {/* CHANGE THIS HERE TO ASSIGN USER ID TO TASK ID AS HELPER */}
               {!task.helperId ? 
-              <i id={task.id} onClick={alterTask} className="fas fa-hands-helping tasks__helping-hands-icon">CLICK</i> : null  }
+              <i id={task.id} name='iWillHelp' onClick={alterTask} className="fas fa-hands-helping tasks__helping-hands-icon"></i> : null  }
               <div className="tasks__checkbox">{task.category} - {task.details}</div><br />
             </div>
           )
@@ -92,7 +96,7 @@ const Tasks = () => {
       })
   }
 
-  return isLoaded && (
+  return (
     <div className='tasks-container'>
       <div className='tabs'>
         <h1 className='tabs-header__name'>Tasks</h1>

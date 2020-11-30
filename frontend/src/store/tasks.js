@@ -1,7 +1,5 @@
 import { fetch } from './csrf'
 
-// const SET_USER = 'session/setUser'
-// const REMOVE_USER = 'session/removeUser'
 const ADD_TASK = 'tasks/addTask'
 const UPDATE_TASK = 'tasks/updateTasks'
 const FIND_TASKS = 'tasks/findTasks'
@@ -38,13 +36,11 @@ export const taskUpdate = (task) => async (dispatch) => {
       name
     }),
   })
-  console.log("THIS IS RES!!!",res)
   dispatch(updateTask(res.data.task));
   return
 }
 
 export const taskAdd = (task) => async (dispatch) => {
-  // ${currentUserPage}
   const { choreType, taskDetails, id } = task;
   const res = await fetch(`/api/users/${id}/tasks/add`, {
     method: 'POST',
@@ -54,13 +50,10 @@ export const taskAdd = (task) => async (dispatch) => {
       id
     }),
   })
-  // console.log("THIS IS RES!!!",res)
-  // dispatch(addTask(res.task));
   return
 }
 
 export const search = (user) => async (dispatch) => {
-  // ${currentUserPage}
   const { urlId } = user;
   const res = await fetch(`/api/users/${urlId}/tasks`, {
     method: 'POST',
