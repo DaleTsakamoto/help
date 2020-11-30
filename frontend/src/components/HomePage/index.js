@@ -115,7 +115,6 @@ function HomePage() {
   return (
     <>
       <div className='home-page-main-image'>
-        <img className='home-page-main-image' src='/images/help_sample.jpeg' />
         <HomeLogoAlternate />
         <SearchBarAlternate />
       </div>
