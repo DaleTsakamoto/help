@@ -3,7 +3,7 @@ import { Redirect } from 'react-router-dom'
 import {useDispatch} from 'react-redux'
 import * as searchActions from '../../store/search'
 
-import './HomePage.css'
+// import './HomePage.css'
 
 function SearchBarAlternate() {
   const dispatch = useDispatch();

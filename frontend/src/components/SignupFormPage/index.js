@@ -155,7 +155,7 @@ const SignupFormPage = () => {
       </div>
     </form>
       </div>
-      {/* <img className='signup-image' src='/images/login-pic.jpg'/> */}
+      <img className='signup-image' src='/images/login-pic.jpg'/>
     </div>
     
   )

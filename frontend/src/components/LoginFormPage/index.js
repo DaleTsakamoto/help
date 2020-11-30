@@ -61,7 +61,7 @@ const LoginFormPage = () => {
           <button className='login-form-button'type="submit">Log In</button>
         </form>
       </div>
-      {/* <img className='login-image' src='/images/login-pic.jpg'/> */}
+      <img className='login-image' src='/images/login-pic.jpg'/>
     </div>
   );
 }
