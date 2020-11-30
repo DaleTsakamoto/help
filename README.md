@@ -38,6 +38,8 @@ The Helpers are also rendered below this using the same sorting methods and rout
 
 The searchbar was an interesting challenge as I tried to implement the best sorting algorhythm while also using a complex sequelize query that added users depending on location and/or a general search:
 
+![Screen Shot of Search Bar](./frontend/public/images/screen_shot_4.png)
+
 * Use possible multiple parameters to search location and general search(similar to yelp)
 
     To implement this, I used a react/redux store on the frontend which checked on the backend for a particular search.
