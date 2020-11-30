@@ -119,33 +119,57 @@ The searchbar was an interesting challenge as I tried to implement the best sort
     
     ```
 
+### Tasks
 
-### Comments
+The tasks list renders a list of complete and incomplete tasks for the user to see their own and others:
 
-* Access and leave comments on any story
-* Comments dynamically update on your page after you publish, edit or delete them
-* Comments slide into the screen and slide out
+![Screen Shot of Tasks](./frontend/public/images/screen_shot_5.png)
 
-Comments functionality on the front-end were created with the use of the Fetch API to provide real-time site updates without the need for a page refresh.
+* Create a completed and incomplete task list
+* If task needs to be completed for helper it has a checkmark and moves to completed list once checked
+* If task needs to be completed for a helpee it includes a clickable image of the helping hands to add to your list.
 
-Example: Dynamically editing a comment with Fetch
+The greatest challenge of this project was using many conditionals and nested conditionals to render the correct information depending on a helper or helpee
 
 ```js
-const body = { comment };
-try {
-    const res = await fetch(`/stories/${storiesId}/comments/${commentId}`, {
-        method: "PUT",
-        body: JSON.stringify(body),
-        headers: {
-            "Content-Type": "application/json",
-        },
-    });
-    if (!res.ok) {
-        throw res;
-    }
-} catch (err) {
-    alert("Something went wrong. Please try again!");
-}
+let complete;
+  let incomplete;
+  if (isLoaded) {
+    complete = Object.values(currentTasks).map((task, idx) => {
+        if (task.completed) {
+          return(
+            <div className='task-container__list__completed' key={idx}>
+              <i className="far fa-check-square completed-icon"></i>
+              <p>{task.category} - {task.details}</p><br />
+            </div>
+          )
+        }
+      })
+      incomplete = Object.values(currentTasks).map((task, idx) => {
+        if (id === urlId && !currentHelpType && !task.completed) {
+          return (
+            <div className='task-container__list__incomplete' key={idx}>
+              <div className="tasks__checkbox" key={idx}>{task.category} - {task.details}</div><br />
+            </div>
+          )
+        } else if (!task.completed && currentHelpType) {
+          return(
+            <div className='task-container__list__incomplete' key={idx}>
+              <input className='task-list__checkbox' type="checkbox" id={task.id} name='checkbox' onClick={alterTask} />
+              <label className="tasks__checkbox" key={task.id} htmlFor={task.id}>{task.category} - {task.details}</label><br />
+            </div>
+          )
+        } else if (!task.completed){
+          return(
+            <div className='task-container__list__incomplete' key={idx}>
+              {!task.helperId ? 
+              <i id={task.id} name='iWillHelp' onClick={alterTask} className="fas fa-hands-helping tasks__helping-hands-icon"></i> : null  }
+              <div className="tasks__checkbox">{task.category} - {task.details}</div><br />
+            </div>
+          )
+        }
+      })
+  }
 ```
 PostgreSQL utilization for database storage of all comments, available for any Fetch method request.
 
@@ -173,27 +197,20 @@ There was also some bug that was a combo: after *updating* the comment and/or *c
 
 ## FAQ
 
-### How can I write a story or leave a comment?
+### What is a helper and helpee?
 
-You will first need to sign-up for an account. Once you are logged in, you will have access to all features on the website, which include writing a story or leaving a comment.
+A helper is someone who is willing to run errands, do household chores, help mow the lawn, etc. for someone.  A helpee is someone who needs help or assistance in one of these areas
 
-### How can I follow my favorite writers?
+### Why help?
 
-See a story you like? You can click on the follow link at the top of any story page to begin following that writer.
-
-### Why lightsabers?
-
-Because they are cool.
+The purpose of this app is to create a sense of community between all the users.  As our society becomes more engrossed with technology it is important we don't forget those who are left behind who still need our help.
 
 ## Links
 
-Your destiny awaits... follow this link to enter Infinium:
+Get some help or help out today... follow this link to join help:
 
-https://infinium.herokuapp.com/
+https://helpp.herokuapp.com/
 
-## Contributing
+## Contributor
 
 * Dale Sakamoto - DaleTsakamoto @ GitHub
-* Michael Jensen - Mjensen24 @ GitHub
-* Rhys Previte - Preezey24 @ GitHub
-* Scott Smith - scottgit @ GitHub
