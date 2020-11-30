@@ -26,9 +26,13 @@ The Home Page will render a simple searchbar similar to yelp with a few links fo
 
 ![Screen Shot of Home Page](./frontend/public/images/screen_shot_1.png)
 
-The Home Page also offers access to local users in the area which renders helpers within a 20 mile radius by using a geolocation service on the frontend to compare to the database which uses a node package to translate addresses to lattitude and longitude.  Everything then goes through a sorting algorhythm to render the nearest helper first, up to six helpers.
+The Home Page also offers access to local users in the area which renders helpees within a 20 mile radius by using a geolocation service on the frontend to compare to the database which uses a node package to translate addresses to lattitude and longitude.  Everything then goes through a sorting algorhythm to render the nearest helper first, up to six helpers.
 
-![Screen Shot of Home Page Helpers](./frontend/public/images/screen_shot_2.png)
+![Screen Shot of Home Page Helpees](./frontend/public/images/screen_shot_2.png)
+
+The Helpers are also rendered below this using the same sorting methods and routes on the backend.
+
+![Screen Shot of Home Page Helpers](./frontend/public/images/screen_shot_3.png)
 
 ### Searchbar
 
