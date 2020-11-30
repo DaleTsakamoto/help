@@ -20,6 +20,12 @@ As a logged-in user, you will have access to:
 
 ## Features
 
+### Home Page
+
+The homepage will render a simple searchbar similar to yelp with a few links for accessibility navigating the site:
+
+![Screen Shot of Homepage](./frontend/public/images/screen_shot_1.png)
+
 ### Searchbar
 
 The searchbar was an interesting challenge as I tried to implement the best sorting algorhythm while also using a complex sequelize query that added users depending on location and/or a general search:
