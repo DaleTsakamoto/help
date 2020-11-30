@@ -1,8 +1,8 @@
 {
   "name": "help",
   "version": "1.0.0",
-  "description": "![Logo of the project](./frontend/public/images/help.png)",
-  "main": "index.js",
+  "description": "help make connections",
+  "main": "index.html",
   "scripts": {
     "heroku-postbuild": "npm run build --prefix frontend",
     "install": "npm --prefix backend install backend && npm --prefix frontend install frontend",
@@ -12,7 +12,8 @@
     "sequelize-cli": "npm run --prefix backend sequelize-cli",
     "start": "npm start --prefix backend"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC"
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DaleTsakamoto/help"
+  }
 }
