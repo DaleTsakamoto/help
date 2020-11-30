@@ -127,5 +127,3 @@ const UserPage = () => {
 }
 
 export default UserPage;
-
-//nest routes with a switch, use location or use history
