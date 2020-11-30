@@ -20,6 +20,20 @@ As a logged-in user, you will have access to:
 
 ## Features
 
+### Home Page
+
+The Home Page will render a simple searchbar similar to yelp with a few links for accessibility navigating the site:
+
+![Screen Shot of Home Page](./frontend/public/images/screen_shot_1.png)
+
+The Home Page also offers access to local users in the area which renders helpees within a 20 mile radius by using a geolocation service on the frontend to compare to the database which uses a node package to translate addresses to lattitude and longitude.  Everything then goes through a sorting algorhythm to render the nearest helper first, up to six helpers.
+
+![Screen Shot of Home Page Helpees](./frontend/public/images/screen_shot_2.png)
+
+The Helpers are also rendered below this using the same sorting methods and routes on the backend.
+
+![Screen Shot of Home Page Helpers](./frontend/public/images/screen_shot_3.png)
+
 ### Searchbar
 
 The searchbar was an interesting challenge as I tried to implement the best sorting algorhythm while also using a complex sequelize query that added users depending on location and/or a general search:
@@ -105,81 +119,105 @@ The searchbar was an interesting challenge as I tried to implement the best sort
     
     ```
 
+### Tasks
 
-### Comments
+The tasks list renders a list of complete and incomplete tasks for the user to see their own and others:
 
-* Access and leave comments on any story
-* Comments dynamically update on your page after you publish, edit or delete them
-* Comments slide into the screen and slide out
+![Screen Shot of Tasks](./frontend/public/images/screen_shot_5.png)
 
-Comments functionality on the front-end were created with the use of the Fetch API to provide real-time site updates without the need for a page refresh.
+* Create a completed and incomplete task list
+* If task needs to be completed for helper it has a checkmark and moves to completed list once checked
+* If task needs to be completed for a helpee it includes a clickable image of the helping hands to add to your list.
 
-Example: Dynamically editing a comment with Fetch
+The greatest challenge of this project was using many conditionals and nested conditionals to render the correct information depending on a helper or helpee
 
 ```js
-const body = { comment };
-try {
-    const res = await fetch(`/stories/${storiesId}/comments/${commentId}`, {
-        method: "PUT",
-        body: JSON.stringify(body),
-        headers: {
-            "Content-Type": "application/json",
-        },
-    });
-    if (!res.ok) {
-        throw res;
-    }
-} catch (err) {
-    alert("Something went wrong. Please try again!");
-}
+let complete;
+  let incomplete;
+  if (isLoaded) {
+    complete = Object.values(currentTasks).map((task, idx) => {
+        if (task.completed) {
+          return(
+            <div className='task-container__list__completed' key={idx}>
+              <i className="far fa-check-square completed-icon"></i>
+              <p>{task.category} - {task.details}</p><br />
+            </div>
+          )
+        }
+      })
+      incomplete = Object.values(currentTasks).map((task, idx) => {
+        if (id === urlId && !currentHelpType && !task.completed) {
+          return (
+            <div className='task-container__list__incomplete' key={idx}>
+              <div className="tasks__checkbox" key={idx}>{task.category} - {task.details}</div><br />
+            </div>
+          )
+        } else if (!task.completed && currentHelpType) {
+          return(
+            <div className='task-container__list__incomplete' key={idx}>
+              <input className='task-list__checkbox' type="checkbox" id={task.id} name='checkbox' onClick={alterTask} />
+              <label className="tasks__checkbox" key={task.id} htmlFor={task.id}>{task.category} - {task.details}</label><br />
+            </div>
+          )
+        } else if (!task.completed){
+          return(
+            <div className='task-container__list__incomplete' key={idx}>
+              {!task.helperId ? 
+              <i id={task.id} name='iWillHelp' onClick={alterTask} className="fas fa-hands-helping tasks__helping-hands-icon"></i> : null  }
+              <div className="tasks__checkbox">{task.category} - {task.details}</div><br />
+            </div>
+          )
+        }
+      })
+  }
 ```
-PostgreSQL utilization for database storage of all comments, available for any Fetch method request.
 
-Example: Back-end routing established for accessing and deleting a comment from the database.
+The tasks list also utilized a react/redux store along with several queries on the backend for this information including patch requests to udpate information in the database when a task is completed or when a task is set to a helper.
 
 ```js
-router.delete('/:id(\\d+)', asyncHandler(async (req, res) => {
-    const id = parseInt(req.params.id, 10);
-    const comment = await Comment.findByPk(id);
 
-    if (comment) {
-        await comment.destroy();
-        res.status(204).end();
+router.patch('/', requireAuth, asyncHandler(async (req, res) => {
+    let { taskId, name, userId } = req.body
+    const id = parseInt(taskId)
+    const user = parseInt(userId)
+    let task;
+    if (!name) {
+      task = await Task.update({ helperId: user }, {
+        where: {
+          id: id
+        }
+      });
     } else {
-        const errors = validateErrors.array().map(error => error.msg);
-        res.render('comments', {
-            errors,
-        });
+      task = await Task.update({ completed: true }, {
+        where: {
+          id: id
+        }
+      });
     }
-}));
-```
-There were some unique challenges with the comments, causing three of us to spend considerable time in various capacities on them. A number of insidious bugs were present in that last few days before deployment. Two big ones were the update of a comment `fetch` for a `PUT` (shown above) request was not *just* doing that, but also initiating *something* after one of the pushes suddenly causing a `GET` to immediately follow with an attached query string of what the newly revised comment was. It turned out that a key placement of `event.preventDefault()` was needed to fix that.
+      return res.json({
+        task
+      });
+  }));
 
-There was also some bug that was a combo: after *updating* the comment and/or *canceling* a delete, going through with a delete was causing "extra" deletions from the "Responses" count based on the number of times buttons were hit. This turned out to finally be solved (1) by unnesting some of the `addEventListener()` calls and (2) making those calls named functions and explicitly calling `removeEventListener()` on them when they were no longer needed.
+```
+
 
 ## FAQ
 
-### How can I write a story or leave a comment?
+### What is a helper and helpee?
 
-You will first need to sign-up for an account. Once you are logged in, you will have access to all features on the website, which include writing a story or leaving a comment.
+A helper is someone who is willing to run errands, do household chores, help mow the lawn, etc. for someone.  A helpee is someone who needs help or assistance in one of these areas
 
-### How can I follow my favorite writers?
+### Why help?
 
-See a story you like? You can click on the follow link at the top of any story page to begin following that writer.
-
-### Why lightsabers?
-
-Because they are cool.
+The purpose of this app is to create a sense of community between all the users.  As our society becomes more engrossed with technology it is important we don't forget those who are left behind who still need our help.
 
 ## Links
 
-Your destiny awaits... follow this link to enter Infinium:
+Get some help or help out today... follow this link to join help:
 
-https://infinium.herokuapp.com/
+https://helpp.herokuapp.com/
 
-## Contributing
+## Contributor
 
 * Dale Sakamoto - DaleTsakamoto @ GitHub
-* Michael Jensen - Mjensen24 @ GitHub
-* Rhys Previte - Preezey24 @ GitHub
-* Scott Smith - scottgit @ GitHub
