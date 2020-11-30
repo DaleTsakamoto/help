@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import {NavLink} from 'react-router-dom'
+import {NavLink, Redirect} from 'react-router-dom'
 
 import './HomePage.css';
 import HomeLogoAlternate from './HomeLogoAlternate'
@@ -125,6 +125,12 @@ function HomePage() {
         <div className='users-container__header__local'>Helpers in Your Area</div>
         <div className='users-container__body__local__2'> {Helpers}
         </div>
+        <footer>
+            <a className='navlink-to-github' href='https://github.com/DaleTsakamoto'>
+              <img className='github-image'src='/images/github-logo.png' />
+              <div>Learn more about me</div>
+            </a>
+        </footer>
       </div>
     </>
   )
