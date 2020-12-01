@@ -10,6 +10,7 @@ import * as usersAction from '../../store/users'
 function HomePage() {
   const dispatch = useDispatch()
   const localPeople = useSelector(state => state.users.users)
+  const sessionUser = useSelector(state => state.session.user);
   const [currentLocation, setCurrentLocation] = useState()
   const [people, setPeople] = useState([])
   const [isLoaded, setIsLoaded] = useState(false);
@@ -120,10 +121,10 @@ function HomePage() {
       </div>
       <div className='homepage-users-container__local'>
         <div className='users-container__header__local'>Help in Your Area</div>
-        <div className='users-container__body__local'> {Helpees}
+        <div className='users-container__body__local'> {sessionUser ? Helpees : null}
         </div>
         <div className='users-container__header__local'>Helpers in Your Area</div>
-        <div className='users-container__body__local__2'> {Helpers}
+        <div className='users-container__body__local__2'> {sessionUser ? Helpers : null}
         </div>
         <footer>
             <a className='navlink-to-github' href='https://github.com/DaleTsakamoto'>
