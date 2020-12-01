@@ -28,6 +28,22 @@ const LoginFormPage = () => {
     })
   }
 
+  const demo__helper = () => {
+      let credential = 'Demo_helper'
+      let password = 'password'
+      return dispatch(sessionActions.login({
+      credential, password
+      }))
+  }
+  
+  const demo__helpee = () => {
+    let credential = 'Demo_helpee'
+    let password = 'password'
+    return dispatch(sessionActions.login({
+    credential, password
+    }))
+  }
+
   return (
     <div className='login-all'>
       <div className='login-form-container'>
@@ -58,8 +74,10 @@ const LoginFormPage = () => {
               required
             />
           </label>
-          <button className='login-form-button'type="submit">Log In</button>
+          <button className='login-form-button' type="submit">Log In</button>
         </form>
+        <button className='demo-login-form-button' onClick={demo__helper} type='button'>Demo Helper Log In</button>
+        <button className='demo-login-form-button' onClick={demo__helpee} type='button'>Demo Helpee Log In</button>
       </div>
       <img className='login-image' src='/images/login-pic.jpg'/>
     </div>

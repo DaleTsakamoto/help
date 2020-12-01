@@ -45,6 +45,21 @@ input{
   border: none;
 }
 
+.demo-login-form-button{
+  box-sizing: border-box;
+  border: 5px solid lightgrey;
+  background-color: transparent;
+  width: 250px;
+  padding: 10px 0;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 1200;
+  cursor: pointer;
+  border-radius: 5px;
+  color: teal;
+  box-shadow: none;
+  border: none;
+}
+
 .new-login-form{
   display: flex;
   flex-direction: row;
