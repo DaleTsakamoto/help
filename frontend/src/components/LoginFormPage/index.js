@@ -79,7 +79,9 @@ const LoginFormPage = () => {
         <button className='demo-login-form-button' onClick={demo__helper} type='button'>Demo Helper Log In</button>
         <button className='demo-login-form-button' onClick={demo__helpee} type='button'>Demo Helpee Log In</button>
       </div>
-      <img className='login-image' src='/images/login-pic.jpg'/>
+      <div className='login-image-holder'>
+        <img className='login-image' src='/images/login-pic.jpg'/>
+      </div>
     </div>
   );
 }

@@ -8,15 +8,16 @@
   display: grid;
   box-sizing: border-box;
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  margin: 0 auto;
 }
 
 .user-holder__header{
   display: grid;
   grid-template-columns: 250px 500px 250px;
   grid-template-rows: 200px;
-  width: 100vw;
   grid-column: 1 / 4;
   background-color: whitesmoke;
+  margin: 0 auto;
 }
 
 .user-holder__header__1{
@@ -132,8 +133,8 @@
 .user-holder__body{
   display: grid;
   grid-template-columns: 250px 500px 250px;
-  width: 100vw;
   grid-column: 1 / 4;
+  margin: 0 auto;
 }
 
 .user-holder__body__1{

@@ -74,8 +74,8 @@ function HomePage() {
       if (!person.user.helpType) {
         countHelpee = countHelpee + 1;
         return (
-          <div key={idx} className={`users-container__body__local__helpees__${countHelpee}`}>
-            <div className={`body-local__helpee__${countHelpee}`}>
+          <div key={idx} className={`users-container__body__local__helpees`}>
+            <div className={`body-local__helpee`}>
               <NavLink className='navlinks' to={`/users/${person.user.id}`}>
               <div className='body-local-header'>
                   <img className='body-local-header__image' src={person.user.avatar}/>
@@ -95,8 +95,8 @@ function HomePage() {
       if (person.user.helpType) {
         countHelper = countHelper + 1;
         return (
-          <div key={idx} className={`users-container__body__local__helpers__${countHelper}`}>
-            <div className={`body-local__helpee__${countHelpee}`}>
+          <div key={idx} className={`users-container__body__local__helpers`}>
+            <div className={`body-local__helpee`}>
             <NavLink className='navlinks' to={`/users/${person.user.id}`}>
               <div className='body-local-header'>
                 <img className='body-local-header__image' src={person.user.avatar}/>
@@ -115,7 +115,7 @@ function HomePage() {
 
   return (
     <>
-      <div className='home-page-main-image'>
+      <div className='homepage-main-image'>
         <HomeLogoAlternate />
         <SearchBarAlternate />
       </div>
@@ -127,10 +127,12 @@ function HomePage() {
         <div className='users-container__body__local__2'> {sessionUser ? Helpers : null}
         </div>
         <footer>
+          <div className='github-about-container'>
             <a className='navlink-to-github' href='https://github.com/DaleTsakamoto'>
               <img className='github-image'src='/images/github-logo.png' />
-              <div>Learn more about me</div>
+              <div className='github-about-text'>Learn more about me</div>
             </a>
+          </div>
         </footer>
       </div>
     </>

@@ -1,12 +1,20 @@
+.login-all{
+  width: 1100px;
+  display: flex;
+  margin: 0 auto;
+}
+
 .login-form-container{
   height: 300px;
-  width: 200px;
+  width: 500px;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
   box-sizing: border-box;
-  margin-left: 180px;
-  margin-top: 180px;
+  padding-left: 80px;
+  padding-top: 180px;
+  margin: 0 auto;
   font-family: 'Open Sans', sans-serif;
 }
 
@@ -80,15 +88,19 @@ input{
   text-decoration: underline;
 }
 
-.login-all{
+.login-image-holder{
+  height: 350px;
+  width: 500px;
+  padding-top: 100px;
   display: flex;
   flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
 }
 
 .login-image{
   height: 350px;
   width: 350px;
-  margin-left: 200px;
-  margin-top: 150px;
   border-radius: 50%;
 }
