@@ -61,7 +61,7 @@ function HomePage() {
         .then((res) => setPeople(res))
         .then(() => setIsLoaded(true))
     }
-  },[dispatch, currentLocation])
+  },[dispatch, currentLocation, sessionUser])
   
 
   let Helpers;
@@ -121,10 +121,10 @@ function HomePage() {
       </div>
       <div className='homepage-users-container__local'>
         <div className='users-container__header__local'>Help in Your Area</div>
-        <div className='users-container__body__local'> {sessionUser ? Helpees : null}
+        <div className='users-container__body__local'> {Helpees}
         </div>
         <div className='users-container__header__local'>Helpers in Your Area</div>
-        <div className='users-container__body__local__2'> {sessionUser ? Helpers : null}
+        <div className='users-container__body__local__2'> {Helpers}
         </div>
         <footer>
           <div className='github-about-container'>
