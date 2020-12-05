@@ -14,8 +14,7 @@ const Results = () => {
     resultsRender =
       Object.values(locals).map((person, idx) => {
       return (
-        <div key={idx} className={`results-container__results__local`}>
-        <div className={`results-local__helpee`}>
+        <div key={idx} className='results-container__body__local'>
             <NavLink className='navlinks' to={`/users/${person.id}`}>
               <div className='results-local-header'>
                 <img className='results-local-header__image' src={person.avatar} />
@@ -23,7 +22,6 @@ const Results = () => {
               </div>
             </NavLink>
             <div className='results-local-user__bio'>{person.bio}</div>
-          </div>
         </div>
       )
     })
@@ -31,9 +29,9 @@ const Results = () => {
     resultsRender = <div className='no-results-found'> No Results Found </div>
   }
   return (
-    <div>
+    <div className='results_page'>
       <h1 className='results-title'>Results:</h1>
-      <div className='users-container__body__local'>{resultsRender}</div>
+      <div className='results-container__body'>{resultsRender}</div>
     </div>
   )
 }

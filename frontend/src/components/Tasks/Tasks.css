@@ -35,9 +35,8 @@
 
 .tab-header__incomplete,
 .tab-header__complete{
-  position: absolute;
-  margin-top: 0px;
-  width: 12%;
+  /* position: relative; */
+  width: 100px;
   margin-top: -26px;
   text-align: center;
   cursor: pointer;
@@ -49,7 +48,7 @@
 }
 
 .tab-header__incomplete{
-  margin-right: 160px;
+  margin-right: 2px;
 }
 
 a {
@@ -132,6 +131,7 @@ a {
   border-top: .5px dashed #e6f2f2;
   border-left: .5px dashed #e6f2f2;
   border-right: .5px dashed #e6f2f2;
+  margin-bottom: -1px;
 }
 
 .tasks__hidden-submit{

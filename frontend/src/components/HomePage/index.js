@@ -61,7 +61,7 @@ function HomePage() {
         .then((res) => setPeople(res))
         .then(() => setIsLoaded(true))
     }
-  },[dispatch, currentLocation, sessionUser])
+  },[dispatch, currentLocation])
   
 
   let Helpers;
@@ -119,12 +119,29 @@ function HomePage() {
         <HomeLogoAlternate />
         <SearchBarAlternate />
       </div>
+      <div className='homepage-about-what-container'>
+        <h1>What is help?</h1>
+        <p>Help was developed during the 2020 pandemic to help people 
+          who cannot complete labor intensive tasks or go out into public
+          for fear of exposure find other in the community to help them out.
+        </p>
+      </div>
+      <div className='homepage-about-how-container'>
+        <h1>How it works:</h1>
+        <p>You can sign up as a helper(someone who wants to help out) or a 
+          helpee(someone who needs help).  Fill out a basic form including
+          your location to find help in your area.  You can add tasks to your
+          task-list which will be selected by helpers.  Both of you will see
+          when the task is completed and can leave a testimony or give helping-hands
+          for a job well done!
+        </p>
+      </div>
       <div className='homepage-users-container__local'>
         <div className='users-container__header__local'>Help in Your Area</div>
-        <div className='users-container__body__local'> {Helpees}
+        <div className='users-container__body__local'> {sessionUser ? Helpees : null}
         </div>
         <div className='users-container__header__local'>Helpers in Your Area</div>
-        <div className='users-container__body__local__2'> {Helpers}
+        <div className='users-container__body__local__2'> {sessionUser ? Helpers : null}
         </div>
         <footer>
           <div className='github-about-container'>

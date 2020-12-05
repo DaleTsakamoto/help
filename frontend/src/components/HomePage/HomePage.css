@@ -1,3 +1,16 @@
+.homepage-about-what-container{
+  display:flex;
+  flex-direction: column;
+  margin: 10px;
+  width: 1000px;
+  height: 450px;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+.homepage-about-what-container > h1{
+  font-size: 28px;
+}
+
 .navlinks{
   text-decoration: none;
 }
