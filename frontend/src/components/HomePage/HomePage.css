@@ -8,7 +8,48 @@
 }
 
 .homepage-about-what-container > h1{
+  width: 500px;
+  text-align: center;
   font-size: 28px;
+  margin-top: 5px;
+  padding: 0 15px;
+}
+
+.homepage-about-what-container > p{
+  width: 500px;
+  font-size: 14px;
+  margin-top: 15px;
+  padding: 0 10px;
+  line-height: 1.6;
+}
+
+.homepage-about-how-container{
+  display:flex;
+  flex-direction: column;
+  align-items: flex-end;
+  margin: 10px 0;
+  padding: 15px;
+  width: 100%;
+  height: 450px;
+  background-color: teal;
+  color: white;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+.homepage-about-how-container > h1{
+  width: 500px;
+  text-align: center;
+  font-size: 28px;
+  margin-top: 5px;
+  padding: 0 15px;
+}
+
+.homepage-about-how-container > p{
+  width: 500px;
+  font-size: 14px;
+  margin-top: 15px;
+  padding: 0 10px;
+  line-height: 1.6;
 }
 
 .navlinks{
