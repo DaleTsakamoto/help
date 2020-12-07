@@ -120,21 +120,45 @@ function HomePage() {
         <SearchBarAlternate />
       </div>
       <div className='homepage-about-what-container'>
-        <h1>What is help?</h1>
-        <p>Help was developed during the 2020 pandemic to help people 
-          who cannot complete labor intensive tasks or go out into public
-          for fear of exposure find other in the community to help them out.
-        </p>
+        <div className='homepage-about-what-text'>
+          <h1>What is help?</h1>
+          <p>Help was developed during the 2020 pandemic to help people
+          connect with their community and to provide assistance to our 
+          neighbors in need.  Many elderly and/or disabled people struggle
+          every day to accomplish the simple tasks such as driving to the grocery
+          store or taking out the trash that we take for granted.  Help let's us
+          bring legs to those who cannot walk and comfort and safety for those
+          who are immunocompromised.
+          </p>
+          <p>
+            Help is what brings it all together.  With interactive features such as 
+            a task list for helpees(someone requesting help) and helpers(someone 
+            willing to help), interactive maps to help you find someone in your area
+            to be helped or to help out, and a way to leave testimony on someone's behalf,
+            help is working to recreate community ties and relationships in even the most
+            difficult times.
+          </p>
+        </div>
+        <div id='homepage-about-what__images__container'>
+          <img src="./images/help-images2.jpg" />
+          <img src="./images/help-images3.jpg" />
+          <img src="./images/help-images4.jpg" />
+          <img src="./images/help-images5.jpg" />
+          <img src="./images/help-images6.jpg" />
+          <img src="./images/help-images7.jpg" />
+        </div>
       </div>
       <div className='homepage-about-how-container'>
-        <h1>How it works:</h1>
-        <p>You can sign up as a helper(someone who wants to help out) or a 
-          helpee(someone who needs help).  Fill out a basic form including
-          your location to find help in your area.  You can add tasks to your
-          task-list which will be selected by helpers.  Both of you will see
-          when the task is completed and can leave a testimony or give helping-hands
-          for a job well done!
-        </p>
+        <div className='homepage-about-how-text'>
+          <h1>How it works:</h1>
+          <p>You can sign up as a helper(someone who wants to help out) or a 
+            helpee(someone who needs help).  Fill out a basic form including
+            your location to find help in your area.  You can add tasks to your
+            task-list which will be selected by helpers.  Both of you will see
+            when the task is completed and can leave a testimony or give helping-hands
+            for a job well done!
+          </p>
+        </div>
       </div>
       <div className='homepage-users-container__local'>
         <div className='users-container__header__local'>Help in Your Area</div>
