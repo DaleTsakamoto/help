@@ -70,13 +70,17 @@ a {
 
 .task-container__list__incomplete,
 .task-container__list__completed{
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: center;
-  padding-top: 15px;
+  display: grid;
+  grid-template-columns: 20px 310px 60px;
+  padding-top: 12px;
   padding-right: 10px;
-  padding-left: 10px;
+  padding-left: 15px;
+}
+
+.task-container__list__completed__link{
+  text-decoration: none;
+  color: teal;
+  text-align: right;
 }
 
 .tasks__helping-hands-icon{

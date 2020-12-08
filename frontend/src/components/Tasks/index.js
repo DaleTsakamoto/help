@@ -13,6 +13,7 @@ const Tasks = () => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [taskDetails, setTaskDetails] = useState('')
   const [currentHelpType, setCurrentHelpType] = useState()
+  const [taskChange, setTaskChange] = useState('')
   const [taskId, setTaskId] = useState()
   const [choreType, setChoreType] = useState('House Chores')
   const { id, helpType } = user;
@@ -25,6 +26,7 @@ const Tasks = () => {
     const ele = document.querySelector('.show');
     ele.classList.remove('show')
     e.target.parentElement.classList.add('show')
+    setTaskChange(e.target)
   }
 
   const handleSubmit = (e) => {
@@ -55,18 +57,26 @@ const Tasks = () => {
           document.querySelector('.task-list__checkbox').checked = false;
       }
     })
-  });
+  }, [taskId, taskDetails, isLoaded, taskChange]);
 
   let complete;
   let incomplete;
   if (isLoaded) {
     complete = Object.values(currentTasks).map((task, idx) => {
-        if (task.completed) {
+        if (task.completed && !currentHelpType) {
           return(
             <div className='task-container__list__completed' key={idx}>
               <i className="far fa-check-square completed-icon"></i>
-              <p>{task.category} - {task.details}</p><br />
+              <p>{task.category} - {task.details}</p>
             </div>
+          )
+        } else {
+          return (
+            <div className='task-container__list__completed' key={idx}>
+              <i className="far fa-check-square completed-icon"></i>
+              <p>{task.category} - {task.details}</p>
+              <a className='task-container__list__completed__link'href={`/users/${task.helpeeId}`}>helpee</a>
+          </div>
           )
         }
       })
@@ -117,7 +127,7 @@ const Tasks = () => {
           <div className='tab-content'>
           {complete}
           </div>
-          </Route>
+        </Route>
         <Route path={`/users/${urlId}/tasks/incomplete`}>
             <div className='tab-content'>
               {id === urlId && !helpType ?
