@@ -17,8 +17,8 @@ const countHelpingHands = (hands) => {
 }
 
 export const handAdd = (helpingHand) => async (dispatch) => {
-  const { urlId, id } = helpingHand;
-  const likerId = urlId
+  const { urlIdAdd, id } = helpingHand;
+  const likerId = urlIdAdd
   const res = await fetch(`/api/helpingHands`, {
     method: 'POST',
     body: JSON.stringify({

@@ -47,12 +47,6 @@ module.exports = {
       },
       {
         likerId: 2,
-        userId: 1,
-        createdAt: new Date(),
-        updatedAt: new Date(),
-      },
-      {
-        likerId: 2,
         userId: 3,
         createdAt: new Date(),
         updatedAt: new Date(),
