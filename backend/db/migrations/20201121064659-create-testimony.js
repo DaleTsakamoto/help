@@ -12,12 +12,12 @@ module.exports = {
         type: Sequelize.STRING(50),
         allowNull: false
       },
-      helperId: {
+      userId: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {model: 'Users'}
       },
-      helpeeId: {
+      commenterId: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {model: 'Users'}

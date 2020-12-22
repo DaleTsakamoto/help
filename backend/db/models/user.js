@@ -51,8 +51,8 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       User.belongsToMany(models.User, {through: "Tasks", as: "helperTask", foreignKey: "helpeeId", otherKey: "helperId"});
       User.belongsToMany(models.User, {through: "Tasks", as: "helpeeTask", foreignKey: "helperId", otherKey: "helpeeId" });
-      User.belongsToMany(models.User, {through: "Testimonies", as: "helperTestimony", foreignKey: "helpeeId", otherKey: "helperId"});
-      User.belongsToMany(models.User, {through: "Testimonies", as: "helpeeTestimony", foreignKey: "helperId", otherKey: "helpeeId" });
+      User.belongsToMany(models.User, {through: "Testimonies", as: "userTestimony", foreignKey: "commenterId", otherKey: "userId"});
+      User.belongsToMany(models.User, {through: "Testimonies", as: "commenterTestimony", foreignKey: "userId", otherKey: "commenterId" });
       User.belongsToMany(models.User, {through: "helpingHands", as: "likerHands", foreignKey: "userId", otherKey: "likerId"});
       User.belongsToMany(models.User, {through: "helpingHands", as: "userHands", foreignKey: "likerId", otherKey: "userId"});
     }
