@@ -9,10 +9,10 @@ const addHelpingHand = () => {
   }
 }
 
-const countHelpingHands = (hands) => {
+const countHelpingHands = (allHands) => {
   return {
     type: COUNT_HELPING_HANDS,
-    hands
+    allHands
   }
 }
 
