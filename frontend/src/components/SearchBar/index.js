@@ -29,10 +29,7 @@ function SearchBar() {
 
   const goRedirect = () => {
     if (isLoaded) {
-      return <Redirect
-      to={{
-      pathname: '/results'
-    }} />
+      return <Redirect exact to='/results'/>
     }
   }
 

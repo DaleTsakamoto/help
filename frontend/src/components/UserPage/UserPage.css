@@ -91,6 +91,7 @@
   width: 15px;
   color: whitesmoke;
   background-color: teal;
+  cursor: pointer;
 }
 
 .stats__testimonies-icon{

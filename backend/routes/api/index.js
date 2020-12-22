@@ -5,11 +5,13 @@ const sessionRouter = require('./session.js');
 const usersRouter = require('./users.js');
 const searchRouter = require('./searchbar')
 const peopleRouter = require('./people')
+const helpingHandsRouter = require('./helpingHands')
 
 router.use('/session', sessionRouter);
 router.use('/users', usersRouter);
 router.use('/search', searchRouter);
 router.use('/people', peopleRouter);
+router.use('/helpingHands', helpingHandsRouter);
 
 
 module.exports = router;

@@ -30,13 +30,13 @@ function App() {
           <Navigation isLoaded={isLoaded}/>
           <SignupFormPage />
         </Route>
-        <Route path="/users/:id">
-          <Navigation isLoaded={isLoaded}/>
-          <UserPage />
-        </Route>
         <Route path="/results">
           <Navigation isLoaded={isLoaded}/>
           <Results />
+        </Route>
+        <Route path="/users/:id">
+          <Navigation isLoaded={isLoaded}/>
+          <UserPage />
         </Route>
         <Route path="/">
           <NavigationAlternate isLoaded={isLoaded}/>

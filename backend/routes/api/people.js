@@ -1,7 +1,5 @@
 const express = require('express');
 const asyncHandler = require('express-async-handler');
-const { check } = require('express-validator');
-const NodeGeocoder = require('node-geocoder');
 
 const { User, Sequelize } = require('../../db/models');
 const { distance, quickSort } = require ('../utils/mathEquations')

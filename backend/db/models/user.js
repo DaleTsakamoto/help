@@ -53,8 +53,8 @@ module.exports = (sequelize, DataTypes) => {
       User.belongsToMany(models.User, {through: "Tasks", as: "helpeeTask", foreignKey: "helperId", otherKey: "helpeeId" });
       User.belongsToMany(models.User, {through: "Testimonies", as: "helperTestimony", foreignKey: "helpeeId", otherKey: "helperId"});
       User.belongsToMany(models.User, {through: "Testimonies", as: "helpeeTestimony", foreignKey: "helperId", otherKey: "helpeeId" });
-      User.belongsToMany(models.User, {through: "helpingHands", as: "helperHand", foreignKey: "helpeeId", otherKey: "helperId"});
-      User.belongsToMany(models.User, {through: "helpingHands", as: "helpeeHand", foreignKey: "helperId", otherKey: "helpeeId"});
+      User.belongsToMany(models.User, {through: "helpingHands", as: "likerHands", foreignKey: "userId", otherKey: "likerId"});
+      User.belongsToMany(models.User, {through: "helpingHands", as: "userHands", foreignKey: "likerId", otherKey: "userId"});
     }
   };
   User.init(

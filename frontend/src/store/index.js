@@ -4,12 +4,14 @@ import sessionReducer from './session';
 import tasksReducer from './tasks'
 import usersReducer from './users'
 import localsReducer from './search'
+import helpingHandsReducer from './helpingHands'
 
 const rootReducer = combineReducers({
   session: sessionReducer,
   tasks: tasksReducer,
   users: usersReducer,
-  locals: localsReducer
+  locals: localsReducer,
+  helpingHands: helpingHandsReducer
 })
 
 let enhancer;

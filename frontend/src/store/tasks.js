@@ -76,7 +76,7 @@ const tasksReducer = (state = initialState, action) => {
       return newState;
     case ADD_TASK:
       newState = Object.assign({}, state)
-      newState.task = action.task;
+      // newState.task = action.task;
       return newState;
     case UPDATE_TASK:
       newState = Object.assign({}, state)

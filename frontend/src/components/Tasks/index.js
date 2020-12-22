@@ -8,7 +8,8 @@ import * as TaskActions from '../../store/tasks'
 
 const Tasks = () => {
   const dispatch = useDispatch()
-  const user = useSelector(state => state.session.user)
+  const currentUser = useSelector(state => state.session.user)
+  const user = useSelector(state => state.users.person)
   const currentTasks = useSelector(state => state.tasks.tasks)
   const [isLoaded, setIsLoaded] = useState(false);
   const [taskDetails, setTaskDetails] = useState('')
@@ -37,7 +38,7 @@ const Tasks = () => {
 
   const alterTask = (e) => {
     let taskId = e.target.id
-    let userId = user.id;
+    let userId = currentUser.id;
     let name;
     if (e.target.name) {
       name = e.target.name
@@ -63,43 +64,43 @@ const Tasks = () => {
   let incomplete;
   if (isLoaded) {
     complete = Object.values(currentTasks).map((task, idx) => {
-        if (task.completed && !currentHelpType) {
+        if ((task.completed && user.helpType) || currentUser.id === user.id && currentUser.helpType){
           return(
             <div className='task-container__list__completed' key={idx}>
               <i className="far fa-check-square completed-icon"></i>
               <p>{task.category} - {task.details}</p>
+              <a className='task-container__list__completed__link'href={`/users/${task.helpeeId}`}>helpee</a>
             </div>
           )
-        } else {
+        } else if (task.completed){
           return (
             <div className='task-container__list__completed' key={idx}>
               <i className="far fa-check-square completed-icon"></i>
               <p>{task.category} - {task.details}</p>
-              <a className='task-container__list__completed__link'href={`/users/${task.helpeeId}`}>helpee</a>
           </div>
           )
         }
       })
       incomplete = Object.values(currentTasks).map((task, idx) => {
-        if (id === urlId && !currentHelpType && !task.completed) {
+        if ((!task.completed && id !== currentUser.id && currentHelpType) || (!currentUser.helpType)){
           return (
             <div className='task-container__list__incomplete' key={idx}>
               <div className="tasks__checkbox" key={idx}>{task.category} - {task.details}</div><br />
             </div>
           )
-        } else if (!task.completed && currentHelpType) {
-          return(
+        } else if (!task.completed && !user.helpType && currentUser.helpType) {
+          return (
             <div className='task-container__list__incomplete' key={idx}>
-              <input className='task-list__checkbox' type="checkbox" id={task.id} name='checkbox' onClick={alterTask} />
-              <label className="tasks__checkbox" key={task.id} htmlFor={task.id}>{task.category} - {task.details}</label><br />
+              {!task.helperId ? 
+              <i id={task.id} name='iWillHelp' onClick={alterTask} className="fas fa-hands-helping tasks__helping-hands-icon"></i> : null  }
+              <div className="tasks__checkbox">{task.category} - {task.details}</div><br />
             </div>
           )
         } else if (!task.completed){
           return(
             <div className='task-container__list__incomplete' key={idx}>
-              {!task.helperId ? 
-              <i id={task.id} name='iWillHelp' onClick={alterTask} className="fas fa-hands-helping tasks__helping-hands-icon"></i> : null  }
-              <div className="tasks__checkbox">{task.category} - {task.details}</div><br />
+              <input className='task-list__checkbox' type="checkbox" id={task.id} name='checkbox' onClick={alterTask} />
+              <label className="tasks__checkbox" key={task.id} htmlFor={task.id}>{task.category} - {task.details}</label><br />
             </div>
           )
         }
@@ -130,7 +131,7 @@ const Tasks = () => {
         </Route>
         <Route path={`/users/${urlId}/tasks/incomplete`}>
             <div className='tab-content'>
-              {id === urlId && !helpType ?
+              {currentUser.id === user.id && !currentUser.helpType ?
                 <div className='tasks__addTask'>
                   <form onSubmit={handleSubmit}>
                   <label className='tasks__type__choice' htmlFor="type">Type:</label>

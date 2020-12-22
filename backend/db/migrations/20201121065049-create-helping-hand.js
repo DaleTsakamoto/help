@@ -8,16 +8,12 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      hands: {
-        type: Sequelize.INTEGER,
-        allowNull: false
-      },
-      helperId: {
+      likerId: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {model: 'Users'}
       },
-      helpeeId: {
+      userId: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {model: 'Users'}

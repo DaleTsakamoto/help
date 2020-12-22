@@ -8,27 +8,46 @@ import Testimony from './Testimony'
 import Overview from './userPageOverview'
 import './UserPage.css'
 import * as usersAction from '../../store/users'
+import * as helpingAction from '../../store/helpingHands'
 
 const UserPage = () => {
   const sessionUser = useSelector(state => state.session.user)
   const person = useSelector(state => state.users.person)
   const [apiKey, setApiKey] = useState('')
+  const [hands, setHands] = useState('')
+  const [handUpdate, setHandUpdate] = useState(false)
   const dispatch = useDispatch()
   const [isLoaded, setIsLoaded] = useState(false);
+  const [helpingLoaded, setHelpingLoaded] = useState(false);
 
+  const { id } = sessionUser
   const urlId = window.location.pathname.split('/')[2]
 
   useEffect(() => {
     dispatch(usersAction.searchPerson(urlId))
       .then((res) => setApiKey(res.data.apiKey))
       .then(() => setIsLoaded(true))
-  },[dispatch])
+  }, [dispatch])
+  
+  useEffect(() => {
+    dispatch(helpingAction.searchHands(urlId))
+      .then((res) => setHands(res.data.allHands))
+      .then(() => setHelpingLoaded(true))
+  },[dispatch, handUpdate])
 
   const addClass = (e) => {
     if (!e.target.id) {
       e.target.parentElement.classList.add("user-holder__body__1__selected")
     } else {
       e.target.classList.add("user-holder__body__1__selected")
+    }
+  }
+
+  const addHands = (e) => {
+    if (sessionUser.id !== urlId) {
+      setHandUpdate(false)
+      dispatch(helpingAction.handAdd({ urlId, id }))
+      .then(() => setHandUpdate(true))
     }
   }
 
@@ -40,6 +59,17 @@ const UserPage = () => {
       value.classList.remove("user-holder__body__1__selected")
     }
     column2 = addClass(e);
+  }
+
+  let helps;
+  if (helpingLoaded) {
+    if (hands == 0) {
+      helps = null
+    } else if (hands == 1) {
+      helps = "1 Helping Hand"
+    } else {
+      helps = `${hands} Helping Hands`
+    }
   }
 
   return isLoaded && sessionUser &&(
@@ -61,8 +91,8 @@ const UserPage = () => {
           <h2>{person.city}, {person.state}</h2>
           <div className="stats">
             <div className="stats__helping-hands">
-              <i className="fas fa-hands-helping stats__helping-hands-icon"></i>
-              2 Helping Hands
+              <i onClick={ addHands }className="fas fa-hands-helping stats__helping-hands-icon"></i>
+              {helps}
             </div>
             <div className="stats__testimonies">
             <i className="far fa-comment-alt stats__testimonies-icon" />
