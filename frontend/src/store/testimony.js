@@ -68,7 +68,9 @@ export const testimonyAdd = (test) => async (dispatch) => {
 }
 
 export const testimonySearch = (id) => async (dispatch) => {
-  const res = await fetch(`/api/testimony/${id}`, {
+  const {urlId} = id
+  console.log("IS THIS THE CORRECTID????????", urlId)
+  const res = await fetch(`/api/testimony/${urlId}`, {
     method: 'GET',
   })
   dispatch(findTestimony(res.data.testimony));

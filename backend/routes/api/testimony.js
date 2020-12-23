@@ -3,7 +3,7 @@ const asyncHandler = require('express-async-handler');
 const { validationResult } = require('express-validator');
 
 const { requireAuth } = require('../../utils/auth');
-const { Testimony } = require('../../db/models');
+const { Testimony, User } = require('../../db/models');
 
 const router = express.Router();
 
@@ -13,10 +13,10 @@ router.get(
   '/:id',
   asyncHandler(async (req, res) => {
     const searchId = req.params.id
-    let testimony = await Task.findAll({
+    let testimony = await Testimony.findAll({
       where: {
         'userId': searchId
-      }
+      },
     })
     return res.json({
       testimony

@@ -4,7 +4,7 @@ import {NavLink, Switch, Route} from 'react-router-dom'
 
 import Location from './Location'
 import Tasks from '../Tasks'
-import Testimony from './Testimony'
+import Testimony from '../Testimony'
 import Overview from './userPageOverview'
 import './UserPage.css'
 import * as usersAction from '../../store/users'
@@ -27,13 +27,13 @@ const UserPage = () => {
     dispatch(usersAction.searchPerson(urlId))
       .then((res) => setApiKey(res.data.apiKey))
       .then(() => setIsLoaded(true))
-  }, [dispatch])
+  }, [dispatch, urlId])
   
   useEffect(() => {
     dispatch(helpingAction.searchHands(urlId))
       .then((res) => setHands(res.data.allHands))
       .then(() => setHelpingLoaded(true))
-  },[dispatch, handUpdate])
+  },[dispatch, handUpdate, urlId])
 
   const addClass = (e) => {
     if (!e.target.id) {
@@ -79,7 +79,7 @@ const UserPage = () => {
         <div className='user-holder__header__1'>
           {person.avatar ? 
             <div className="avatar">
-              <img className='avatar-image' src={person.avatar}/>
+              <img className='avatar-image' src={person.avatar} alt='Profile'/>
             </div>
            :
           <div className="avatar">

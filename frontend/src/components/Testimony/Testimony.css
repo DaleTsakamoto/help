@@ -1,0 +1,40 @@
+.testimony-container{
+  width: 420px;
+  height: 100vh;
+  margin-left: 10px;
+  display: flex;
+  flex-direction: column;
+  padding: 15px;
+  border-top: .5px solid whitesmoke;
+  border-left: .5px solid whitesmoke;
+  border-right: .5px solid whitesmoke;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  background-color: whitesmoke;
+  font-family: 'Handlee', cursive;
+}
+
+.testimony-header__name{
+  color: teal;
+  text-align: center;
+  font-size: 24px;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+.testimony-comments-holder{
+  display: flex;
+  flex-direction: column;
+}
+
+.testimony-individual-container{
+  width: 400px;
+  min-height: 100px;
+  margin-bottom: 10px;
+  padding: 5px;
+  border-top: .5px solid #e6f2f2;
+  border-left: .5px solid #e6f2f2;
+  border-right: .5px solid #e6f2f2;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
