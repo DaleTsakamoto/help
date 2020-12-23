@@ -24,8 +24,8 @@ router.post('/', requireAuth, asyncHandler(async (req, res) => {
     const hand = HelpingHand.build({
       likerId: likeId,
       userId: userId,
+    
     });
-
     const validateErrors = validationResult(req);
     if (validateErrors.isEmpty()) {
       await hand.save();
@@ -36,6 +36,17 @@ router.post('/', requireAuth, asyncHandler(async (req, res) => {
         errors
       });
     }
+  } else {
+    let removeHand = await HelpingHand.destroy({
+      where: {
+        "likerId": likeId,
+        "userId": userId
+      }
+    })
+    console.log("THIS IS THE REMOVED HAND!!!!!!", removeHand)
+    return res.json({
+      removeHand
+    })
   }
 }));
 

@@ -33,20 +33,11 @@ router.post('/', requireAuth, asyncHandler(async (req, res) => {
       commenterId: commenterId,
       comment: comment,
     });
-
-    const validateErrors = validationResult(req);
-    if (validateErrors.isEmpty()) {
-      await testimony.save();
-      res.status(204)
-      return res.json({
-        testimony
-      });
-    } else {
-      const errors = validateErrors.array().map(error => error.msg);
-      return res.json({
-        errors
-      });
-    }
+    console.log("THIS IS THE TESTIMONY", testimony)
+    await testimony.save();
+    return res.json({
+      testimony
+    });
 }));
 
 /****************** FIND TESTIMONY **************************/
@@ -70,7 +61,7 @@ router.post('/', requireAuth, asyncHandler(async (req, res) => {
   router.delete('/:id', requireAuth, asyncHandler(async (req, res) => {
     const primaryKey = req.params.id
       await Testimony.destroy({
-        where: { id: primaryKey }
+        where: { "id": primaryKey }
       })
       return res.json({
         message: "sucessfully deleted"

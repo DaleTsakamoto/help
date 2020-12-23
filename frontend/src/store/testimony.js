@@ -34,7 +34,7 @@ const deleteTestimony = () => {
 
 export const testimonyUpdate = (test) => async (dispatch) => {
   const { primaryKey, comment } = test
-  const res = await fetch(`/api/testimony`, {
+  const res = await fetch(`/api/testimony/`, {
     method: 'PATCH',
     body: JSON.stringify({
       primaryKey,
@@ -55,7 +55,7 @@ export const testimonyDelete = (id) => async (dispatch) => {
 
 export const testimonyAdd = (test) => async (dispatch) => {
   const { userId, commenterId, comment } = test;
-  const res = await fetch(`/api/testimony`, {
+  const res = await fetch(`/api/testimony/`, {
     method: 'POST',
     body: JSON.stringify({
       userId,
@@ -63,14 +63,15 @@ export const testimonyAdd = (test) => async (dispatch) => {
       comment
     }),
   })
+  console.log("THIS IS RESSS!!!!!!!!!!!!!!!", res.data)
   dispatch(addTestimony(res.data.testimony));
   return res
 }
 
 export const testimonySearch = (id) => async (dispatch) => {
-  const {urlId} = id
-  console.log("IS THIS THE CORRECTID????????", urlId)
-  const res = await fetch(`/api/testimony/${urlId}`, {
+  const {userId} = id
+  console.log("IS THIS THE CORRECTID????????", userId)
+  const res = await fetch(`/api/testimony/${userId}`, {
     method: 'GET',
   })
   dispatch(findTestimony(res.data.testimony));
