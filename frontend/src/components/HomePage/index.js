@@ -114,7 +114,7 @@ function HomePage() {
   }
 
   return (
-    <>
+    <div className='homepage-main'>
       <div className='homepage-main-image'>
         <HomeLogoAlternate />
         <SearchBarAlternate />
@@ -148,16 +148,18 @@ function HomePage() {
           <img src="./images/help-images7.jpg" />
         </div>
       </div>
-      <div className='homepage-about-how-container'>
-        <div className='homepage-about-how-text'>
-          <h1>How it works:</h1>
-          <p>You can sign up as a helper(someone who wants to help out) or a 
-            helpee(someone who needs help).  Fill out a basic form including
-            your location to find help in your area.  You can add tasks to your
-            task-list which will be selected by helpers.  Both of you will see
-            when the task is completed and can leave a testimony or give helping-hands
-            for a job well done!
-          </p>
+      <div className='homepage-about-how-holder'>
+        <div className='homepage-about-how-container'>
+          <div className='homepage-about-how-text'>
+            <h1>How it works:</h1>
+            <p>You can sign up as a helper(someone who wants to help out) or a 
+              helpee(someone who needs help).  Fill out a basic form including
+              your location to find help in your area.  You can add tasks to your
+              task-list which will be selected by helpers.  Both of you will see
+              when the task is completed and can leave a testimony or give helping-hands
+              for a job well done!
+            </p>
+          </div>
         </div>
       </div>
       <div className='homepage-users-container__local'>
@@ -169,14 +171,14 @@ function HomePage() {
         </div>
         <footer>
           <div className='github-about-container'>
-            <a className='navlink-to-github' href='https://github.com/DaleTsakamoto'>
+            <a className='navlink-to-github' href='https://daletsakamoto.github.io/'>
               <img className='github-image'src='/images/github-logo.png' />
               <div className='github-about-text'>Learn more about me</div>
             </a>
           </div>
         </footer>
       </div>
-    </>
+    </div>
   )
 }
 

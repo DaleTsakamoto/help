@@ -12,17 +12,12 @@ const Testimony = () => {
   const currentTestimony = useSelector(state => state.testimony.testimony)
   const [isLoaded, setIsLoaded] = useState(false);
   const [comment, setComment] = useState('')
+  const [comment2, setComment2] = useState('')
+  const [commentEdit, setCommentEdit] = useState(false)
+  const [commentFirstName, setCommentFirstName] = useState([])
+  const [currentTarget, setCurrentTarget] = useState()
   const userId = user.id;
   const commenterId = currentUser.id;
-
-
-
-  // const tabHide = (e) => {
-  //   const ele = document.querySelector('.show');
-  //   ele.classList.remove('show')
-  //   e.target.parentElement.classList.add('show')
-  //   setTaskChange(e.target)
-  // }
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -30,41 +25,80 @@ const Testimony = () => {
     .then(() => setComment(''))
     return
   };
+  
+  const handleEdit = (e) => {
+    let parent = document.getElementById('testimony-comments-holder-mama')
+    let child = e.target.parentElement.parentElement.parentElement
+    let indexNum = [...parent.children].indexOf(child)
+    setCurrentTarget(currentTestimony[indexNum].id)
+    setComment2(currentTestimony[indexNum].comment)
+    if (!commentEdit) {
+      setCommentEdit(true)
+    } else if (commentEdit && child.contains(document.querySelector('.edit-and-delete-form'))) {
+      let primaryKey = parseInt(currentTestimony[indexNum].id, 10)
+      let comment = comment2
+        dispatch(TestimonyActions.testimonyUpdate({ primaryKey, comment }))
+          .then(() => setComment2(''))
+      setCommentEdit(false)
+      return
+    }
+  }
 
-  // const alterTask = (e) => {
-  //   let taskId = e.target.id
-  //   let userId = currentUser.id;
-  //   let name;
-  //   if (e.target.name) {
-  //     name = e.target.name
-  //   } else {
-  //     name = null
-  //   }
-  //   dispatch(TaskActions.taskUpdate({ taskId, urlId, name, userId })).then(setTaskId(taskId))
-  //   return;
-  // };
+  const handleDelete = (e) => {
+    let parent = document.getElementById('testimony-comments-holder-mama')
+    let child = e.target.parentElement.parentElement.parentElement
+    let indexNum = [...parent.children].indexOf(child)
+    let id = currentTestimony[indexNum].id
+    dispatch(TestimonyActions.testimonyDelete(id))
+      .then(() => setCurrentTarget())
+    return
+  }
 
   useEffect(() => {
     dispatch(TestimonyActions.testimonySearch({
       userId
-    })).then(() => setIsLoaded(true))
+    })).then((res) => setCommentFirstName(res.data.commenters))
+      .then(() => setIsLoaded(true))
   }, [dispatch, setComment, comment]);
 
   let comments;
+  let i = -1;
   if (isLoaded) {
     comments = Object.values(currentTestimony).map((testimony, idx) => {
-      return (
-        <div className='testimony-individual-container' key={idx}>
-          <div className='testimony-individual-header'>
-            <h1>{testimony.commenterId} </h1>
-            <div>
-              <i class="fas fa-edit"></i>
-              <i class="fas fa-minus-square"></i>
+      i += 1
+      if (testimony.commenterId === currentUser.id) {
+        return (
+          <div className='testimony-individual-container' key={idx}>
+            <div className='testimony-individual-header'>
+              <a href={`/users/${testimony.commenterId}`}>{commentFirstName[i]} </a>
+              <div className='edit-and-delete'>
+                <i className="fas fa-edit edit-icon" onClick={handleEdit}></i>
+                <i className="fas fa-minus-square" onClick={handleDelete}></i>
+              </div>
             </div>
+            {commentEdit && testimony.id === currentTarget ?
+              <form className='edit-and-delete-form'>
+                <textarea className='testimony-testify-text'
+                value={comment2}
+                name= 'testify'
+                onChange={e => setComment2(e.target.value)}/>
+              </form>
+              :
+            <p className='testimony-individual-body'>{testimony.comment}</p>
+            }
           </div>
-          <p className='testimony-individual-body'>{testimony.comment}</p>
-        </div>
-      )
+        )
+      } else {
+        return (
+          <div className='testimony-individual-container' key={idx}>
+            <div className='testimony-individual-header'>
+              <a href={`/users/${testimony.commenterId}`}>{commentFirstName[i]} </a>
+              <div></div>
+            </div>
+            <p className='testimony-individual-body'>{testimony.comment}</p>
+          </div>
+        )
+      }
     })
   }
 
@@ -76,7 +110,7 @@ const Testimony = () => {
           <form onSubmit={handleSubmit}>
             <div>
               <label className='testimony-type-choice' htmlFor="testify">Testify</label>
-              <i onClick={ handleSubmit }className="fas fa-share-square"></i>
+              <i onClick={ handleSubmit } className="fas fa-share-square"></i>
             </div>
               {user.helpType ? 
                 <textarea id='textarea-submit' className='testimony-testify-text'
@@ -95,7 +129,7 @@ const Testimony = () => {
             }
           </form>
         </div> : null}
-      <div className='testimony-comments-holder'>{ comments }</div>
+      <div id = 'testimony-comments-holder-mama' className='testimony-comments-holder'>{ comments }</div>
     </div>
   )
 }

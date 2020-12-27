@@ -75,38 +75,40 @@ const UserPage = () => {
 
   return isLoaded && sessionUser &&(
     <div className="user-holder">
-      <div className="user-holder__header">
-        <div className='user-holder__header__1'>
-          {person.avatar ? 
+      <div className='user-holder__header'>
+        <div className="user-holder__header-container">
+          <div className='user-holder__header__1'>
+            {person.avatar ? 
+              <div className="avatar">
+                <img className='avatar-image' src={person.avatar} alt='Profile'/>
+              </div>
+            :
             <div className="avatar">
-              <img className='avatar-image' src={person.avatar} alt='Profile'/>
+            <i className="far fa-user avatar__temp" />
             </div>
-           :
-          <div className="avatar">
-          <i className="far fa-user avatar__temp" />
+          }
           </div>
-        }
-        </div>
-        <div className='user-holder__header__2'>
-          <h1>{person.firstName} {person.lastName.slice(0, 1).toUpperCase()}.</h1>
-          <h2>{person.city}, {person.state}</h2>
-          <div className="stats">
-            <div className="stats__helping-hands">
-              <i onClick={ addHands }className="fas fa-hands-helping stats__helping-hands-icon"></i>
-              {helps}
-            </div>
-            <div className="stats__testimonies">
-            <i className="far fa-comment-alt stats__testimonies-icon" />
-              3 Testimonies
+          <div className='user-holder__header__2'>
+            <h1>{person.firstName} {person.lastName.slice(0, 1).toUpperCase()}.</h1>
+            <h2>{person.city}, {person.state}</h2>
+            <div className="stats">
+              <div className="stats__helping-hands">
+                <i onClick={ addHands }className="fas fa-hands-helping stats__helping-hands-icon"></i>
+                {helps}
+              </div>
+              <div className="stats__testimonies">
+              <i className="far fa-comment-alt stats__testimonies-icon" />
+                3 Testimonies
+              </div>
             </div>
           </div>
-        </div>
-        <div className='user-holder__header__3'>
-          <div className='user-holder__header__3__updates'>
-            <div>
-            <i className="fas fa-camera user-holder__header__camera"/>Add Profile Photos</div>
-            <div>
-              <i className="far fa-address-card user-holder__header__update" />Update Your Profile</div>
+          <div className='user-holder__header__3'>
+            <div className='user-holder__header__3__updates'>
+              <div>
+              <i className="fas fa-camera user-holder__header__camera"/>Add Profile Photos</div>
+              <div>
+                <i className="far fa-address-card user-holder__header__update" />Update Your Profile</div>
+            </div>
           </div>
         </div>
       </div>

@@ -17,7 +17,7 @@ const Tasks = () => {
   const [taskChange, setTaskChange] = useState('')
   const [taskId, setTaskId] = useState()
   const [choreType, setChoreType] = useState('House Chores')
-  const { id, helpType } = user;
+  const { id } = user;
 
   //USE TO GET CORRECT USERPAGE/INFORMATION
   let urlId = parseInt(window.location.pathname.split('/')[2])

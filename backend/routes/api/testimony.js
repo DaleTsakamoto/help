@@ -17,9 +17,22 @@ router.get(
       where: {
         'userId': searchId
       },
+      order: [
+        ['createdAt', 'ASC'],
+    ],
     })
+
+    let commenters = [];
+    for (let i = 0; i < testimony.length; i++) {
+      console.log(parseInt(testimony[i].commenterId))
+      let person = await User.findByPk(testimony[i].commenterId)
+      commenters.push(person.firstName)
+    }
+
+    console.log(commenters)
     return res.json({
-      testimony
+      testimony,
+      commenters
     });
   }),
 );
@@ -45,14 +58,19 @@ router.post('/', requireAuth, asyncHandler(async (req, res) => {
 /****************** UPDATE TESTIMONY **************************/
   
   router.patch('/', requireAuth, asyncHandler(async (req, res) => {
-    const { primaryKey, comment} = req.body;
-      let testimony = await Task.update({ comment: comment }, {
+    const { primaryKey, comment } = req.body;
+    console.log("HERE IS THE EDIT INFO", primaryKey, comment)
+      let succeededUpdate = await Testimony.update({ comment: comment }, {
         where: {
           id: primaryKey
         }
       });
-      return res.json({
-        testimony
+    let upTestimony = await Testimony.findByPk(primaryKey)
+    const id = upTestimony.id
+    const upComment = upTestimony.comment
+    return res.json({
+      id,
+      upComment
       });
   }));
 
@@ -63,8 +81,9 @@ router.post('/', requireAuth, asyncHandler(async (req, res) => {
       await Testimony.destroy({
         where: { "id": primaryKey }
       })
+      console.log(primaryKey)
       return res.json({
-        message: "sucessfully deleted"
+        primaryKey
       });
   }));
 

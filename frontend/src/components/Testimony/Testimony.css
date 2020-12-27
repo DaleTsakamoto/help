@@ -60,14 +60,15 @@
   cursor: pointer;
 }
 
-.testimony-form > form > textarea{
+textarea{
   height: 75px;
-  resize: none;
+  width: 396px;
+  resize: none; 
   background-color: whitesmoke;
   border: none;
 }
 
-.testimony-form > form > textarea::placeholder{
+textarea::placeholder{
   padding-left: 2px;
   padding-top: 2px;
   font-family: 'Handlee', cursive;
@@ -98,9 +99,15 @@
   color: teal;
 }
 
+.testimony-individual-header > a{
+  text-decoration: none;
+  color: teal;
+}
+
 .testimony-individual-header > div > i{
   padding: 0 4px;
   font-size: 14px;
+  cursor: pointer;
 }
 
 .testimony-individual-body{

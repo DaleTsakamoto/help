@@ -12,23 +12,25 @@ const findTestimony = (testimony) => {
   }
 }
 
-const addTestimony = (testimony) => {
+const addTestimony = (testify) => {
   return {
     type: ADD_TESTIMONY,
-    testimony,
+    testify,
   }
 }
 
-const updateTestimony = (testimony) => {
+const updateTestimony = (id, upComment) => {
   return {
     type: UPDATE_TESTIMONY,
-    testimony,
+    id,
+    'comment': upComment
   }
 }
 
-const deleteTestimony = () => {
+const deleteTestimony = (primaryKey) => {
   return {
     type: DELETE_TESTIMONY,
+    primaryKey
   }
 }
 
@@ -41,7 +43,7 @@ export const testimonyUpdate = (test) => async (dispatch) => {
       comment
     }),
   })
-  dispatch(updateTestimony(res.data.testimony));
+  dispatch(updateTestimony(res.data.id, res.data.upComment));
   return res
 }
 
@@ -49,7 +51,7 @@ export const testimonyDelete = (id) => async (dispatch) => {
   const res = await fetch(`/api/testimony/${id}`, {
     method: 'DELETE',
   })
-  dispatch(deleteTestimony(res.data.testimony));
+  dispatch(deleteTestimony(res.data.primaryKey));
   return res
 }
 
@@ -63,7 +65,6 @@ export const testimonyAdd = (test) => async (dispatch) => {
       comment
     }),
   })
-  console.log("THIS IS RESSS!!!!!!!!!!!!!!!", res.data)
   dispatch(addTestimony(res.data.testimony));
   return res
 }
@@ -89,14 +90,25 @@ const testimonyReducer = (state = initialState, action) => {
       return newState;
     case ADD_TESTIMONY:
       newState = Object.assign({}, state)
-      // newState.task = action.task;
+      newState.testimony = action.testify;
       return newState;
     case UPDATE_TESTIMONY:
       newState = Object.assign({}, state)
-      newState.testimony = action.testimony;
+      for (let i = 0; i < newState.testimony.length; i++){
+        let test = newState.testimony[i]
+        if (test.id === action.id) {
+          console.log('hello')
+          test.comment = action.comment
+        };
+      }
       return newState;
     case DELETE_TESTIMONY:
       newState = Object.assign({}, state)
+      console.log(action.primaryKey)
+      const testimony = newState.testimony.filter(person => person.id !== parseInt(action.primaryKey));
+      console.log(testimony)
+      newState.testimony = testimony
+      return newState
     default:
       return state;
   }

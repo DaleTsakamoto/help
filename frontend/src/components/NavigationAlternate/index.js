@@ -26,8 +26,12 @@ const NavigationAlternate = ({isLoaded}) => {
   }
 
   return (
-      <div className="alt-header">
-        <div className="alt-header-testimony">Write a Testimony</div>
+    <div className="alt-header">
+      {userSession ? 
+      <a href={`/users/${userSession.id}/testimony/`} className="alt-header-testimony">Read my Testimony</a>
+      :
+      <a></a>
+    }
         <div className="alt-profile-drop"> {isLoaded && headerNavigation} </div>
       </div>
   );
