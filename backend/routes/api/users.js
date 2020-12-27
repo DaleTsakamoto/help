@@ -10,7 +10,7 @@ const tasksRouter = require('./tasks')
 
 const router = express.Router();
 
-router.use('/:id/tasks', tasksRouter);
+router.use('/', tasksRouter);
 
 
 /****************** SIGNUP ERRORS MIDDLEWARE **************************/

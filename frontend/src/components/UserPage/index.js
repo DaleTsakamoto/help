@@ -20,7 +20,6 @@ const UserPage = () => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [helpingLoaded, setHelpingLoaded] = useState(false);
 
-  const { id } = sessionUser
   let urlId = window.location.pathname.split('/')[2]
 
   useEffect(() => {
@@ -45,6 +44,7 @@ const UserPage = () => {
 
   const addHands = (e) => {
     const urlIdAdd = parseInt(urlId, 10)
+    const { id } = sessionUser
     if (id !== urlIdAdd) {
       setHandUpdate(false)
       dispatch(helpingAction.handAdd({ urlIdAdd, id }))

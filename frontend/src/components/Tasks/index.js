@@ -32,7 +32,8 @@ const Tasks = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(TaskActions.taskAdd({ choreType, taskDetails, id })).then(setTaskDetails(''))
+    dispatch(TaskActions.taskAdd({ choreType, taskDetails, id }))
+      .then(setTaskDetails(''))
     return
   };
 
@@ -45,7 +46,13 @@ const Tasks = () => {
     } else {
       name = null
     }
-    dispatch(TaskActions.taskUpdate({ taskId, urlId, name, userId })).then(setTaskId(taskId))
+    dispatch(TaskActions.taskUpdate({ taskId, urlId, name, userId }))
+      .then(setTaskId(taskId))
+      .then(() => {
+        if (document.querySelector('.task-list__checkbox')) {
+          document.querySelector('.task-list__checkbox').checked = false;
+        }
+      })
     return;
   };
 
@@ -53,18 +60,13 @@ const Tasks = () => {
     dispatch(TaskActions.search({
       urlId
     })).then((res) => setCurrentHelpType(res.data.helpType)).then(() => setIsLoaded(true))
-      .then(() => {
-        if (document.querySelector('.task-list__checkbox')) {
-          document.querySelector('.task-list__checkbox').checked = false;
-      }
-    })
-  }, [taskId, taskDetails, isLoaded, taskChange]);
+  }, [dispatch, setTaskDetails, taskDetails, setTaskId, taskId]);
 
   let complete;
   let incomplete;
   if (isLoaded) {
     complete = Object.values(currentTasks).map((task, idx) => {
-        if ((task.completed && user.helpType) || currentUser.id === user.id && currentUser.helpType){
+        if ((task.completed && user.helpType) || (currentUser.id === user.id && currentUser.helpType)){
           return(
             <div className='task-container__list__completed' key={idx}>
               <i className="far fa-check-square completed-icon"></i>
@@ -92,7 +94,7 @@ const Tasks = () => {
           return (
             <div className='task-container__list__incomplete' key={idx}>
               {!task.helperId ? 
-              <i id={task.id} name='iWillHelp' onClick={alterTask} className="fas fa-hands-helping tasks__helping-hands-icon"></i> : null  }
+              <i id={task.id} name='iWillHelp' onChange={alterTask} className="fas fa-hands-helping tasks__helping-hands-icon"></i> : null  }
               <div className="tasks__checkbox">{task.category} - {task.details}</div><br />
             </div>
           )

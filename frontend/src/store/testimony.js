@@ -71,7 +71,6 @@ export const testimonyAdd = (test) => async (dispatch) => {
 
 export const testimonySearch = (id) => async (dispatch) => {
   const {userId} = id
-  console.log("IS THIS THE CORRECTID????????", userId)
   const res = await fetch(`/api/testimony/${userId}`, {
     method: 'GET',
   })
@@ -90,21 +89,19 @@ const testimonyReducer = (state = initialState, action) => {
       return newState;
     case ADD_TESTIMONY:
       newState = Object.assign({}, state)
-      newState.testimony = action.testify;
+      newState.testimony[newState.testimony.length] = action.testify;
       return newState;
     case UPDATE_TESTIMONY:
       newState = Object.assign({}, state)
       for (let i = 0; i < newState.testimony.length; i++){
         let test = newState.testimony[i]
         if (test.id === action.id) {
-          console.log('hello')
           test.comment = action.comment
         };
       }
       return newState;
     case DELETE_TESTIMONY:
       newState = Object.assign({}, state)
-      console.log(action.primaryKey)
       const testimony = newState.testimony.filter(person => person.id !== parseInt(action.primaryKey));
       console.log(testimony)
       newState.testimony = testimony

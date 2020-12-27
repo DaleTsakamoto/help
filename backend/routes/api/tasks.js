@@ -1,6 +1,5 @@
 const express = require('express');
 const asyncHandler = require('express-async-handler');
-const { validationResult } = require('express-validator');
 
 const { requireAuth } = require('../../utils/auth');
 const { Task, User } = require('../../db/models');
@@ -9,10 +8,11 @@ const router = express.Router();
 
 /****************** FIND TASKS **************************/
 
-router.post(
-  '/',
-  asyncHandler(async (req, res, next) => {
-    const { urlId } = req.body;
+router.get(
+  '/:id/tasks',
+  requireAuth, 
+  asyncHandler(async (req, res) => {
+    const urlId = req.params.id;
     let user = await User.findByPk(urlId)
     let helpType = user.dataValues.helpType;
 
@@ -36,51 +36,41 @@ router.post(
 
 /****************** ADD TASK **************************/
 
-router.post('/add', requireAuth, asyncHandler(async (req, res) => {
-  const { choreType, taskDetails, id } = req.body;
-  const userId = parseInt(id, 10)
+router.post('/:id/tasks', requireAuth, asyncHandler(async (req, res) => {
+  const { choreType, taskDetails} = req.body;
+  const userId = parseInt(req.params.id)
     const task = Task.build({
       helpeeId: userId,
       details: taskDetails,
       category: choreType,
       completed: false,
     });
-
-    const validateErrors = validationResult(req);
-    if (validateErrors.isEmpty()) {
-      await task.save();
-      res.status(204).end()
-      // return res.json({
-      //   task
-      // });
-    } else {
-      const errors = validateErrors.array().map(error => error.msg);
-      return res.json({
-        errors
-      });
-    }
+    await task.save();
+    return res.json({
+      task
+    });
 }));
 
 /****************** UPDATE TASK **************************/
   
-  router.patch('/', requireAuth, asyncHandler(async (req, res) => {
+  router.patch('/:id/tasks', requireAuth, asyncHandler(async (req, res) => {
     let { taskId, name, userId } = req.body
     const id = parseInt(taskId)
     const user = parseInt(userId)
-    let task;
     if (!name) {
-      task = await Task.update({ helperId: user }, {
+      await Task.update({ helperId: user }, {
         where: {
           id: id
         }
       });
     } else {
-      task = await Task.update({ completed: true }, {
+      await Task.update({ completed: true }, {
         where: {
           id: id
         }
       });
     }
+    let task = await Task.findByPk(id)
       return res.json({
         task
       });

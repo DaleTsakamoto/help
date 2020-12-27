@@ -1,7 +1,7 @@
 import { fetch } from './csrf'
 
 const ADD_TASK = 'tasks/addTask'
-const UPDATE_TASK = 'tasks/updateTasks'
+const UPDATE_TASK = 'tasks/updateTask'
 const FIND_TASKS = 'tasks/findTasks'
 
 const findTasks = (tasks) => {
@@ -37,29 +37,27 @@ export const taskUpdate = (task) => async (dispatch) => {
     }),
   })
   dispatch(updateTask(res.data.task));
-  return
+  return res
 }
 
 export const taskAdd = (task) => async (dispatch) => {
   const { choreType, taskDetails, id } = task;
-  const res = await fetch(`/api/users/${id}/tasks/add`, {
+  const res = await fetch(`/api/users/${id}/tasks`, {
     method: 'POST',
     body: JSON.stringify({
       choreType,
-      taskDetails,
-      id
+      taskDetails
     }),
   })
-  return
+  dispatch(addTask(res.data.task));
+  return res
 }
 
 export const search = (user) => async (dispatch) => {
   const { urlId } = user;
+  console.log("THE INITIAL URLID", urlId)
   const res = await fetch(`/api/users/${urlId}/tasks`, {
-    method: 'POST',
-    body: JSON.stringify({
-      urlId,
-    }),
+    method: 'GET',
   })
   dispatch(findTasks(res.data.tasks));
   return res
@@ -76,11 +74,19 @@ const tasksReducer = (state = initialState, action) => {
       return newState;
     case ADD_TASK:
       newState = Object.assign({}, state)
-      // newState.task = action.task;
+      newState.tasks[newState.tasks.length] = action.task
       return newState;
     case UPDATE_TASK:
       newState = Object.assign({}, state)
-      newState.task = action.task;
+      console.log(newState.tasks)
+      for (let i = 0; i < newState.tasks.length; i++){
+        let task = newState.tasks[i]
+        console.log(action.task.id)
+        if (task.id === action.task.id) {
+          console.log("IT'S WORKING!!!!", action.task.id)
+          task = action.task
+        };
+      }
       return newState;
     default:
       return state;
