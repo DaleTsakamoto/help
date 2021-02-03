@@ -1,14 +1,14 @@
-import React, { useEffect, useState} from 'react'
-import { Redirect, Route } from 'react-router-dom'
+import React, { useState} from 'react'
+import { useHistory } from 'react-router-dom'
 import {useDispatch} from 'react-redux'
 import * as searchActions from '../../store/search'
 
 import './SearchBar.css'
 
 function SearchBar() {
+  const history = useHistory()
   const [keywordSearch, setKeywordSearch] = useState('')
   const [locationSearch, setLocationSearch] = useState('')
-  const [isLoaded, setIsLoaded] = useState(false)
 
   const dispatch = useDispatch();
   
@@ -16,21 +16,20 @@ function SearchBar() {
   const activateSearch = async () => {
     if (!locationSearch) {
       dispatch(searchActions.localsFind({ keywordSearch }))
-        .then(() => setIsLoaded(true))
+        .then(() => goRedirect())
     } else {
       dispatch(searchActions.localsFindLocation({ keywordSearch, locationSearch }))
         .then(() => {
           setLocationSearch('')
           document.querySelector('.search-bar__location').value = '';
         })
-        .then(() => setIsLoaded(true))
+        .then(() => goRedirect())
     }
   }
 
   const goRedirect = () => {
-    if (isLoaded) {
-      return <Redirect exact to='/results'/>
-    }
+    let path = '/results'
+    return history.push(path);
   }
 
   return (
@@ -46,7 +45,7 @@ function SearchBar() {
       placeholder="San Francisco"
       name="locationSearch" />
       <button onClick={activateSearch} className="search-button">
-        {goRedirect()}
+        {/* {goRedirect()} */}
         <i className="fas fa-search magnify" />
       </button>
     </div>
