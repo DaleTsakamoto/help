@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import {NavLink, Switch, Route} from 'react-router-dom'
+import {NavLink, Switch, Route, Redirect} from 'react-router-dom'
 
 import Location from './Location'
 import Tasks from '../Tasks'
@@ -72,6 +72,10 @@ const UserPage = () => {
       helps = `${hands} Helping Hands`
     }
   }
+
+  if (!sessionUser) return (
+    <Redirect to="/login" />
+  );
 
   return isLoaded && sessionUser &&(
     <div className="user-holder">

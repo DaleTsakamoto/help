@@ -83,7 +83,6 @@ const tasksReducer = (state = initialState, action) => {
         let task = newState.tasks[i]
         console.log(action.task.id)
         if (task.id === action.task.id) {
-          console.log("IT'S WORKING!!!!", action.task.id)
           task = action.task
         };
       }
