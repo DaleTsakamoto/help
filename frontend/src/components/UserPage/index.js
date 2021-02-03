@@ -127,7 +127,7 @@ const UserPage = () => {
             </div>
           </div>
           </NavLink>
-          <NavLink className="navlinks" to={`/users/${person.id}/tasks`}>
+          <NavLink className="navlinks" to={`/users/${person.id}/tasks/incomplete`}>
             <div className='user-holder__body__1__parent'>
               <div id='Tasks' onClick={addRemoveClass} className='user-holder__body__1__Tasks'>
                 <i className="fas fa-tasks user-holder__body__1__Tasks__icon" />
