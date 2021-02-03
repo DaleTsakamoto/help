@@ -2,6 +2,10 @@
 
 ![Logo of the project](./frontend/public/images/help.png)
 
+Get some help or help out today... follow this link to join help:
+
+https://helpp.herokuapp.com/
+
 > Welcome to help
 
 help was created during the 2020 pandemic as a way to connect people who need help(helpees) with those who can help them out (helpers).  The app was designed especially for older people who may be limited in where they can go during the pandemic because of the risk of catching Covid-19.
