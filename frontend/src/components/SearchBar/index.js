@@ -16,12 +16,18 @@ function SearchBar() {
   const activateSearch = async () => {
     if (!locationSearch) {
       dispatch(searchActions.localsFind({ keywordSearch }))
+      .then(() => {
+        setKeywordSearch('')
+        document.querySelector('.search-bar__keyword').value = '';
+      })
         .then(() => goRedirect())
     } else {
       dispatch(searchActions.localsFindLocation({ keywordSearch, locationSearch }))
         .then(() => {
           setLocationSearch('')
+          setKeywordSearch('')
           document.querySelector('.search-bar__location').value = '';
+          document.querySelector('.search-bar__keyword').value = '';
         })
         .then(() => goRedirect())
     }

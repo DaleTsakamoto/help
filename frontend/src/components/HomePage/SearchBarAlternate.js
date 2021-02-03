@@ -1,39 +1,42 @@
 import React, {useState} from 'react'
-import { Redirect } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 import {useDispatch} from 'react-redux'
 import * as searchActions from '../../store/search'
 
 // import './HomePage.css'
 
 function SearchBarAlternate() {
+  const history = useHistory()
   const dispatch = useDispatch();
   const [keywordSearch, setKeywordSearch] = useState('')
   const [locationSearch, setLocationSearch] = useState('')
-  const [isLoaded, setIsLoaded] = useState(false)
 
   
 
-  const activateSearch = () => {
+  const activateSearch = async () => {
     if (!locationSearch) {
       dispatch(searchActions.localsFind({ keywordSearch }))
-        .then(() => setIsLoaded(true))
+      .then(() => {
+        setKeywordSearch('')
+        document.querySelector('.alt-search-bar__keyword').value = '';
+      })
+        .then(() => goRedirect())
     } else {
       dispatch(searchActions.localsFindLocation({ keywordSearch, locationSearch }))
         .then(() => {
           setLocationSearch('')
+          setKeywordSearch('')
           document.querySelector('.alt-search-bar__location').value = '';
+          document.querySelector('.alt-search-bar__keyword').value = '';
         })
-        .then(() => setIsLoaded(true))
+        .then(() => goRedirect())
     }
   }
 
+
   const goRedirect = () => {
-    if (isLoaded) {
-      return <Redirect
-      to={{
-      pathname: '/results'
-    }} />
-    }
+    let path = '/results'
+    return history.push(path);
   }
 
   return (
@@ -49,7 +52,6 @@ function SearchBarAlternate() {
       placeholder="San Francisco"
       name="locationSearch" />
       <button onClick={activateSearch} className="alt-search-button">
-      {goRedirect()}
         <i className="fas fa-search alt-magnify" />
       </button>
     </div>

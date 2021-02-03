@@ -16,7 +16,7 @@
   align-self: center;
   margin-left: 50px;
   width: 500px;
-  height: 320px;
+  height: 260px;
 }
 
 #homepage-about-what__images__container img{
@@ -91,10 +91,11 @@
   height: 350px;
 }
 
-.homepage-gallery-gallery{
+.image-gallery-slide .image-gallery-image{
+  width: 500px !important;
   height: 100%;
-  width: 100%;
   border-radius: 10px;
+  object-fit: contain;
 }
 
 .homepage-about-how-holder{

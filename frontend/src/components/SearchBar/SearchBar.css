@@ -130,3 +130,8 @@ input:focus{
 .results_page{
   margin: 0 auto;
 }
+
+.results-no-results{
+  padding-top: 20px;
+  color: teal;
+}

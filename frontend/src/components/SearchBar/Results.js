@@ -30,8 +30,12 @@ const Results = () => {
   }
   return (
     <div className='results_page'>
-      <h1 className='results-title'>Results:</h1>
-      <div className='results-container__body'>{resultsRender}</div>
+      <h1 className='results-title'>Helpers/Helpees in Your Area:</h1>
+      {resultsRender.length ? 
+        <div className='results-container__body'>{resultsRender}</div>
+        :
+        <p className='results-no-results'>No helpers/helpees in your area</p>
+    }
     </div>
   )
 }

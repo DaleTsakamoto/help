@@ -13,7 +13,7 @@ module.exports = {
         firstName: 'Dale',
         lastName: 'Sakamoto',
         avatar: 'https://images.unsplash.com/photo-1518806118471-f28b20a1d79d?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=2200&q=80',
-        bio: 'From the very first time I copied a CSS code snippet into my Myspace HTML to render animated colors in my background, I have been enthralled with code.  As an undergraduate I built my own gaming computer and later took a beginning class in C++ when completing my Doctorate.  The architecture of composing a piece of music reminds me of working from the backend to the frontend in an application, where each developer can use the same tools and formatting in a million different ways.  I love following the stack trace to uncover bugs and weaving my own creativity into every line of code.',
+        bio: 'I love the idea of an app that helps bring members of a community together for good.  People have struggled extraordinarily during this time and while our country may seem very divided at times, I think there are more things that bind us together than separate us.  When we lose our desire to communicate and come together in our local community, we breed an environment of fear and distrust of each other.  If we can learn to trust again on a local level, perhaps we can also on a larger scale.',
         address: '5208 Timber Creek Ct',
         city: 'Antioch',
         state: 'CA',
