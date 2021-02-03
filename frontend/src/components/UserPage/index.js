@@ -7,17 +7,21 @@ import Tasks from '../Tasks'
 import Testimony from '../Testimony'
 import Overview from './userPageOverview'
 import './UserPage.css'
+
 import * as usersAction from '../../store/users'
 import * as helpingAction from '../../store/helpingHands'
+import * as TestimonyActions from '../../store/testimony'
 
 const UserPage = () => {
   const sessionUser = useSelector(state => state.session.user)
+  const testimony = useSelector(state => state.testimony.testimony)
   const person = useSelector(state => state.users.person)
   const [apiKey, setApiKey] = useState('')
   const [hands, setHands] = useState('')
   const [handUpdate, setHandUpdate] = useState(false)
   const dispatch = useDispatch()
   const [isLoaded, setIsLoaded] = useState(false);
+  const [isLoaded2, setIsLoaded2] = useState(false);
   const [helpingLoaded, setHelpingLoaded] = useState(false);
 
   let urlId = window.location.pathname.split('/')[2]
@@ -27,6 +31,13 @@ const UserPage = () => {
       .then((res) => setApiKey(res.data.apiKey))
       .then(() => setIsLoaded(true))
   }, [dispatch, urlId])
+
+  useEffect(() => {
+    let userId = urlId
+    dispatch(TestimonyActions.testimonySearch({
+      userId
+    })).then(() => setIsLoaded2(true))
+  }, []);
   
   useEffect(() => {
     dispatch(helpingAction.searchHands(urlId))
@@ -77,7 +88,11 @@ const UserPage = () => {
     <Redirect to="/login" />
   );
 
-  return isLoaded && sessionUser &&(
+  const giveAlert = () => {
+    alert("Coming Soon!")
+  }
+
+  return isLoaded && sessionUser && isLoaded2 &&(
     <div className="user-holder">
       <div className='user-holder__header'>
         <div className="user-holder__header-container">
@@ -101,16 +116,18 @@ const UserPage = () => {
                 {helps}
               </div>
               <div className="stats__testimonies">
-              <i className="far fa-comment-alt stats__testimonies-icon" />
-                3 Testimonies
+              <NavLink className="navlinks" to={`/users/${person.id}/testimony`}>
+                <i className="far fa-comment-alt stats__testimonies-icon" />
+              </NavLink>
+                {Object.keys(testimony).length} Testimonies
               </div>
             </div>
           </div>
           <div className='user-holder__header__3'>
             <div className='user-holder__header__3__updates'>
-              <div>
-              <i className="fas fa-camera user-holder__header__camera"/>Add Profile Photos</div>
-              <div>
+              <div onClick={giveAlert}>
+                <i className="fas fa-camera user-holder__header__camera"/>Add Profile Photos</div>
+              <div onClick={giveAlert}>
                 <i className="far fa-address-card user-holder__header__update" />Update Your Profile</div>
             </div>
           </div>

@@ -5,6 +5,7 @@ import {NavLink} from 'react-router-dom'
 import './HomePage.css';
 import HomeLogoAlternate from './HomeLogoAlternate'
 import SearchBarAlternate from './SearchBarAlternate'
+import Gallery from '../Gallery'
 import * as usersAction from '../../store/users'
 
 function HomePage() {
@@ -13,6 +14,17 @@ function HomePage() {
   const sessionUser = useSelector(state => state.session.user);
   const [currentLocation, setCurrentLocation] = useState()
   const [people, setPeople] = useState([])
+  const images = [
+    {
+      original: 'https://picsum.photos/id/1018/1000/600/',
+    },
+    {
+      original: 'https://picsum.photos/id/1015/1000/600/',
+    },
+    {
+      original: 'https://picsum.photos/id/1019/1000/600/',
+    },
+  ];
   const [isLoaded, setIsLoaded] = useState(false);
 
   function getLocation() {
@@ -150,6 +162,9 @@ function HomePage() {
       </div>
       <div className='homepage-about-how-holder'>
         <div className='homepage-about-how-container'>
+          <div className='homepage-gallery-container'>
+            <Gallery className='homepage-gallery-gallery' images={images}></Gallery>
+          </div>
           <div className='homepage-about-how-text'>
             <h1>How it works:</h1>
             <p>You can sign up as a helper(someone who wants to help out) or a 

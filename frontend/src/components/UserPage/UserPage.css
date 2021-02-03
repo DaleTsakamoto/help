@@ -101,9 +101,15 @@
   cursor: pointer;
 }
 
+.stats__testimonies{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 16px;
+}
+
 .stats__testimonies-icon{
   padding-top: 2px;
-  margin-right: 4px;
   font-size: 14px;
   height: 13px;
   width: 15px;
