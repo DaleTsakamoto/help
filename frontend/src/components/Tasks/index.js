@@ -94,7 +94,7 @@ const Tasks = () => {
           return (
             <div className='task-container__list__incomplete' key={idx}>
               {!task.helperId ? 
-              <i id={task.id} name='iWillHelp' onChange={alterTask} className="fas fa-hands-helping tasks__helping-hands-icon"></i> : null  }
+              <i id={task.id} name='iWillHelp' onClick={alterTask} className="fas fa-hands-helping tasks__helping-hands-icon"></i> : null  }
               <div className="tasks__checkbox">{task.category} - {task.details}</div><br />
             </div>
           )
