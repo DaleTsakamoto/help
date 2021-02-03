@@ -196,7 +196,7 @@ input:focus{
 }
 
 .alt-search-bar__keyword::placeholder{
-  color: whitesmoke;
+  color: grey;
 }
 
 .alt-search-bar__keyword{

@@ -16,7 +16,7 @@ input:focus{
 }
 
 .search-bar__keyword::placeholder{
-  color: whitesmoke;
+  color: grey;
 }
 
 .search-bar__keyword{

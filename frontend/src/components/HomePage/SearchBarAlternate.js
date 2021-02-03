@@ -41,7 +41,7 @@ function SearchBarAlternate() {
       <input
       onChange={(e) => setKeywordSearch(e.target.value)}
       className="alt-search-bar__keyword"
-      placeholder="gardening, Julia Smith"
+      placeholder="Dale Sakamoto, demo_helpee"
       name="keywordSearch" />
       <input
       onChange={(e) => setLocationSearch(e.target.value)}

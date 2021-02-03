@@ -33,6 +33,20 @@ router.post(
     const { keywordSearch, locationSearch } = req.body;
 
     let locals;
+    let keywords;
+    if (keywordSearch.includes(' ')) {
+      keywords = keywordSearch.split(' ')
+      for (let i = 0; i < keywords.length; i++){
+        keywords[i] = '%'+keywords[i]+'%'
+      }
+    }
+
+    let newSearch;
+    if (keywords) {
+      newSearch = keywords
+    } else {
+      newSearch = ['%'+keywordSearch+'%']
+    }
 
     if (locationSearch) {
       let { lat, lng } = await geocodeAddress(locationSearch)
@@ -40,37 +54,63 @@ router.post(
       lng = parseFloat(lng, 10)
       locals = await User.findAll({
         where: {
+          [Op.and]: [{
           lat: {
             [Op.between]: [(lat - .5), (lat + .5)]
           },
           lng: {
             [Op.between]: [(lng - .5), (lng + .5)]
-          },
-          [Op.or]: [{
-            username: {
-              [Op.iLike]: '%' + keywordSearch + '%'
+            },
+          }],
+          [Op.or]: [
+            {
+              firstName: {
+                [Op.iLike]: { [Op.any]: newSearch }
+              }
+            },
+            {
+              lastName: {
+                [Op.iLike]: { [Op.any]: newSearch }
+              }
+            },
+            {
+              email: {
+                [Op.iLike]: { [Op.any]: newSearch }
+              }
+            },
+            {
+              username: {
+                [Op.iLike]: { [Op.any]: newSearch }
+              }
             }
-          }, {
-            firstName: {
-              [Op.iLike]: '%' + keywordSearch + '%'
-            }
-          }, {
-            lastName: {
-              [Op.iLike]: '%' + keywordSearch + '%'
-            }
-          }]
+          ]
         },
       })
     } else {
       locals = await User.findAll({
         where: {
-          [Op.or]: [{username: {
-            [Op.iLike]: '%'+keywordSearch+'%'
-          }}, {firstName: {
-            [Op.iLike]: '%'+keywordSearch+'%'
-          }}, {lastName: {
-            [Op.iLike]: '%'+keywordSearch+'%'
-          }}]
+          [Op.or]: [
+            {
+              firstName: {
+                [Op.iLike]: { [Op.any]: newSearch }
+              }
+            },
+            {
+              lastName: {
+                [Op.iLike]: { [Op.any]: newSearch }
+              }
+            },
+            {
+              email: {
+                [Op.iLike]: { [Op.any]: newSearch }
+              }
+            },
+            {
+              username: {
+                [Op.iLike]: { [Op.any]: newSearch }
+              }
+            }
+          ]
         }
       })
     }
