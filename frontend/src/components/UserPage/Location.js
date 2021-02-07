@@ -8,6 +8,10 @@ import './Location.css'
 const Location = (props) => {
   const person = useSelector(state => state.users.person)
 
+  const mapOptions = {
+    disableDefaultUI: true
+  }
+
   const loader = new Loader({
     apiKey: props.apiKey,
     version: "weekly",
@@ -19,6 +23,7 @@ const Location = (props) => {
     map = new google.maps.Map(document.getElementById("location-body-map"), {
       center: myLatLng,
       zoom: 12,
+      options: mapOptions
     });
     new google.maps.Marker({
       position: myLatLng,
@@ -29,7 +34,7 @@ const Location = (props) => {
 
   return (
     <div className='location-container'>
-      <h1 className='location-title'>Location:</h1>
+      <h1 className='location-title'>Location</h1>
       <div id='location-body-map'></div>
     </div>
   )

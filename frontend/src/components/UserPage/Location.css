@@ -12,6 +12,7 @@
   height: 320px;
   margin-top: 30px;
   border-left: .5px solid lightgrey;
+  padding-left: 16px;
 }
 
 .location-title{

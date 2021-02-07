@@ -145,3 +145,38 @@
   width: 100%;
   border-radius: 50%;
 }
+
+@media only screen and (max-width: 1018px) {
+  .login-button{
+    height: 30px;
+    width: 60px;
+    padding: 7px 0;
+    font-size: 14px;
+    margin-right: 6px;
+  }
+
+  .signup-button{
+    height: 30px;
+    width: 60px;
+    padding: 7px 0;
+    font-size: 14px;
+  }
+}
+
+
+@media only screen and (max-width: 740px) {
+  .login-button{
+    height: 25px;
+    width: 50px;
+    padding: 5px 0;
+    font-size: 11px;
+    margin-right: 3px;
+  }
+
+  .signup-button{
+    height: 25px;
+    width: 50px;
+    padding: 5px 0;
+    font-size: 11px;
+  }
+}

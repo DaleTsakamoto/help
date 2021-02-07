@@ -9,6 +9,7 @@ import * as sessionActions from "./store/session";
 import NavigationAlternate from './components/NavigationAlternate'
 import Navigation from './components/Navigation'
 import HomePage from './components/HomePage'
+import Footer from './components/Footer'
 import Results from './components/SearchBar/Results'
 
 
@@ -25,22 +26,27 @@ function App() {
         <Route path="/login">
           <Navigation isLoaded={isLoaded}/>
           <LoginFormPage />
+          <Footer />
         </Route>
         <Route path="/signup">
           <Navigation isLoaded={isLoaded}/>
           <SignupFormPage />
+          <Footer />
         </Route>
         <Route path="/results">
           <Navigation isLoaded={isLoaded}/>
           <Results />
+          <Footer />
         </Route>
         <Route path="/users/:id">
           <Navigation isLoaded={isLoaded}/>
           <UserPage />
+          <Footer />
         </Route>
         <Route path="/">
           <NavigationAlternate isLoaded={isLoaded}/>
           <HomePage />
+          <Footer />
         </Route>
       </Switch>
       </>

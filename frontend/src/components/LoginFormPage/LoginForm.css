@@ -1,20 +1,19 @@
 .login-all{
-  width: 1100px;
   display: flex;
+  flex-direction: row;
+  max-width: 1000px;
   margin: 0 auto;
 }
 
 .login-form-container{
-  height: 300px;
-  width: 500px;
+  height: 500px;
+  width: 200px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
   box-sizing: border-box;
-  padding-left: 80px;
-  padding-top: 180px;
-  margin: 0 auto;
+  margin-left: 180px;
+  margin-top: 60px;
   font-family: 'Open Sans', sans-serif;
 }
 
@@ -88,19 +87,47 @@ input{
   text-decoration: underline;
 }
 
-.login-image-holder{
-  height: 350px;
-  width: 500px;
-  padding-top: 100px;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  margin: 0 auto;
-}
-
 .login-image{
   height: 350px;
   width: 350px;
+  margin-left: 200px;
+  margin-top: 120px;
   border-radius: 50%;
+}
+
+@media only screen and (max-width: 1018px) {
+  .login-image{
+    height: 320px;
+    width: 320px;
+    margin-left: 120px;
+  }
+}
+
+
+@media only screen and (max-width: 740px) {
+  .login-all{
+    flex-direction: column-reverse;
+    align-items: center;
+  }
+
+  .login-image{
+    margin-left: 0;
+    margin-top: 20px;
+    height: 280px;
+    width: 280px;
+  }
+
+  .login-form-container{
+    margin-top: 30px;
+    margin-left: 0;
+    margin-bottom: 40px;
+  }
+
+  .login-button{
+    display: none;
+  }
+
+  .signup-button{
+    display: none;
+  }
 }

@@ -1,6 +1,6 @@
 .testimony-container{
   width: 420px;
-  height: auto;
+  min-height: 500px;
   display: flex;
   flex-direction: column;
   padding: 15px;
@@ -11,6 +11,7 @@
   border-top-right-radius: 10px;
   background-color: whitesmoke;
   font-family: 'Handlee', cursive;
+  margin-bottom: 30px;
 }
 
 .testimony-header__name{

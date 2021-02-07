@@ -1,6 +1,6 @@
 .tasks-container{
   width: 420px;
-  height: 100vh;
+  min-height: 500px;
   margin-left: 10px;
   display: flex;
   border-top: .5px solid #FFFEF2;

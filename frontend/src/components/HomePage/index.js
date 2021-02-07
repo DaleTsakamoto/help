@@ -185,14 +185,6 @@ function HomePage() {
         <div className='users-container__header__local'>Helpers in Your Area</div>
         <div className='users-container__body__local__2'> {sessionUser ? Helpers : null}
         </div> */}
-        <footer>
-          <div className='github-about-container'>
-            <a className='navlink-to-github' href='https://daletsakamoto.github.io/'>
-              <img className='github-image'src='/images/github-logo.png' />
-              <div className='github-about-text'>Learn more about me</div>
-            </a>
-          </div>
-        </footer>
       </div>
     </div>
   )

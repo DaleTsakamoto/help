@@ -68,6 +68,8 @@ input{
 .signup-all{
   display: flex;
   flex-direction: row;
+  max-width: 1000px;
+  margin: 0 auto;
 }
 
 .signup-image{
@@ -125,4 +127,41 @@ label > input{
   border: .5px solid lightgrey;
   border-radius: 3px;
   padding-left: 5px;
+}
+
+@media only screen and (max-width: 1018px) {
+  .signup-image{
+    height: 320px;
+    width: 320px;
+    margin-left: 120px;
+  }
+}
+
+
+@media only screen and (max-width: 740px) {
+  .signup-all{
+    flex-direction: column-reverse;
+    align-items: center;
+  }
+
+  .signup-image{
+    margin-left: 0;
+    margin-top: 20px;
+    height: 280px;
+    width: 280px;
+  }
+
+  .signup-form-container{
+    margin-top: 30px;
+    margin-left: 0;
+    margin-bottom: 40px;
+  }
+
+  .login-button{
+    display: none;
+  }
+
+  .signup-button{
+    display: none;
+  }
 }
