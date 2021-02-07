@@ -19,7 +19,6 @@ router.post('/', requireAuth, asyncHandler(async (req, res) => {
       "likerId": likeId
     }
   })
-  console.log("IM STILL HERE!!!!!!!!!", exists)
   if (!exists.length) {
     const hand = HelpingHand.build({
       likerId: likeId,
@@ -43,7 +42,6 @@ router.post('/', requireAuth, asyncHandler(async (req, res) => {
         "userId": userId
       }
     })
-    console.log("THIS IS THE REMOVED HAND!!!!!!", removeHand)
     return res.json({
       removeHand
     })

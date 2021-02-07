@@ -103,7 +103,6 @@ const testimonyReducer = (state = initialState, action) => {
     case DELETE_TESTIMONY:
       newState = Object.assign({}, state)
       const testimony = newState.testimony.filter(person => person.id !== parseInt(action.primaryKey));
-      console.log(testimony)
       newState.testimony = testimony
       return newState
     default:

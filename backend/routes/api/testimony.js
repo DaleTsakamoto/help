@@ -23,12 +23,10 @@ router.get(
 
     let commenters = [];
     for (let i = 0; i < testimony.length; i++) {
-      console.log(parseInt(testimony[i].commenterId))
       let person = await User.findByPk(testimony[i].commenterId)
       commenters.push(person.firstName)
     }
 
-    console.log(commenters)
     return res.json({
       testimony,
       commenters
@@ -45,7 +43,6 @@ router.post('/', requireAuth, asyncHandler(async (req, res) => {
       commenterId: commenterId,
       comment: comment,
     });
-    console.log("THIS IS THE TESTIMONY", testimony)
     await testimony.save();
     return res.json({
       testimony
@@ -58,7 +55,6 @@ router.post('/', requireAuth, asyncHandler(async (req, res) => {
   
   router.patch('/', requireAuth, asyncHandler(async (req, res) => {
     const { primaryKey, comment } = req.body;
-    console.log("HERE IS THE EDIT INFO", primaryKey, comment)
       let succeededUpdate = await Testimony.update({ comment: comment }, {
         where: {
           id: primaryKey
@@ -80,7 +76,6 @@ router.post('/', requireAuth, asyncHandler(async (req, res) => {
       await Testimony.destroy({
         where: { "id": primaryKey }
       })
-      console.log(primaryKey)
       return res.json({
         primaryKey
       });

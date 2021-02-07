@@ -55,7 +55,6 @@ export const taskAdd = (task) => async (dispatch) => {
 
 export const search = (user) => async (dispatch) => {
   const { urlId } = user;
-  console.log("THE INITIAL URLID", urlId)
   const res = await fetch(`/api/users/${urlId}/tasks`, {
     method: 'GET',
   })
@@ -78,10 +77,8 @@ const tasksReducer = (state = initialState, action) => {
       return newState;
     case UPDATE_TASK:
       newState = Object.assign({}, state)
-      console.log(newState.tasks)
       for (let i = 0; i < newState.tasks.length; i++){
         let task = newState.tasks[i]
-        console.log(action.task.id)
         if (task.id === action.task.id) {
           task = action.task
         };
