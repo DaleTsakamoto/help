@@ -27,7 +27,7 @@ export const localsFind = (keyword) => async (dispatch) => {
     }),
   })
   dispatch(findLocalsSearch(res.data.locals));
-  return
+  return res;
 }
 
 export const localsFindLocation = (keyword) => async (dispatch) => {
@@ -40,7 +40,7 @@ export const localsFindLocation = (keyword) => async (dispatch) => {
     }),
   })
   dispatch(findLocalsSearch(res.data.locals));
-  return
+  return res;
 }
 
 const initialState = { locals: null }

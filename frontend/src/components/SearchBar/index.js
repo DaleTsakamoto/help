@@ -9,27 +9,37 @@ function SearchBar() {
   const history = useHistory()
   const [keywordSearch, setKeywordSearch] = useState('')
   const [locationSearch, setLocationSearch] = useState('')
+  const [errors, setErrors] = useState([]);
 
   const dispatch = useDispatch();
   
 
   const activateSearch = async () => {
+    setErrors([])
     if (!locationSearch) {
-      dispatch(searchActions.localsFind({ keywordSearch }))
+      dispatch(searchActions.localsFind({ keywordSearch })).catch((res) => {
+        if (res.data && res.data.errors) {
+          setErrors(res.data.errors)
+          return
+        }
+      })
       .then(() => {
         setKeywordSearch('')
         document.querySelector('.search-bar__keyword').value = '';
-      })
-        .then(() => goRedirect())
+      }).then(() => goRedirect())
     } else {
-      dispatch(searchActions.localsFindLocation({ keywordSearch, locationSearch }))
+      dispatch(searchActions.localsFindLocation({ keywordSearch, locationSearch })).catch((res) => {
+        if (res.data && res.data.errors) {
+          setErrors(res.data.errors)
+          return
+        }
+      })
         .then(() => {
           setLocationSearch('')
           setKeywordSearch('')
           document.querySelector('.search-bar__location').value = '';
           document.querySelector('.search-bar__keyword').value = '';
-        })
-        .then(() => goRedirect())
+        }).then(() => goRedirect())
     }
   }
 
@@ -39,6 +49,7 @@ function SearchBar() {
   }
 
   return (
+    <div className="search-bar-holder">
     <div className="search-bar">
       <input
       onChange={(e) => setKeywordSearch(e.target.value)}
@@ -54,7 +65,13 @@ function SearchBar() {
         {/* {goRedirect()} */}
         <i className="fas fa-search magnify" />
       </button>
-    </div>
+      </div>
+      <div>
+        <ul>
+          {errors.map((error, idx) => <li key={idx}>{error}</li>)}
+        </ul>
+      </div>
+      </div>
   )
 }
 

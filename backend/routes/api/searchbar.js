@@ -2,10 +2,21 @@ const router = require('express').Router();
 const asyncHandler = require('express-async-handler');
 const { check } = require('express-validator');
 const NodeGeocoder = require('node-geocoder');
+const { handleValidationErrors } = require('../../utils/validation');
 
 const { User, Sequelize, Task } = require('../../db/models');
 
 const Op = Sequelize.Op
+
+/****************** LOGIN ERRORS MIDDLEWARE **************************/
+
+const validateSearch = [
+  check('keywordSearch' || 'locationSearch')
+    .exists({ checkFalsy: true })
+    .notEmpty()
+    .withMessage('Please provide a search term.'),
+  handleValidationErrors,
+];
 
 
 /****************** GEOCODER ************************/
@@ -28,6 +39,7 @@ async function geocodeAddress (address) {
 
 router.post(
   '/',
+  validateSearch,
   asyncHandler(async (req, res, next) => {
 
     const { keywordSearch, locationSearch } = req.body;

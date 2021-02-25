@@ -10,19 +10,30 @@ function SearchBarAlternate() {
   const dispatch = useDispatch();
   const [keywordSearch, setKeywordSearch] = useState('')
   const [locationSearch, setLocationSearch] = useState('')
+  const [errors, setErrors] = useState([]);
 
   
 
   const activateSearch = async () => {
     if (!locationSearch) {
-      dispatch(searchActions.localsFind({ keywordSearch }))
+      dispatch(searchActions.localsFind({ keywordSearch })).catch((res) => {
+        if (res.data && res.data.errors) {
+          setErrors(res.data.errors)
+          return alert(res.data.errors)
+        }
+      })
       .then(() => {
         setKeywordSearch('')
         document.querySelector('.alt-search-bar__keyword').value = '';
       })
         .then(() => goRedirect())
     } else {
-      dispatch(searchActions.localsFindLocation({ keywordSearch, locationSearch }))
+      dispatch(searchActions.localsFindLocation({ keywordSearch, locationSearch })).catch((res) => {
+        if (res.data && res.data.errors) {
+          setErrors(res.data.errors)
+          return alert(res.data.errors)
+        }
+      })
         .then(() => {
           setLocationSearch('')
           setKeywordSearch('')
@@ -40,6 +51,7 @@ function SearchBarAlternate() {
   }
 
   return (
+    <>
     <div className="alt-search-bar">
       <input
       onChange={(e) => setKeywordSearch(e.target.value)}
@@ -54,7 +66,8 @@ function SearchBarAlternate() {
       <button onClick={activateSearch} className="alt-search-button">
         <i className="fas fa-search alt-magnify" />
       </button>
-    </div>
+      </div>
+      </>
   )
 }
 
