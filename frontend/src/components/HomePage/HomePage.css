@@ -179,6 +179,15 @@ input:focus{
   outline: none;
 }
 
+.alt-search-container{
+  display: flex;
+  flex-direction: column;
+}
+
+.alt-search-errors{
+  color: white;
+}
+
 .alt-search-bar{
   display: flex;
   flex-direction: row;

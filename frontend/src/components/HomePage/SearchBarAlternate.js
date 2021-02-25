@@ -15,6 +15,7 @@ function SearchBarAlternate() {
   
 
   const activateSearch = async () => {
+    setErrors([])
     if (!locationSearch) {
       dispatch(searchActions.localsFind({ keywordSearch })).catch((res) => {
         if (res.data && res.data.errors) {
@@ -51,7 +52,7 @@ function SearchBarAlternate() {
   }
 
   return (
-    <>
+    <div className='alt-search-container'>
     <div className="alt-search-bar">
       <input
       onChange={(e) => setKeywordSearch(e.target.value)}
@@ -67,7 +68,12 @@ function SearchBarAlternate() {
         <i className="fas fa-search alt-magnify" />
       </button>
       </div>
-      </>
+      <div>
+        <ul className='alt-search-errors'>
+          {errors.map((error, idx) => <li key={idx}>{error}</li>)}
+        </ul>
+      </div>
+      </div>
   )
 }
 
